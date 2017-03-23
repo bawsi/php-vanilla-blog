@@ -1,0 +1,28 @@
+div.container-new-article {
+	form.article-form {
+		input[type=text] {
+			display: block;
+			width: 100%;
+			margin-bottom: 15px;
+		}
+		textarea {
+			display: block;
+		}
+		button {
+			display: block;
+			margin: 0 auto;
+			border: none;
+			padding: 15px 0px;
+			width: 100%;
+			margin-top: 5px;
+			background: #709c59;
+			color: white;
+
+			&:hover {
+				background: #5f8849;
+			}
+
+
+		}
+	}
+}

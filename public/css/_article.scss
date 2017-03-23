@@ -1,0 +1,19 @@
+div.container-article {
+	div.article-col {
+		border: 1px solid #f2f1f1;
+		background: white;;
+		padding: 20px;
+
+		h5.article-info {
+			opacity: 0.4;
+
+			span:nth-child(2), span:nth-child(3) {
+				margin-left: 10px;;
+			}
+		}
+
+		p.article-body {
+			text-align: justify;
+		}
+	}
+}

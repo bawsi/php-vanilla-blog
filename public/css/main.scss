@@ -1,0 +1,17 @@
+// GLOBAL CSS
+body {
+	background: rgba(#f6f4f2, 0.6);
+}
+
+nav.navbar {
+	margin-bottom: 0px;
+}
+
+// homepage (index.php)
+@import "_homepage.scss";
+
+// Single article page
+@import "_article.scss";
+
+// New-article admin page
+@import '_new-article.scss';
