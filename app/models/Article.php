@@ -69,25 +69,6 @@ class Article
     }
 
     /**
-     * Checks if submitted new article form data is valid.
-     * For now, it only checks if everything was filled in
-     *
-     * @param  string $title    Article title
-     * @param  string $body     Article body
-     * @param  int    $authorId ID of author
-     *
-     * @return bool               Return true, if all fields were filled, false otherwise
-     */
-    public function formDataIsValid($title, $body, $authorId)
-    {
-        if (!empty($title) && !empty($body) && is_int($authorId)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Save article to database
      *
      * @param  string $title    Article title
