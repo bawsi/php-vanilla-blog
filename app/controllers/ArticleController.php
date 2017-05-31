@@ -55,7 +55,7 @@ class ArticleController
      *
      * @return bool             Return true, if all fields were filled, false otherwise
      */
-    public function validateArticleFormData($title, $body, $authorId)
+    public function validateAndStoreArticle($title, $body, $authorId)
     {
         if (!empty($title) && !empty($body) && is_int($authorId)) {
             return true;
