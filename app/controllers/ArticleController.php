@@ -53,7 +53,7 @@ class ArticleController
      * @param  string $body     Article body
      * @param  int    $authorId ID of author
      *
-     * @return bool               Return true, if all fields were filled, false otherwise
+     * @return bool             Return true, if all fields were filled, false otherwise
      */
     public function validateArticleFormData($title, $body, $authorId)
     {
