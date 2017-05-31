@@ -51,7 +51,6 @@ class Article
      */
     public function getSingleArticleById($id)
     {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         $stmt = $this->db->prepare(
             'SELECT articles.title, articles.body, articles.created_at,
 	                article_categories.category_name, users.username as author
