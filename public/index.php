@@ -1,10 +1,7 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$db = new Db;
-$article = new Article($db);
 $articles = $article->getArticles(10);
-$user = new User($db);
 
 include(TEMPLATES_PATH . '/_header.php')
 ?>
@@ -41,8 +38,8 @@ include(TEMPLATES_PATH . '/_header.php')
 						</p>
 
 						<h3><?php echo $article['title']; ?></h3>
-						<p><?php echo substr(strip_tags($article['body']), 0 , 150) . '...'; ?></p>
-						<p><a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-primary" role="button">Read More</a></p>
+						<p style="margin-top: 25px;"><a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-primary" role="button">Read More</a></p>
+
 					</div>
 				</div>
 			</div> <!-- End of article -->
