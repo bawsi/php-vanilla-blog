@@ -36,7 +36,10 @@ class ArticleController
      */
     public function getArticleById($id)
     {
-        if (is_int( (int) $id)) {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $isIdInt = filter_var($id, FILTER_VALIDATE_INT);
+
+        if ($isIdInt) {
             return $this->articleModel->getSingleArticleById($id);
         }
         else {
