@@ -1,9 +1,6 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$db = new Db;
-$article = new Article($db);
-
 include(TEMPLATES_PATH . '/_header.php');
 ?>
 
@@ -16,7 +13,7 @@ include(TEMPLATES_PATH . '/_header.php');
 			<input type="text" name="title">
 			<p>Article Body</p>
 			<textarea name="body" rows="8"></textarea>
-			<input type="hidden" name="authorId" value="2">
+			<input type="hidden" name="authorId" value="1">
 			<button type="submit" name="submit">Send now</button>
 		</form>
 

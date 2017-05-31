@@ -1,9 +1,6 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$db = new Db();
-$article = new Article($db);
-
 $articleTitle = $_POST['title'];
 $articleBody = $_POST['body'];
 $articleAuthorId = (int)$_POST['authorId'];

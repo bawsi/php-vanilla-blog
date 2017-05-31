@@ -1,9 +1,6 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$db = new Db;
-
-$article = new Article($db);
 $article = $article->getSingleArticleById($_GET['id']);
 
 include(TEMPLATES_PATH . '/_header.php');
