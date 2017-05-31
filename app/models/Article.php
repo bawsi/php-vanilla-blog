@@ -27,12 +27,12 @@ class Article
     {
         $stmt = $this->db->prepare(
             'SELECT articles.id, articles.title, articles.body, articles.created_at,
-					          users.username AS author, article_categories.category_name
-			       FROM articles
-			       JOIN users ON articles.author_id = users.id
-			       JOIN article_categories ON articles.category_id = article_categories.id
-			       ORDER BY articles.id
-			       LIMIT :numberOfArticles
+				    users.username AS author, article_categories.category_name
+			 FROM articles
+			 JOIN users ON articles.author_id = users.id
+			 JOIN article_categories ON articles.category_id = article_categories.id
+			 ORDER BY articles.id
+			 LIMIT :numberOfArticles
 		    ');
 
         $stmt->bindParam(':numberOfArticles', $numberOfArticles, PDO::PARAM_INT);
@@ -54,13 +54,13 @@ class Article
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         $stmt = $this->db->prepare(
             'SELECT articles.title, articles.body, articles.created_at,
-				            article_categories.category_name, users.username as author
-			       FROM articles
-			       JOIN article_categories ON articles.category_id = article_categories.id
-			       JOIN users ON articles.author_id = users.id
-			       WHERE articles.id = :id
-			       LIMIT 1
-			  ');
+	                article_categories.category_name, users.username as author
+			FROM articles
+			JOIN article_categories ON articles.category_id = article_categories.id
+			JOIN users ON articles.author_id = users.id
+			WHERE articles.id = :id
+			LIMIT 1
+	    ');
 
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
