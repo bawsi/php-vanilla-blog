@@ -31,7 +31,7 @@ class Article
 			 FROM articles
 			 JOIN users ON articles.author_id = users.id
 			 JOIN article_categories ON articles.category_id = article_categories.id
-			 ORDER BY articles.id
+			 ORDER BY articles.id DESC
 			 LIMIT :numberOfArticles
 		    ');
 
