@@ -92,6 +92,6 @@ class Article
         $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_STR);
         $stmt->execute();
 
-        return ($stmt) ? true : false;
+        return ($stmt) ? $this->db->lastInsertId() : false;
     }
 }
