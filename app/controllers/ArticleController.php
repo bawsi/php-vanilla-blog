@@ -58,10 +58,10 @@ class ArticleController
      *
      * @return bool             Return true, if all fields were filled, false otherwise
      */
-    public function validateAndStoreArticle($title, $body, $authorId)
+    public function validateAndStoreArticle($title, $body, $articleCategory, $authorId)
     {
         if (!empty($title) && !empty($body) && is_int($authorId)) {
-            if ($articleId = $this->articleModel->saveArticle($title, $body, $authorId)) {
+            if ($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)) {
                 return $articleId;
             }
             else {
