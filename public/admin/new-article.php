@@ -1,6 +1,24 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
+
+// If POST request, new article was already submitted. Validate & store it
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$articleTitle = $_POST['title'];
+	$articleBody = $_POST['body'];
+	$articleAuthorId = (int)$_POST['authorId'];
+
+	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleAuthorId)) {
+		$success_messages[] = 'Article successfully added.';
+		header('location: /article.php?id=' . $articleId);
+	}
+	else {
+		$error_messages[] = 'Failed to submit article. Try again!';
+	}
+}
+
+
+
 include(TEMPLATES_PATH . '/_header.php');
 ?>
 
@@ -8,7 +26,7 @@ include(TEMPLATES_PATH . '/_header.php');
 <div class="container container-new-article">
 	<div class="col-md-8 col-md-offset-2">
 
-		<form class="article-form" action="save-article.php" method="post">
+		<form class="article-form" action="" method="post">
 			<p>Article Title</p>
 			<input type="text" name="title">
 			<p>Article Body</p>
