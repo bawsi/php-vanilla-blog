@@ -71,18 +71,4 @@ class ArticleController
             return false;
         }
     }
-
-    /**
-     * Save article to database
-     *
-     * @param  string $title    Article title
-     * @param  string $body     Article body
-     * @param  int    $authorId ID of author
-     *
-     * @return bool               Return true, if all fields were filled, false otherwise
-     */
-    public function saveArticle($title, $body, $authorId)
-    {
-
-    }
 }
