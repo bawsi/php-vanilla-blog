@@ -91,10 +91,7 @@ class Article
         $currentTime = time();
         $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_STR);
         $stmt->execute();
-        if ($stmt) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return ($stmt) ? true : false;
     }
 }
