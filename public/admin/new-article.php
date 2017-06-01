@@ -31,6 +31,12 @@ include(TEMPLATES_PATH . '/_header.php');
 			<input type="text" name="title">
 			<p>Article Body</p>
 			<textarea name="body" rows="8"></textarea>
+			<select class="category form-control	" name="category">
+				<option value="other">Other</option>
+				<option value="programming">Programming</option>
+				<option value="cooking">Cooking</option>
+				<option value="gardening">Gardening</option>
+			</select>
 			<input type="hidden" name="authorId" value="1">
 			<button type="submit" name="submit">Send now</button>
 		</form>
