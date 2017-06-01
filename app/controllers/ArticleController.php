@@ -61,7 +61,12 @@ class ArticleController
     public function validateAndStoreArticle($title, $body, $authorId)
     {
         if (!empty($title) && !empty($body) && is_int($authorId)) {
-            return true;
+            if ($this->articleModel->saveArticle($title, $body, $authorId)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         } else {
             return false;
         }
