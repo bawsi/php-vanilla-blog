@@ -77,12 +77,12 @@ class Article
      *
      * @return bool               Return true, if all fields were filled, false otherwise
      */
-    public function saveArticle($title, $body, $authorId)
+    public function saveArticle($title, $body, $articleCategory, $authorId)
     {
         $stmt = $this->db->prepare(
             'INSERT INTO articles
-			      (title, body, author_id, created_at)
-			      VALUES (:title, :body, :authorId, :createdAt)
+			      (title, body, author_id, created_at, category_id)
+			      VALUES (:title, :body, :authorId, :createdAt, :category_id)
 			  ');
 
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
@@ -90,6 +90,7 @@ class Article
         $stmt->bindParam(':authorId', $authorId, PDO::PARAM_INT);
         $currentTime = time();
         $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_STR);
+        $stmt->bindParam(':category_id', $articleCategory);
         $stmt->execute();
 
         return ($stmt) ? $this->db->lastInsertId() : false;
