@@ -6,7 +6,7 @@ $categories = $article->getCategories();
 
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$articleTitle = $_POST['title'];
+	$articleTitle = $_POST['title'];  
 	$articleBody = $_POST['body'];
 	$articleCategory = $_POST['category'];
 	$articleAuthorId = (int)$_POST['authorId'];
