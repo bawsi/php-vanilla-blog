@@ -5,16 +5,23 @@ $articleTitle = $_POST['title'];
 $articleBody = $_POST['body'];
 $articleAuthorId = (int)$_POST['authorId'];
 
-if ($article->formDataIsValid($articleTitle, $articleBody, $articleAuthorId)) {
-	if ($article->saveArticle($articleTitle, $articleBody, $articleAuthorId)) {
-		echo "Article added.";
-	}
-	else {
-		echo "Failed to save article to DB.";
-	}
+if ($article->validateAndStoreArticle($articleTitle, $articleBody, $articleAuthorId)) {
+	echo "Article added";
 }
 else {
-	echo "Article verification failed.";
+	echo "Article not addd";
 }
+
+// if ($article->formDataIsValid($articleTitle, $articleBody, $articleAuthorId)) {
+// 	if ($article->saveArticle($articleTitle, $articleBody, $articleAuthorId)) {
+// 		echo "Article added.";
+// 	}
+// 	else {
+// 		echo "Failed to save article to DB.";
+// 	}
+// }
+// else {
+// 	echo "Article verification failed.";
+// }
 
 ?>
