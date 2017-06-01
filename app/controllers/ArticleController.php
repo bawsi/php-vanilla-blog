@@ -71,4 +71,10 @@ class ArticleController
             return false;
         }
     }
+
+    public function getCategories() {
+        $categories = $this->articleModel->getCategories();
+
+        return $categories;
+    }
 }

@@ -95,4 +95,13 @@ class Article
 
         return ($stmt) ? $this->db->lastInsertId() : false;
     }
+
+    public function getCategories() {
+        $stmt = $this->db->query('SELECT * FROM article_categories');
+        $stmt->execute();
+
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $categories;
+    }
 }
