@@ -6,9 +6,10 @@ include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
 	$articleBody = $_POST['body'];
+	$articleCategory = $_POST['category'];
 	$articleAuthorId = (int)$_POST['authorId'];
 
-	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleAuthorId)) {
+	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $articleAuthorId)) {
 		$success_messages[] = 'Article successfully added.';
 		header('location: /article.php?id=' . $articleId);
 	}
@@ -32,10 +33,10 @@ include(TEMPLATES_PATH . '/_header.php');
 			<p>Article Body</p>
 			<textarea name="body" rows="8"></textarea>
 			<select class="category form-control	" name="category">
-				<option value="other">Other</option>
-				<option value="programming">Programming</option>
-				<option value="cooking">Cooking</option>
-				<option value="gardening">Gardening</option>
+				<option value="1">Other</option>
+				<option value="2">Programming</option>
+				<option value="3">Cooking</option>
+				<option value="4">Gardening</option>
 			</select>
 			<input type="hidden" name="authorId" value="1">
 			<button type="submit" name="submit">Send now</button>
