@@ -1,7 +1,7 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$articles = $article->getArticles(10);
+$articles = $article->getArticles(9);
 
 include(TEMPLATES_PATH . '/_header.php')
 ?>
