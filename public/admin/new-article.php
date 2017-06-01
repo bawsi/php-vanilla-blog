@@ -1,8 +1,10 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
+// Getting list of all categories
+$categories = $article->getCategories();
 
-// If POST request, new article was already submitted. Validate & store it
+// If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
 	$articleBody = $_POST['body'];
@@ -32,11 +34,10 @@ include(TEMPLATES_PATH . '/_header.php');
 			<input type="text" name="title">
 			<p>Article Body</p>
 			<textarea name="body" rows="8"></textarea>
-			<select class="category form-control	" name="category">
-				<option value="1">Other</option>
-				<option value="2">Programming</option>
-				<option value="3">Cooking</option>
-				<option value="4">Gardening</option>
+			<select class="category form-control" name="category">
+				<?php foreach ($categories as $category): ?>
+					<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
+				<?php endforeach; ?>
 			</select>
 			<input type="hidden" name="authorId" value="1">
 			<button type="submit" name="submit">Send now</button>
