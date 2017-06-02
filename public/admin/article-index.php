@@ -9,15 +9,13 @@ include(TEMPLATES_PATH . '/_header.php')
 
 <div class="container container-admin-index">
 
-    <!-- breadcrumbs -->
-    <?php include(TEMPLATES_PATH . '/admin/_breadcrumbs.php'); ?>
-
     <div class="row">
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
-        <!-- article table -->
+        <!-- articles table column -->
         <div class="col-md-9">
+
             <table class="table table-condensed table-bordered" style="background: white;">
                 <tr>
                     <th>id</th>
