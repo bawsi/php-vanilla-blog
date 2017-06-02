@@ -1,7 +1,8 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$page = 'admin-article-index';
 
-// If post request, update article
+// If POST request, update article
 if ($_SERVER['REQUEST_METHOD'] == 'post') {
     $articleId = $_POST['id'];
     $title = $_POST['title'];
@@ -9,14 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'post') {
     $categoryId = $_POST['category_id'];
 
 } else {
-    // Otherwise, get article by its id, so we can fill the form with its info
+    // Otherwise, get article by its id, so we can fill the form below with its info
     $articleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     $categories = $article->getCategories();
-
-
     $articleData = $article->getArticleById($articleId);
-
-
 }
 
 include(TEMPLATES_PATH . '/_header.php');
@@ -45,7 +42,7 @@ include(TEMPLATES_PATH . '/_header.php');
 					<?php endforeach; ?>
 				</select>
 				<input type="hidden" name="authorId" value="1">
-				<button type="submit" name="submit" class="btn btn-danger btn-block">Publish article <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				<button type="submit" name="submit" class="btn btn-danger btn-block">Update article <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			</form>
 		</div>
 
