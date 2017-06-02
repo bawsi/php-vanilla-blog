@@ -32,7 +32,7 @@ include(TEMPLATES_PATH . '/_header.php')
                         <td><?php echo htmlspecialchars($article['author']); ?></td>
                         <td><?php echo htmlspecialchars(date("d.m.Y", $article['created_at'])); ?></td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a href="<?php echo '/admin/edit.php?id=' . $article['id']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                             <a href="<?php echo '/admin/delete.php?id=' . $article['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </td>
                     </tr>
