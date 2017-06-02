@@ -17,7 +17,7 @@ include(TEMPLATES_PATH . '/_header.php')
 			<!-- Single article -->
 			<div class="single-article col-md-4 col-sm-6 col-xs-12">
 				<div class="thumbnail">
-					<img src="http://placehold.it/350x200" alt="article image thumbnail">
+					<img src="http://lorempixel.com/400/200/technics/<?php echo rand(1, 10); ?>" alt="article image thumbnail">
 					<div class="caption" style="padding-bottom: 0">
 
 						<p class="article-info">
@@ -38,7 +38,7 @@ include(TEMPLATES_PATH . '/_header.php')
 						</p>
 
 						<h3><?php echo $article['title']; ?></h3>
-						<p style="margin-top: 25px;"><a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-primary" role="button">Read More</a></p>
+						<p style="margin-top: 25px;"><a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-danger" role="button">Read More</a></p>
 
 					</div>
 				</div>
