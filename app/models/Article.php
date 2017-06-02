@@ -104,4 +104,17 @@ class Article
 
         return $categories;
     }
+
+    public function delete($id) {
+        $stmt = $this->db->prepare(
+            'DELETE FROM articles WHERE id = :id'
+        );
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // If any rows were affected/deleted, return rue, false otherwise
+        return ($stmt->rowCount()) ? true : false;
+
+    }
+
 }
