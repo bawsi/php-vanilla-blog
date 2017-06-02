@@ -38,7 +38,7 @@ include(TEMPLATES_PATH . '/_header.php')
 						</p>
 
 						<h3><?php echo $article['title']; ?></h3>
-						<p style="margin-top: 25px;"><a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-danger" role="button">Read More</a></p>
+						<a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-danger read-more-btn" role="button">Read More</a>
 
 					</div>
 				</div>
