@@ -7,18 +7,23 @@ include(TEMPLATES_PATH . '/_header.php')
 ?>
 
 <div class="container container-admin-index">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <!-- breadcrumbs -->
+            <ol class="breadcrumb">
+                <li><a href="#">Admin panel</a></li>
+                <li class="active"><a href="#">Article list</a>
+            </ol>
+        </div>
+    </div>
+
 
     <div class="row">
-        <!-- menu -->
-        <div class="col-md-3">
-            <div class="list-group">
-                <a href="#" class="list-group-item">Home</a>
-                <a href="#" class="list-group-item">List articles</a>
-                <a href="#" class="list-group-item">New article</a>
-                <a href="#" class="list-group-item">Users</a>
-            </div>
-        </div>
 
+        <!-- side navigation -->
+        <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
+
+        <!-- article table -->
         <div class="col-md-9">
             <table class="table table-condensed table-bordered" style="background: white;">
                 <tr>
