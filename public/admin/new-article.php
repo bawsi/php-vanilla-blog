@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<?php endforeach; ?>
 				</select>
 				<input type="hidden" name="authorId" value="1">
-				<button type="submit" name="submit">Send now</button>
+				<button type="submit" name="submit" class="btn btn-danger btn-block">Publish article <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			</form>
 		</div>
 
