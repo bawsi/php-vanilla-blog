@@ -105,12 +105,19 @@ class Article
         return $categories;
     }
 
-    public function edit($id, $title, $body, $categoryId) {
+    public function edit($articleId, $title, $body, $categoryId) {
         $stmt = $this->db->prepare(
             'UPDATE articles
-            SET title = :title, body = :body, category = :category
+            SET title = :title, body = :body, category_id = :categoryId
             WHERE id = :id'
         );
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':body', $body, PDO::PARAM_STR);
+        $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt->rowCount() > 0) ? true : false;
     }
 
     public function delete($id) {
