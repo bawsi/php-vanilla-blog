@@ -8,14 +8,12 @@ include(TEMPLATES_PATH . '/_header.php')
 ?>
 
 <div class="container container-admin-index">
-
     <div class="row">
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
         <!-- articles table column -->
         <div class="col-md-9">
-
             <table class="table table-condensed table-bordered" style="background: white;">
                 <tr>
                     <th>id</th>
@@ -25,7 +23,6 @@ include(TEMPLATES_PATH . '/_header.php')
                     <th>Created on</th>
                     <th>Options</th>
                 </tr>
-
                 <!-- Articles -->
                 <?php foreach ($articles as $article):?>
                     <tr>
@@ -40,7 +37,6 @@ include(TEMPLATES_PATH . '/_header.php')
                         </td>
                     </tr>
                 <?php endforeach; ?>
-
             </table>
         </div>
     </div>
