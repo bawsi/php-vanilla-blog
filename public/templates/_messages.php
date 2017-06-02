@@ -6,7 +6,7 @@ echo '<div style="margin-top:20px;" class="container container-messages"><div cl
 /**
  * If there is at least 1 error set in error_messages, show it, then unset it
  */
-if (isset($_SESSION['error_messages']) && $_SESSION['error_messages'] !== '') {
+if (isset($_SESSION['error_messages']) && !empty($_SESSION['error_messages'])) {
 	$messages = $_SESSION['error_messages'];
 
 	// Displaying message
@@ -24,7 +24,7 @@ if (isset($_SESSION['error_messages']) && $_SESSION['error_messages'] !== '') {
 /**
  * If there is at least 1 message in success_messages, show it, then unset it
  */
-if (isset($_SESSION['success_messages']) && $_SESSION['success_messages'] !== '') {
+if (isset($_SESSION['success_messages']) && !empty($_SESSION['success_messages'])) {
 	$messages = $_SESSION['success_messages'];
 
 	// Displaying message
