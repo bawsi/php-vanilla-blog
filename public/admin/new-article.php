@@ -27,18 +27,18 @@ include(TEMPLATES_PATH . '/_header.php');
 <!-- Main content -->
 <div class="container container-new-article">
 	<div class="row">
+
 		<!-- Sidebar column-->
-		<div class="col-md-3">
-			<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
-		</div>
+		<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
 		<!-- new article form column -->
 		<div class="col-md-9">
 			<form class="article-form" action="" method="post">
 				<p>Article Title</p>
-				<input type="text" name="title">
+				<input type="text" name="title" placeholder="Article title here" class="form-control">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"></textarea>
+				<p>Category</p>
 				<select class="category form-control" name="category">
 					<?php foreach ($categories as $category): ?>
 						<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
