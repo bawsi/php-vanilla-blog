@@ -7,14 +7,20 @@ include(TEMPLATES_PATH . '/_header.php')
 ?>
 
 <div class="container container-admin-index">
-    <!-- Row for buttons/navigation on top of admin page -->
-    <div class="row text-center">
-        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> New Article</a>
-    </div>
-    <br>
+
     <div class="row">
+        <!-- menu -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item">Home</a>
+                <a href="#" class="list-group-item">List articles</a>
+                <a href="#" class="list-group-item">New article</a>
+                <a href="#" class="list-group-item">Users</a>
+            </div>
+        </div>
+
         <div class="col-md-9">
-            <table class="table table-condensed table-bordered">
+            <table class="table table-condensed table-bordered" style="background: white;">
                 <tr>
                     <th>id</th>
                     <th>Title</th>
