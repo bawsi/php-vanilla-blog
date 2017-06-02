@@ -3,11 +3,19 @@ include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $page = 'admin-article-index';
 
 // If POST request, update article
-if ($_SERVER['REQUEST_METHOD'] == 'post') {
-    $articleId = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $articleId = $_POST['articleId'];
     $title = $_POST['title'];
     $body = $_POST['body'];
-    $categoryId = $_POST['category_id'];
+    $categoryId = $_POST['categoryId'];
+
+    if ($article->edit($articleId, $title, $body, $categoryId)) {
+        $_SESSION['success_messages'][] = 'Article successfully updated!';
+        header('location: /article.php?id=' . $articleId);
+    } else {
+        $_SESSION['error_messages'][] = 'Failed to update the article. Try again please!';
+        header('location: /admin/article-index.php');
+    }
 
 } else {
     // Otherwise, get article by its id, so we can fill the form below with its info
@@ -28,9 +36,10 @@ include(TEMPLATES_PATH . '/_header.php');
 		<!-- Sidebar column-->
 		<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
-		<!-- new article form column -->
+		<!-- edit article form column -->
 		<div class="col-md-9">
 			<form class="article-form" action="" method="post">
+                <input type="hidden" name="articleId" value="<?php echo $articleId; ?>">
 				<p>Article Title</p>
 				<input type="text" name="title" placeholder="Article title here" class="form-control" value="<?php echo $articleData['title']; ?>">
 				<p>Article Body</p>
