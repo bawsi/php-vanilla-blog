@@ -7,16 +7,8 @@ include(TEMPLATES_PATH . '/_header.php')
 ?>
 
 <div class="container container-admin-index">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <!-- breadcrumbs -->
-            <ol class="breadcrumb">
-                <li><a href="#">Admin panel</a></li>
-                <li class="active"><a href="#">Article list</a>
-            </ol>
-        </div>
-    </div>
 
+    <?php include(TEMPLATES_PATH . '/admin/_breadcrumbs.php'); ?>
 
     <div class="row">
 
