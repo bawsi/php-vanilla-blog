@@ -1,12 +1,13 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$page = 'admin-new-article';
 
 // Getting list of all categories
 $categories = $article->getCategories();
 
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$articleTitle = $_POST['title'];  
+	$articleTitle = $_POST['title'];
 	$articleBody = $_POST['body'];
 	$articleCategory = $_POST['category'];
 	$articleAuthorId = (int)$_POST['authorId'];
@@ -20,28 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
-
-
 include(TEMPLATES_PATH . '/_header.php');
 ?>
 
 <!-- Main content -->
 <div class="container container-new-article">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="row">
+		<!-- Sidebar column-->
+		<div class="col-md-3">
+			<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
+		</div>
 
-		<form class="article-form" action="" method="post">
-			<p>Article Title</p>
-			<input type="text" name="title">
-			<p>Article Body</p>
-			<textarea name="body" rows="8"></textarea>
-			<select class="category form-control" name="category">
-				<?php foreach ($categories as $category): ?>
-					<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
-				<?php endforeach; ?>
-			</select>
-			<input type="hidden" name="authorId" value="1">
-			<button type="submit" name="submit">Send now</button>
-		</form>
+		<!-- new article form column -->
+		<div class="col-md-9">
+			<form class="article-form" action="" method="post">
+				<p>Article Title</p>
+				<input type="text" name="title">
+				<p>Article Body</p>
+				<textarea name="body" rows="8"></textarea>
+				<select class="category form-control" name="category">
+					<?php foreach ($categories as $category): ?>
+						<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<input type="hidden" name="authorId" value="1">
+				<button type="submit" name="submit">Send now</button>
+			</form>
+		</div>
 
 	</div>
 </div>
@@ -52,4 +58,5 @@ include(TEMPLATES_PATH . '/_header.php');
     CKEDITOR.replace( 'body' );
 </script>
 
+<!-- footer -->
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
