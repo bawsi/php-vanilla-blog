@@ -80,6 +80,10 @@ class ArticleController
         return $categories;
     }
 
+    public function edit($articleId, $title, $body, $categoryId) {
+        return $this->articleModel->edit($articleId, $title, $body, $categoryId);
+    }
+
     public function delete($id) {
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         return $this->articleModel->delete($id);
