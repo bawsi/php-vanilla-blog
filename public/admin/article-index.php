@@ -14,7 +14,7 @@ include(TEMPLATES_PATH . '/_header.php')
 
         <!-- articles table column -->
         <div class="col-md-9">
-            <table class="table table-condensed table-bordered" style="background: white;">
+            <table class="table table-bordered" style="background: white;">
                 <tr>
                     <th>id</th>
                     <th>Title</th>

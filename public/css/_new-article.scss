@@ -1,13 +1,25 @@
 div.container-new-article {
 	form.article-form {
+		background: white;
+		padding: 10px;
+		box-shadow: 1px 1px 5px 1px #cccbcb;
+
+		p:not(:first-child) {
+			margin-top: 15px;
+		}
+
 		input[type=text] {
 			display: block;
 			width: 100%;
-			margin-bottom: 15px;
 		}
 		textarea {
 			display: block;
 		}
+
+		select.category {
+
+		}
+
 		button {
 			display: block;
 			margin: 0 auto;
