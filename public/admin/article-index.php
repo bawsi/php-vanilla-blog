@@ -40,8 +40,6 @@ include(TEMPLATES_PATH . '/_header.php')
             </table>
         </div>
     </div>
-
-
 </div>
 
 
