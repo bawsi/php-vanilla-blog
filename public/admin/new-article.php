@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleAuthorId = (int)$_POST['authorId'];
 
 	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $articleAuthorId)) {
-		$_SESSION['success_messages'][] = 'Article successfully added.';
 		header('location: /article.php?id=' . $articleId);
 	} else {
 		// TODO: fill form with old data, if any was submitted
