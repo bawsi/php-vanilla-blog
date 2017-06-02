@@ -62,12 +62,14 @@ class ArticleController
     {
         if (!empty($title) && !empty($body) && is_int($authorId)) {
             if ($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)) {
+                $_SESSION['success_messages'][] = 'Article added to database!';
                 return $articleId;
-            }
-            else {
+            } else {
+                $_SESSION['error_messages'][] = 'Failed to store article to database.. try again!';
                 return false;
             }
         } else {
+            $_SESSION['error_messages'][] = 'All fields are required!';
             return false;
         }
     }
