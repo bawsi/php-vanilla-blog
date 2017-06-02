@@ -105,6 +105,14 @@ class Article
         return $categories;
     }
 
+    public function edit($id, $title, $body, $categoryId) {
+        $stmt = $this->db->prepare(
+            'UPDATE articles
+            SET title = :title, body = :body, category = :category
+            WHERE id = :id'
+        );
+    }
+
     public function delete($id) {
         $stmt = $this->db->prepare(
             'DELETE FROM articles WHERE id = :id'
