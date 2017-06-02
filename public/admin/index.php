@@ -9,10 +9,7 @@ include(TEMPLATES_PATH . '/_header.php')
 
 <div class="container container-admin-index">
 
-    <?php include(TEMPLATES_PATH . '/admin/_breadcrumbs.php'); ?>
-
     <div class="row">
-
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
