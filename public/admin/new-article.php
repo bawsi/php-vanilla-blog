@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $articleAuthorId)) {
 		header('location: /article.php?id=' . $articleId);
 	} else {
-		// TODO: fill form with old data, if any was submitted
+		// Including messages again, since otherwise error message that was set
+		// wont be displayed untill next request
+		include(TEMPLATES_PATH . '/_messages.php');
 	}
 }
 
