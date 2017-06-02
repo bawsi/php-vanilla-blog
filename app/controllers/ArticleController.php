@@ -79,4 +79,10 @@ class ArticleController
 
         return $categories;
     }
+
+    public function delete($id) {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        return $this->articleModel->delete($id);
+    }
+
 }
