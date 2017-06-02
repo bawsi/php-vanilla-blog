@@ -1,5 +1,6 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$page = 'article-index';
 
 $articles = $article->getArticles(999);
 
