@@ -13,6 +13,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="#contact">Contact</a></li>
+				<li><a href="/admin">Admin panel</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
