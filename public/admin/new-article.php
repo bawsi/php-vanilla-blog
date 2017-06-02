@@ -5,6 +5,10 @@ $page = 'admin-new-article';
 // Getting list of all categories
 $categories = $article->getCategories();
 
+// header template (included before other code, because otherwise,
+// success_messages session variable gets unset right after it is set
+include(TEMPLATES_PATH . '/_header.php');
+
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
@@ -13,15 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleAuthorId = (int)$_POST['authorId'];
 
 	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $articleAuthorId)) {
-		$success_messages[] = 'Article successfully added.';
+		$_SESSION['success_messages'][] = 'Article successfully added.';
 		header('location: /article.php?id=' . $articleId);
-	}
-	else {
-		$error_messages[] = 'Failed to submit article. Try again!';
+	} else {
+		// TODO: fill form with old data, if any was submitted
 	}
 }
 
-include(TEMPLATES_PATH . '/_header.php');
+
 ?>
 
 <!-- Main content -->
@@ -55,7 +58,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- CKEditor script that replaced textarea with ckeditor -->
 <script>
-    CKEDITOR.replace( 'body' );
+    CKEDITOR.replace('body');
 </script>
 
 <!-- footer -->
