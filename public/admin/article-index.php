@@ -1,6 +1,6 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
-$page = 'article-index';
+$page = 'admin-article-index';
 
 $articles = $article->getArticles(999);
 
@@ -9,10 +9,10 @@ include(TEMPLATES_PATH . '/_header.php')
 
 <div class="container container-admin-index">
 
+    <!-- breadcrumbs -->
     <?php include(TEMPLATES_PATH . '/admin/_breadcrumbs.php'); ?>
 
     <div class="row">
-
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
@@ -28,6 +28,7 @@ include(TEMPLATES_PATH . '/_header.php')
                     <th>Options</th>
                 </tr>
 
+                <!-- Articles -->
                 <?php foreach ($articles as $article):?>
                     <tr>
                         <td><?php echo htmlspecialchars($article['id']); ?></td>
