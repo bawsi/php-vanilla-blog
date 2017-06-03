@@ -77,12 +77,7 @@ include(TEMPLATES_PATH . '/_header.php')
 
 		</ul>
 	</nav>
-
-
-
-
-
-
 </div> <!-- End of main content -->
+
 
 <?php include(TEMPLATES_PATH . '/_footer.php') ?>
