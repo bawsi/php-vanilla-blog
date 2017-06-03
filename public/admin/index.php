@@ -10,10 +10,15 @@ include(TEMPLATES_PATH . '/_header.php')
 <div class="container container-admin-index">
 
     <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+            <h1>Admin panel</h1>
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
-
-        <h2>Admin panel home page</h2>
     </div>
 
 
