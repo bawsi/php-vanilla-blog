@@ -1,6 +1,15 @@
 // GLOBAL CSS
+
+// Required for footer
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 	background: rgba(#f6f4f2, 0.6);
+	/* Margin bottom for footer height - otherwise content gets covered */
+	margin-bottom: 120px;
 }
 
 nav.navbar {
@@ -15,3 +24,6 @@ nav.navbar {
 
 // New-article admin page
 @import '_new-article.scss';
+
+// Footer template
+@import '_footer.scss';
