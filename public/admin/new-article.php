@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!-- Main content -->
 <div class="container container-new-article">
 	<div class="row">
+        <div class="col-md-9 col-md-offset-3">
+            <h1>Write a new article</h1>
+            <br>
+        </div>
+    </div>
+
+	<div class="row">
 
 		<!-- Sidebar column-->
 		<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
