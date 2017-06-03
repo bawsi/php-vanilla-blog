@@ -38,7 +38,6 @@ class Article
         $stmt->bindParam(':numberOfArticles', $numberOfArticles, PDO::PARAM_INT);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $articles;
     }
 
@@ -129,7 +128,38 @@ class Article
 
         // If any rows were affected/deleted, return rue, false otherwise
         return ($stmt->rowCount()) ? true : false;
+    }
 
+    public function paginate($page, $perPage, $category = 'all') {
+        $offsetAmount = ($page - 1) * $perPage;
+        $stmt = $this->db->prepare(
+            'SELECT articles.id, articles.title, articles.body, articles.created_at,
+				    users.username AS author, article_categories.category_name
+			 FROM articles
+			 JOIN users ON articles.author_id = users.id
+			 JOIN article_categories ON articles.category_id = article_categories.id
+			 ORDER BY articles.id DESC
+			 LIMIT :perPage
+             OFFSET :offset_amount'
+         );
+
+         $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
+         $stmt->bindParam(':offset_amount', $offsetAmount, PDO::PARAM_INT);
+         $stmt->execute();
+
+         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         return $articles;
+    }
+
+    public function getTotalNumberOfArticles() {
+        $stmt = $this->db->prepare(
+            'SELECT COUNT(*) FROM articles'
+        );
+        $stmt->execute();
+
+        $num = $stmt->fetch();
+
+        return $num;
     }
 
 }
