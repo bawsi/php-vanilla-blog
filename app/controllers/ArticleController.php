@@ -89,4 +89,15 @@ class ArticleController
         return $this->articleModel->delete($id);
     }
 
+    public function getArticlesPaginated($page, $perPage, $category = 'all') {
+        $articles = $this->articleModel->paginate($page, $perPage);
+        return $articles;
+    }
+
+    public function getTotalNumberOfPages($perPage) {
+        $numOfArticles = $this->articleModel->getTotalNumberOfArticles();
+        $numOfPages = ceil($numOfArticles[0] / $perPage);
+        return $numOfPages;
+    }
+
 }
