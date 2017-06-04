@@ -95,7 +95,7 @@ class Article
         return ($stmt) ? $this->db->lastInsertId() : false;
     }
 
-    public function saveArticleImagePaths($imgPath, $articleId) {
+    public function saveArticleImagePath($imgPath, $articleId) {
         $stmt = $this->db->prepare(
             'UPDATE articles
             SET img_path = :imgPath
