@@ -14,9 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
 	$articleBody = $_POST['body'];
 	$articleCategory = $_POST['category'];
+	$image = $_POST['image'];
 	$articleAuthorId = (int)$_POST['authorId'];
 
-	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $articleAuthorId)) {
+	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $image, $articleAuthorId)) {
 		header('location: /article.php?id=' . $articleId);
 	} else {
 		// Including messages again, since otherwise error message that was set
@@ -49,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<input type="text" name="title" placeholder="Article title here" class="form-control">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"></textarea>
+				<p>Image (appears on article thumbnail and at top of the article)</p>
+				<input type="file" name="image" class="form-control" accept="image/*">
 				<p>Category</p>
 				<select class="category form-control" name="category">
 					<?php foreach ($categories as $category): ?>
