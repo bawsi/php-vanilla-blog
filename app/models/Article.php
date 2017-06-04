@@ -74,7 +74,7 @@ class Article
      * @param  string $body     Article body
      * @param  int    $authorId ID of author
      *
-     * @return bool               Return true, if all fields were filled, false otherwise
+     * @return int/bool              Return true, if all fields were filled, false otherwise
      */
     public function saveArticle($title, $body, $articleCategory, $authorId)
     {
