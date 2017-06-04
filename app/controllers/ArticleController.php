@@ -58,14 +58,42 @@ class ArticleController
      *
      * @return bool             Return true, if all fields were filled, false otherwise
      */
-    public function validateAndStoreArticle($title, $body, $articleCategory, $authorId)
+    public function validateAndStoreArticle($title, $body, $articleCategory, $image, $authorId)
     {
-        if (!empty($title) && !empty($body) && is_int($authorId)) {
-            if ($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)) {
+        // Very basic validation
+        if (!empty($title) && !empty($body) && !empty($image) && is_int($authorId)) {
+
+            // Getting Image info
+            $imageName = $image['name'];
+            $imageTmpName = $image['tmp_name'];
+            $imageFileType = $image['type'];
+
+            $imageExtension = explode('.', $imageName);
+            $ImageActualExtension = strtolower(end($imageExtension));
+
+            $allowed = ['jpg', 'jpeg', 'png'];
+
+            // Validating image and setting paths etc
+            if (in_array($ImageActualExtension, $allowed)) {
+                $imageNameNew = uniqid('', true) . '.' . $ImageActualExtension;
+                $imageDest = PUBLIC_PATH . '/uploads/' . $imageNameNew;
+            } else {
+                $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
+                header('location: /admin/new-article.php');
+            }
+
+            // Storing data to db
+            if ($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId) && move_uploaded_file($imageTmpName, $imageDest)) {
+                // Modify saved image - make one small image for thumbnail and a larger one for article
+                $img = Image::make($imageDest);
+
+
+
+                // Set success msg and redirect to article
                 $_SESSION['success_messages'][] = 'Article added to database!';
                 return $articleId;
             } else {
-                $_SESSION['error_messages'][] = 'Failed to store article to database.. try again!';
+                $_SESSION['error_messages'][] = 'Failed to store article or image to database.. try again!';
                 return false;
             }
         } else {
