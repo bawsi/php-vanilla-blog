@@ -92,7 +92,7 @@ class ArticleController
                 $imgSmall = Image::make($imageDest)->fit(400, 200)->save($uploadsPath . '/' . $articleId . '_400x200_' . $imageNameNew);
                 $imgBig = Image::make($imageDest)->fit(935, 400)->save($uploadsPath . '/' . $articleId . '_935x400_' . $imageNameNew);
 
-                $this->articleModel->saveArticleImagePaths($imgSmall, $imgBig);
+                $this->articleModel->saveArticleImagePaths($imgSmall, $imgBig, $articleId);
 
                 // Set success msg and return article id
                 $_SESSION['success_messages'][] = 'Article added to database!';
