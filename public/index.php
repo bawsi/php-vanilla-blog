@@ -55,21 +55,25 @@ include(TEMPLATES_PATH . '/_header.php')
 	<nav aria-label="Page navigation" class="text-center">
 		<ul class="pagination">
 
-			<li class="<?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-				<a href="/index.php?p=<?php echo $page - 1; ?>" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
+			<?php if($page > 1): ?>
+				<li>
+					<a href="/index.php?p=<?php echo $page - 1; ?>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+			<?php endif; ?>
 
 			<?php for($pageCount = 1; $pageCount <= $totalPages; $pageCount++):?>
 				<li><a href="/index.php?p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
 			<?php endfor; ?>
 
-			<li class="<?php echo ($page == $totalPages) ? 'disabled' : ''; ?>">
-				<a href="/index.php?p=<?php echo $page + 1; ?>" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
+			<?php if($page < $totalPages): ?>
+				<li>
+					<a href="/index.php?p=<?php echo $page + 1; ?>" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			<?php endif; ?>
 
 		</ul>
 	</nav>
