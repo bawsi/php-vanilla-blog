@@ -95,7 +95,7 @@ class ArticleController
                 Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
 
                 // Save path of image to article db
-                $this->articleModel->saveArticleImagePaths($imgPathForDb, $articleId);
+                $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
 
                 // Set success msg and return article id
                 $_SESSION['success_messages'][] = 'Article added to database!';
@@ -117,8 +117,42 @@ class ArticleController
         return $categories;
     }
 
-    public function edit($articleId, $title, $body, $categoryId) {
-        return $this->articleModel->edit($articleId, $title, $body, $categoryId);
+    public function edit($articleId, $title, $body, $image, $categoryId)
+    {
+
+        // Getting Image info
+        $imageName = $image['name'];
+        $imageTmpName = $image['tmp_name'];
+        $imageFileType = $image['type'];
+
+        $imageExtension = explode('.', $imageName);
+        $ImageActualExtension = strtolower(end($imageExtension));
+
+        $allowed = ['jpg', 'jpeg', 'png'];
+
+        // If submitted image has extension which is now allowed, redirect back with error
+        if(!in_array($ImageActualExtension, $allowed)) {
+            $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
+            header('location: /admin/edit.php?id=' . $articleId);
+        }
+
+        // Saving article
+        $this->articleModel->edit($articleId, $title, $body, $categoryId);
+
+        // Saving the image
+        Image::configure(['driver' => 'imagick']);
+
+        $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+        $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+        $imgPathForDb = '/uploads/' . $fileName;
+
+        // Save phisical copy of image to public/uploads/
+        Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+
+        // Save path of image to article db
+        $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+
+        return true;
     }
 
     public function delete($id) {
