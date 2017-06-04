@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 ?>
-
 <!-- Main content -->
 <div class="container container-new-article">
 	<div class="row">
