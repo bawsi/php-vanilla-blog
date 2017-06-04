@@ -21,7 +21,7 @@ include(TEMPLATES_PATH . '/_header.php')
 			<!-- Single article -->
 			<div class="single-article col-md-4 col-sm-6 col-xs-12">
 				<div class="thumbnail">
-					<img src="http://lorempixel.com/400/200/technics/<?php echo rand(1, 10); ?>" alt="article image thumbnail">
+					<img src="<?php echo $article['img_path']; ?>" alt="article image thumbnail">
 					<div class="caption" style="padding-bottom: 0">
 
 						<p class="article-info">
