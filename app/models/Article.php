@@ -95,6 +95,19 @@ class Article
         return ($stmt) ? $this->db->lastInsertId() : false;
     }
 
+    public function saveArticleImagePaths($imgPath, $articleId) {
+        $stmt = $this->db->prepare(
+            'UPDATE articles
+            SET img_path = :imgPath
+            WHERE id = :id'
+        );
+        $stmt->bindParam(':imgPath', $imgPath, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt->rowCount()) ? true : false;
+    }
+
     public function getCategories() {
         $stmt = $this->db->query('SELECT * FROM article_categories');
         $stmt->execute();
@@ -116,7 +129,7 @@ class Article
         $stmt->bindParam(':id', $articleId, PDO::PARAM_INT);
         $stmt->execute();
 
-        return ($stmt->rowCount() > 0) ? true : false;
+        return ($stmt->rowCount()) ? true : false;
     }
 
     public function delete($id) {
