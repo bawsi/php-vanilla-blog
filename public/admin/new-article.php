@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<input type="text" name="title" placeholder="Article title here" class="form-control">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"></textarea>
-				<p>Image (appears on article thumbnail and at top of the article)</p>
+				<p>Image (appears on article thumbnail / 400x200)</p>
 				<input type="file" name="image" class="form-control" accept="image/*">
 				<p>Category</p>
 				<select class="category form-control" name="category">
