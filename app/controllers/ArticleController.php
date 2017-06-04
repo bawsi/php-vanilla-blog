@@ -85,16 +85,17 @@ class ArticleController
             if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)))
             {
                 // Saving the image - cant save above, because I cant get article's ID before article is saved
-                $uploadsPath = PUBLIC_PATH . '/uploads';
                 Image::configure(['driver' => 'imagick']);
 
-                $imgPath = $uploadsPath . '/' . $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+                $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+                $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                $imgPathForDb = '/uploads/' . $fileName;
 
                 // Save phisical copy of image to public/uploads/
-                Image::make($imageTmpName)->fit(400, 200)->save($imgPath);
+                Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
 
                 // Save path of image to article db
-                $this->articleModel->saveArticleImagePaths($imgPath, $articleId);
+                $this->articleModel->saveArticleImagePaths($imgPathForDb, $articleId);
 
                 // Set success msg and return article id
                 $_SESSION['success_messages'][] = 'Article added to database!';
