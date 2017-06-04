@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class ArticleController
 {
     private $articleModel;
@@ -85,7 +87,8 @@ class ArticleController
             // Storing data to db
             if ($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId) && move_uploaded_file($imageTmpName, $imageDest)) {
                 // Modify saved image - make one small image for thumbnail and a larger one for article
-                $img = Image::make($imageDest);
+                Image::configure(['driver' => 'imagick']);
+                $img = Image::make($imageDest)->resize(300, 200);
 
 
 
