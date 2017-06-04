@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		<!-- new article form column -->
 		<div class="col-md-9">
-			<form class="article-form" action="" method="post">
+			<form class="article-form" action="" method="post" enctype="multipart/form-data">
 				<p>Article Title</p>
 				<input type="text" name="title" placeholder="Article title here" class="form-control">
 				<p>Article Body</p>
