@@ -75,30 +75,31 @@ class ArticleController
 
             $allowed = ['jpg', 'jpeg', 'png'];
 
-            // Validating image and setting paths etc
-            if (in_array($ImageActualExtension, $allowed)) {
-                $imageNameNew = uniqid('', true) . '.' . $ImageActualExtension;
-                $imageDest = PUBLIC_PATH . '/uploads/' . $imageNameNew;
-            } else {
+            // If submitted image has extension which is now allowed, redirect back with error
+            if(!in_array($ImageActualExtension, $allowed)) {
                 $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
                 header('location: /admin/new-article.php');
             }
 
             // Storing data to db
-            if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)) && move_uploaded_file($imageTmpName, $imageDest)) {
+            if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)))
+            {
                 // Saving the image - cant save above, because I cant get article's ID before article is saved
                 $uploadsPath = PUBLIC_PATH . '/uploads';
                 Image::configure(['driver' => 'imagick']);
 
-                $imgPath = $uploadsPath . '/' . $articleId . '_400x200_' . $imageNameNew;
+                $imgPath = $uploadsPath . '/' . $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
 
-                Image::make($imageDest)->fit(400, 200)->save($imgPath);
+                // Save phisical copy of image to public/uploads/
+                Image::make($imageTmpName)->fit(400, 200)->save($imgPath);
 
+                // Save path of image to article db
                 $this->articleModel->saveArticleImagePaths($imgPath, $articleId);
 
                 // Set success msg and return article id
                 $_SESSION['success_messages'][] = 'Article added to database!';
                 return $articleId;
+
             } else {
                 $_SESSION['error_messages'][] = 'Failed to store article or image to database.. try again!';
                 return false;
