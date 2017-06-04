@@ -3,7 +3,7 @@
 include 'config.php';
 
 // composer autoload
-include APP_PATH . '/../vendor/autoload.php';
+require APP_PATH . '/../vendor/autoload.php';
 
 // Including models
 include APP_PATH . '/models/Db.php';
