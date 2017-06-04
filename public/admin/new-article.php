@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
 	$articleBody = $_POST['body'];
 	$articleCategory = $_POST['category'];
-	$image = $_POST['image'];
+	$image = $_FILES['image'];
 	$articleAuthorId = (int)$_POST['authorId'];
 
 	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $image, $articleAuthorId)) {
