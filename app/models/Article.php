@@ -162,7 +162,7 @@ class Article
 
          $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
          $stmt->bindParam(':offset_amount', $offsetAmount, PDO::PARAM_INT);
-         ($category >= 1) ? $stmt->bindParam(':categoryId', $category) : '';
+         ($category >= 1) ? $stmt->bindParam(':categoryId', $category, PDO::PARAM_INT) : '';
          $stmt->execute();
 
          $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
