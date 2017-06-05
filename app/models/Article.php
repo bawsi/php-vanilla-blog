@@ -180,4 +180,11 @@ class Article
         return $num;
     }
 
+    public function getCategoryIdFromName($category) {
+        $stmt = $this->db->prepare('SELECT id FROM article_categories WHERE category_name = :category LIMIT 1');
+        $stmt->bindParam(':category', $category);
+        $stmt->execute();
+
+        return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+    }
 }
