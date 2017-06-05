@@ -169,10 +169,13 @@ class Article
          return $articles;
     }
 
-    public function getTotalNumberOfArticles() {
-        $stmt = $this->db->prepare(
-            'SELECT COUNT(*) FROM articles'
-        );
+    public function getTotalNumberOfArticles($category)
+    {
+        $categoryQuery = ($category >= 1) ? ' WHERE category_id = :categoryId' : '';
+        $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
+
+        $stmt = $this->db->prepare($query);
+        ($category >= 1) ? $stmt->bindParam(':categoryId', $category, PDO::PARAM_INT) : '';
         $stmt->execute();
 
         $num = $stmt->fetch();
