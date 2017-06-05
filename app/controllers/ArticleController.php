@@ -111,7 +111,8 @@ class ArticleController
         }
     }
 
-    public function getCategories() {
+    public function getCategories()
+    {
         $categories = $this->articleModel->getCategories();
 
         return $categories;
@@ -152,12 +153,14 @@ class ArticleController
         return true;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         return $this->articleModel->delete($id);
     }
 
-    public function getArticlesPaginated($page, $perPage, $category = -1) {
+    public function getArticlesPaginated($page, $perPage, $category = -1)
+    {
         if ($category !== -1) {
             $category = $this->articleModel->getCategoryIdFromName($category);
         }
