@@ -119,39 +119,36 @@ class ArticleController
 
     public function edit($articleId, $title, $body, $image, $categoryId)
     {
-
-        // Getting Image info
-        $imageName = $image['name'];
-        $imageTmpName = $image['tmp_name'];
-        $imageFileType = $image['type'];
-
-        $imageExtension = explode('.', $imageName);
-        $ImageActualExtension = strtolower(end($imageExtension));
-
-        $allowed = ['jpg', 'jpeg', 'png'];
-
-        // If submitted image has extension which is now allowed, redirect back with error
-        if(!in_array($ImageActualExtension, $allowed)) {
-            $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
-            header('location: /admin/edit.php?id=' . $articleId);
-        }
-
         // Saving article
         $this->articleModel->edit($articleId, $title, $body, $categoryId);
 
-        // Saving the image
-        Image::configure(['driver' => 'imagick']);
+        // If file was uploaded, get its info, resize it, store it
+        if (file_exists($image[tmp_name])) {
+            // Getting Image info
+            $imageName = $image['name'];
+            $imageTmpName = $image['tmp_name'];
+            $imageFileType = $image['type'];
 
-        $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-        $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
-        $imgPathForDb = '/uploads/' . $fileName;
+            $imageExtension = explode('.', $imageName);
+            $ImageActualExtension = strtolower(end($imageExtension));
 
-        // Save phisical copy of image to public/uploads/
-        Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+            $allowed = ['jpg', 'jpeg', 'png'];
 
-        // Save path of image to article db
-        $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
 
+
+            // Saving the image
+            Image::configure(['driver' => 'imagick']);
+
+            $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+            $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+            $imgPathForDb = '/uploads/' . $fileName;
+
+            // Save phisical copy of image to public/uploads/
+            Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+
+            // Save path of image to article db
+            $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+        }
         return true;
     }
 
