@@ -1,7 +1,7 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-// pagination
+// pagination and getting articles
 $page = (isset($_GET['p'])) ? $_GET['p'] : 1;
 $perPage = 9;
 $totalPages = $article->getTotalNumberOfPages($perPage);
