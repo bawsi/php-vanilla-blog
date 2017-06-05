@@ -9,12 +9,13 @@ if (!isset($_GET['c']) || empty($_GET['c'])) {
 // pagination and getting articles
 $page = (isset($_GET['p'])) ? $_GET['p'] : 1;
 $perPage = 9;
-$category = $_GET['c'];
+$selectedCategory = $_GET['c'];
 
-$totalPages = $article->getTotalNumberOfPages($perPage, $category);
-$articles = $article->getArticlesPaginated($page, $perPage, $category);
+$totalPages = $article->getTotalNumberOfPages($perPage, $selectedCategory);
+$articles = $article->getArticlesPaginated($page, $perPage, $selectedCategory);
 
-include(TEMPLATES_PATH . '/_header.php')
+include(TEMPLATES_PATH . '/_header.php');
+
 ?>
 
 <!-- Main content -->
