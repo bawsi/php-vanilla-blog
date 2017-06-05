@@ -11,6 +11,8 @@ include(TEMPLATES_PATH . '/_header.php');
 	<div class="container container-article">
 		<div class="row">
 			<div class="article-col col-md-10 col-md-offset-1">
+				<a href="<?php echo '/admin/delete.php?id=' . $article['id']; ?>" class="btn btn-danger btn-xs pull-right">Delete</a>
+				<a href="<?php echo '/admin/edit.php?id=' . $article['id']; ?>" class="btn btn-primary btn-xs pull-right">Edit</a>
 				<h2 class="article-title"><?php echo $article['title']; ?></h2>
 				<h5 class="article-info">
 					<span><i class="fa fa-calendar"></i> <?php echo htmlspecialchars(date('d.m.Y \a\t H:i', $article['created_at'])); ?></span>
