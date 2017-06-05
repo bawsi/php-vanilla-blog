@@ -143,21 +143,26 @@ class Article
         return ($stmt->rowCount()) ? true : false;
     }
 
-    public function paginate($page, $perPage, $category = 'all') {
+    public function paginate($page, $perPage, $category)
+    {
         $offsetAmount = ($page - 1) * $perPage;
-        $stmt = $this->db->prepare(
-            'SELECT articles.id, articles.title, articles.body, articles.created_at,
-				    articles.img_path, users.username AS author, article_categories.category_name
-			 FROM articles
-			 JOIN users ON articles.author_id = users.id
-			 JOIN article_categories ON articles.category_id = article_categories.id
-			 ORDER BY articles.id DESC
-			 LIMIT :perPage
-             OFFSET :offset_amount'
-         );
+        $categoryQuery = ($category >= 1) ? ' WHERE articles.category_id = :categoryId' : '';
+
+        $query = 'SELECT articles.id, articles.title, articles.body, articles.created_at,
+                articles.img_path, users.username AS author, article_categories.category_name
+                 FROM articles
+                 JOIN users ON articles.author_id = users.id
+                 JOIN article_categories ON articles.category_id = article_categories.id'
+                 . $categoryQuery .
+                 ' ORDER BY articles.id DESC
+                 LIMIT :perPage
+                 OFFSET :offset_amount';
+
+        $stmt = $this->db->prepare($query);
 
          $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
          $stmt->bindParam(':offset_amount', $offsetAmount, PDO::PARAM_INT);
+         ($category >= 1) ? $stmt->bindParam(':categoryId', $category) : '';
          $stmt->execute();
 
          $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
