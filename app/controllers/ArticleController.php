@@ -157,8 +157,12 @@ class ArticleController
         return $this->articleModel->delete($id);
     }
 
-    public function getArticlesPaginated($page, $perPage, $category = 'all') {
-        $articles = $this->articleModel->paginate($page, $perPage);
+    public function getArticlesPaginated($page, $perPage, $category = -1) {
+        if ($category !== -1) {
+            $category = $this->articleModel->getCategoryIdFromName($category);
+        }
+
+        $articles = $this->articleModel->paginate($page, $perPage, $category['id']);
         return $articles;
     }
 
