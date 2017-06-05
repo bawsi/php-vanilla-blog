@@ -20,7 +20,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- Main content -->
 <div class="container container-homepage">
-	<h1 class="title text-center">Latest Articles</h1>
+	<h1 class="title text-center"><?php echo $selectedCategory; ?></h1>
 	<hr width="75%">
 	<!-- Articles row -->
 	<div class="row">
