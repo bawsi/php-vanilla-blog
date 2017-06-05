@@ -64,19 +64,19 @@ include(TEMPLATES_PATH . '/_header.php');
 
 			<?php if($page > 1): ?>
 				<li>
-					<a href="/index.php?p=<?php echo $page - 1; ?>" aria-label="Previous">
+					<a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $page - 1; ?>" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
 			<?php endif; ?>
 
 			<?php for($pageCount = 1; $pageCount <= $totalPages; $pageCount++):?>
-				<li><a href="/index.php?p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
+				<li><a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
 			<?php endfor; ?>
 
 			<?php if($page < $totalPages): ?>
 				<li>
-					<a href="/index.php?p=<?php echo $page + 1; ?>" aria-label="Next">
+					<a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $page + 1; ?>" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
