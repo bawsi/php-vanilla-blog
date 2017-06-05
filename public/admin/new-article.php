@@ -13,6 +13,10 @@ include(TEMPLATES_PATH . '/_header.php');
 </script>
 
 
+
+<script>
+    CKEDIaTOR.replace('body');
+</script>
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$articleTitle = $_POST['title'];
