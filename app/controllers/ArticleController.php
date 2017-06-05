@@ -63,39 +63,41 @@ class ArticleController
     public function validateAndStoreArticle($title, $body, $articleCategory, $image, $authorId)
     {
         // Very basic validation
-        if (!empty($title) && !empty($body) && !empty($image) && is_int($authorId)) {
-
-            // Getting Image info
-            $imageName = $image['name'];
-            $imageTmpName = $image['tmp_name'];
-            $imageFileType = $image['type'];
-
-            $imageExtension = explode('.', $imageName);
-            $ImageActualExtension = strtolower(end($imageExtension));
-
-            $allowed = ['jpg', 'jpeg', 'png'];
-
-            // If submitted image has extension which is now allowed, redirect back with error
-            if(!in_array($ImageActualExtension, $allowed)) {
-                $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
-                header('location: /admin/new-article.php');
-            }
-
+        if (!empty($title) && !empty($body) && is_int($authorId))
+        {
             // Storing data to db
             if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)))
             {
-                // Saving the image - cant save above, because I cant get article's ID before article is saved
-                Image::configure(['driver' => 'imagick']);
+                // If image was submitted, get its info, resize it, and store it to /uploads directory
+                if (getimagesize($image['tmp_name'])) {
+                    $imageName = $image['name'];
+                    $imageTmpName = $image['tmp_name'];
+                    $imageFileType = $image['type'];
 
-                $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-                $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
-                $imgPathForDb = '/uploads/' . $fileName;
+                    $imageExtension = explode('.', $imageName);
+                    $ImageActualExtension = strtolower(end($imageExtension));
 
-                // Save phisical copy of image to public/uploads/
-                Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+                    $allowed = ['jpg', 'jpeg', 'png'];
 
-                // Save path of image to article db
-                $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+                    // If submitted image has extension which is now allowed, redirect back with error
+                    if(!in_array($ImageActualExtension, $allowed)) {
+                        $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
+                        header('location: /admin/new-article.php');
+                    }
+
+                    // Saving the image - cant save above, because I cant get article's ID before article is saved
+                    Image::configure(['driver' => 'imagick']);
+
+                    $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+                    $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                    $imgPathForDb = '/uploads/' . $fileName;
+
+                    // Save phisical copy of image to public/uploads/
+                    Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+
+                    // Save path of image to article db
+                    $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+                }
 
                 // Set success msg and return article id
                 $_SESSION['success_messages'][] = 'Article added to database!';
