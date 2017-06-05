@@ -1,12 +1,12 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-$article = $article->getArticleById($_GET['id']);
+$articleData = $article->getArticleById($_GET['id']);
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
 
-<?php if ($article !== false): ?>
+<?php if ($articleData !== false): ?>
 	<!-- Main content -->
 	<div class="container container-article">
 		<div class="row">
@@ -20,7 +20,7 @@ include(TEMPLATES_PATH . '/_header.php');
 					<span><i class="fa fa-folder-open-o"></i> <?php echo htmlspecialchars($article['category_name']); ?></span>
 				</h5>
 				<hr>
-				<p class="article-body"><?php echo $article['body']; ?></p>
+				<p class="article-body"><?php echo $articleData['body']; ?></p>
 			</div>
 		</div>
 	</div> <!-- End of main content -->
