@@ -8,13 +8,10 @@ $categories = $article->getCategories();
 // header template (included before other code, because otherwise,
 // success_messages session variable gets unset right after it is set
 include(TEMPLATES_PATH . '/_header.php');
-
-
 <script>
-    CKEDIaTOR.replace('body');
+    CKEDITOR.replace('body');
 </script>
 
-// hi
 
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
