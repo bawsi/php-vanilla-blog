@@ -169,9 +169,15 @@ class ArticleController
         return $articles;
     }
 
-    public function getTotalNumberOfPages($perPage) {
-        $numOfArticles = $this->articleModel->getTotalNumberOfArticles();
+    public function getTotalNumberOfPages($perPage, $category = -1)
+    {
+        if ($category !== -1) {
+            $category = $this->articleModel->getCategoryIdFromName($category);
+        }
+
+        $numOfArticles = $this->articleModel->getTotalNumberOfArticles($category['id']);
         $numOfPages = ceil($numOfArticles[0] / $perPage);
+
         return $numOfPages;
     }
 
