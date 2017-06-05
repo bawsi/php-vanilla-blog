@@ -8,10 +8,6 @@ $categories = $article->getCategories();
 // header template (included before other code, because otherwise,
 // success_messages session variable gets unset right after it is set
 include(TEMPLATES_PATH . '/_header.php');
-<script>
-    CKEDITOR.replace('body');
-</script>
-
 
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -29,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		include(TEMPLATES_PATH . '/_messages.php');
 	}
 }
-
-
 ?>
+
+
 <!-- Main content -->
 <div class="container container-new-article">
 	<div class="row">
@@ -42,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
 	<div class="row">
-
 		<!-- Sidebar column-->
 		<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
