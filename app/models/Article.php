@@ -51,7 +51,7 @@ class Article
     public function getSingleArticleById($id)
     {
         $stmt = $this->db->prepare(
-            'SELECT articles.title, articles.body, articles.created_at,
+            'SELECT articles.id, articles.title, articles.body, articles.created_at,
 	                article_categories.category_name, users.username as author
 			FROM articles
 			JOIN article_categories ON articles.category_id = article_categories.id
