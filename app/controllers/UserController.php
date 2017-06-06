@@ -40,4 +40,11 @@ class UserController
             return false;
         }
     }
+
+    public function logout()
+    {
+        if ($this->isLoggedIn()) {
+            unset($_SESSION['userId']);
+        }
+    }
 }
