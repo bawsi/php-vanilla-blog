@@ -33,11 +33,19 @@ div.container-homepage {
 					bottom: 0px;
 					left: 0px;
 					transition: background-color 150ms, border-color 150ms;
-					
+
 					&:hover {
 						background-color: #CC6565;
 						border-color: #CC6565;
 						transition: background-color 150ms, border-color 150ms;
+					}
+				}
+
+				// Category link in thumbnail
+				span.category {
+					a {
+						text-decoration: none;
+						color: #484b4b;
 					}
 				}
 			}
