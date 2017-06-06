@@ -31,8 +31,17 @@ $categories = $article->getCategories();
 				</li>
 
 				<li><a href="#contact">Contact</a></li>
-				<li><a href="/admin">Admin panel</a></li>
 			</ul>
+
+            <!-- Navbar on right -->
+            <ul class="nav navbar-nav navbar-right">
+                <?php
+                // If logged in, show admin panel and logout buttons, otherwise, show login button
+                echo ($user->isLoggedIn()) ? '<li><a href="/admin">Admin panel</a> <li><a href="#">Logout</a></li>' : '<li><a href="/admin/login.php">Login</a>';
+                ?>
+            </ul>
+
+
 		</div><!--/.nav-collapse -->
 	</div>
 </nav><!-- End of navigation -->
