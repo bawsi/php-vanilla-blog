@@ -25,8 +25,7 @@ class User {
 	 * @param  string   $password   Password string
 	 * @return bool                 True if logged in, false otherwise
 	 */
-	public function login($username, $password) {
-		$username = filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS);
+	public function getUserDataFromUsername($username) {
 
 		$stmt = $this->db->prepare(
 		'SELECT * FROM users
@@ -35,19 +34,9 @@ class User {
 		');
 		$stmt->bindParam(':username', $username);
 		$stmt->execute();
-
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		// If user was found, check if hashed password matches,
-		// and redirect accordingly
-		if (!empty($user)) {
-			if (password_verify($password, $user['password'])) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+		return $user;
 	}
 
 }
