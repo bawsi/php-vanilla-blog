@@ -16,10 +16,10 @@ $categories = $article->getCategories();
 		<div class="collapse navbar-collapse" id="navbar">
             <!-- Navbar left -->
             <ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
+				<li <?php echo ($currentPage == 'index') ? 'class="active"' : ''; ?>><a href="/">Home</a></li>
 
                 <!-- Categories dropdown menu -->
-                <li class="dropdown">
+                <li class="dropdown <?php echo ($currentPage == 'category') ? 'active' : ''; ?>">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Categories <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<?php foreach ($categories as $category): ?>
