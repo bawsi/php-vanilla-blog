@@ -1,8 +1,9 @@
 <?php
+// bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
-// If session variable userId is set, redirect to admin panel
-if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
+// If already logged in, redirect to admin panel
+if ($user->isLoggedIn()) {
     header('location: /admin');
 }
 
@@ -14,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty
         $_SESSION['error_messages'][] = 'Invalid username / password combination.';
     }
 }
-
 
 include(TEMPLATES_PATH . '/_header.php')
 ?>
