@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty
     } else {
         $_SESSION['error_messages'][] = 'Invalid username / password combination.';
     }
+} else {
+    $_SESSION['error_messages'][] = 'Both fields are required!';
 }
 
 include(TEMPLATES_PATH . '/_header.php')
