@@ -35,9 +35,9 @@ include(TEMPLATES_PATH . '/_header.php')
 								<?php echo htmlspecialchars($article['author']); ?>
 							</span>
 
-							<span>
+							<span class="category">
 								<i class="fa fa-folder-open-o"></i>
-								<?php echo htmlspecialchars($article['category_name']); ?>
+								<a href="/category?c=<?php echo htmlspecialchars($article['category_name']); ?>"><?php echo htmlspecialchars($article['category_name']); ?></a>
 							</span>
 						</p>
 
