@@ -48,9 +48,8 @@ include(TEMPLATES_PATH . '/_header.php');
 							</span>
 						</p>
 
-						<h3><?php echo $article['title']; ?></h3>
+                        <a class="article-title" href="/article.php?id=<?php echo $article['id']; ?>"><h3><?php echo $article['title']; ?></h3></a>
 						<a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-block btn-primary read-more-btn" role="button">Read More</a>
-
 					</div>
 				</div>
 			</div> <!-- End of article -->
