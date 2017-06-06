@@ -6,6 +6,10 @@ if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
     header('location: /admin');
 }
 
+// If POST request, try to login with submitted data
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty($_POST['password'])) {
+    $user->login($_POST['username'], $_POST['password']);
+}
 
 
 include(TEMPLATES_PATH . '/_header.php')
