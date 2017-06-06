@@ -38,7 +38,6 @@ class User {
 
 		return $user;
 	}
-
 }
 
 
