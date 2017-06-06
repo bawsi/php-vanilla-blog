@@ -8,7 +8,11 @@ if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
 
 // If POST request, try to login with submitted data
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty($_POST['password'])) {
-    $user->login($_POST['username'], $_POST['password']);
+    if ($user->login($_POST['username'], $_POST['password'])) {
+        header('location: /admin');
+    } else {
+        $_SESSION['error_messages'][] = 'Invalid username / password combination.';
+    }
 }
 
 
