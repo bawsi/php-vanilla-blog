@@ -7,3 +7,17 @@ nav.navbar.navbar-main {
             }
         }
     }
+    div.navbar-collapse {
+        // Menu items
+        li:not(.category-item) {
+            transition: background-color 100ms;
+            &:hover {
+                background-color: #1A242F;
+                transition: background-color 100ms;
+                > a {
+                    color: white;
+                }
+            }
+        }
+    }
+}
