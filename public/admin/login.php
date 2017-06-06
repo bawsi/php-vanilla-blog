@@ -10,7 +10,7 @@ include(TEMPLATES_PATH . '/_header.php')
         <div class="col-md-4 col-md-offset-4">
             <h1>Login to admin area</h1>
             <hr />
-            <form action="" method="post">
+            <form class="login-form" action="" method="post">
                 <!-- <p>Username:</p> -->
                 <input type="text" class="form-control" name="username" placeholder="Username">
                 <input type="password" class="form-control" name="password" placeholder="Password">
