@@ -1,6 +1,7 @@
 <?php
 // bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$currentPage = 'login';
 
 // If already logged in, redirect to admin panel
 if ($user->isLoggedIn()) {
