@@ -38,13 +38,14 @@ class User {
 
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		//TODO finish login system
+		// If user was found, check if hashed password matches,
+		// and redirect accordingly
 		if (!empty($user)) {
 			if (password_verify($password, $user['password'])) {
-				echo "YAY, username matches";
+				return true;
 			}
 			else {
-				echo 'Failed to login';
+				return false;
 			}
 		}
 	}
