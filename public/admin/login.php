@@ -8,6 +8,8 @@ include(TEMPLATES_PATH . '/_header.php')
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
+            <h1>Login to admin area</h1>
+            <hr />
             <form action="" method="post">
                 <!-- <p>Username:</p> -->
                 <input type="text" class="form-control" name="username" placeholder="Username">
