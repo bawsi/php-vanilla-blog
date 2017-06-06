@@ -13,13 +13,33 @@ div.container-homepage {
 			// border: 1px solid rgba(0, 0, 0, 0.07);
 			position: relative;
 
-			a.read-more-btn {
-				border-radius: 0px;
-				border-bottom-left-radius: 2px;
-				border-bottom-right-radius: 2px;
-				position: absolute;
-				bottom: 0px;
-				left: 0px;
+			div.caption {
+				a.article-title {
+					text-decoration: none;
+					color: #2C3E50;
+					transition: color 150ms ease-in-out;
+
+					&:hover {
+						color: #CC6565;
+						transition: color 150ms ease-in-out;
+					}
+				}
+
+				a.read-more-btn {
+					border-radius: 0px;
+					border-bottom-left-radius: 2px;
+					border-bottom-right-radius: 2px;
+					position: absolute;
+					bottom: 0px;
+					left: 0px;
+					transition: background-color 150ms, border-color 150ms;
+					
+					&:hover {
+						background-color: #CC6565;
+						border-color: #CC6565;
+						transition: background-color 150ms, border-color 150ms;
+					}
+				}
 			}
 		}
 
