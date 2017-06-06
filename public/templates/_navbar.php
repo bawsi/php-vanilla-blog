@@ -23,7 +23,7 @@ $categories = $article->getCategories();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Categories <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<?php foreach ($categories as $category): ?>
-							<li><a href="<?php echo '/category.php?c=' . $category['category_name']; ?>"><?php echo $category['category_name']; ?></a></li>
+							<li class="category-item"><a href="<?php echo '/category.php?c=' . $category['category_name']; ?>"><?php echo $category['category_name']; ?></a></li>
 						<?php endforeach; ?>
 					</ul>
 				</li>
