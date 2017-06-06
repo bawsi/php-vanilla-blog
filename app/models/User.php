@@ -118,7 +118,7 @@ class User {
 	 * @param  string   $password   Password string
 	 * @return bool                 True if logged in, false otherwise
 	 */
-	public function loginAttempt($username, $password) {
+	public function login($username, $password) {
 		$username = filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS);
 
 		$stmt = $this->db->prepare(
