@@ -1,7 +1,5 @@
 <?php
-
 $categories = $article->getCategories();
-
  ?>
 
 <!-- Navigation -->
@@ -13,7 +11,7 @@ $categories = $article->getCategories();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">PRACTICE BLOG</a>
+			<a class="navbar-brand" href="/">PRACTICE BLOG</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar">
             <!-- Navbar left -->
