@@ -1,5 +1,7 @@
 <?php
+//bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$currentPage = 'index';
 
 // pagination and getting articles
 $page = (isset($_GET['p'])) ? $_GET['p'] : 1;

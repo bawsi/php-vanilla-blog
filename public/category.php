@@ -1,5 +1,7 @@
 <?php
+//bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$currentPage = 'category';
 
 // If category is not set, redirect to homepage
 if (!isset($_GET['c']) || empty($_GET['c'])) {
