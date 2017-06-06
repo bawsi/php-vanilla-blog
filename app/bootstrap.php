@@ -17,8 +17,9 @@ include APP_PATH . '/controllers/UserController.php';
 // Instantiating Models and Controllers
 $dbModel = new Db;
 $articleModel = new Article($dbModel);
+$userModel = new User($dbModel);
 
 $article = new ArticleController($articleModel);
-// $user = new UserController($userModel);
+$user = new UserController($userModel);
 
 ?>
