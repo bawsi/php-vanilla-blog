@@ -1,6 +1,13 @@
 <?php
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 
+// If session variable userId is set, redirect to admin panel
+if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
+    header('location: /admin');
+}
+
+
+
 include(TEMPLATES_PATH . '/_header.php')
 ?>
 
