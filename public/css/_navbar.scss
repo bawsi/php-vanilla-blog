@@ -23,5 +23,12 @@ nav.navbar.navbar-main {
         form.search {
             margin-top: 12px;
         }
+        // Navbar search button
+        @media(max-width:998px) {
+            button.search-btn {
+                width: 100%;
+            }
+        }
+
     }
 }
