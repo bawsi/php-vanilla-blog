@@ -35,7 +35,9 @@ $categories = $article->getCategories();
             <ul class="nav navbar-nav navbar-right">
                 <?php
                 // If logged in, show admin panel and logout buttons, otherwise, show login button
-                echo ($user->isLoggedIn()) ? '<li><a href="/admin">Admin panel</a> <li><a href="/admin/logout.php">Logout</a></li>' : '<li><a href="/admin/login.php">Login</a>';
+                echo ($user->isLoggedIn())
+                    ? '<li class="' . (($currentPage == 'admin') ? 'active' : '') . '"><a href="/admin">Admin panel</a> <li><a href="/admin/logout.php">Logout</a></li>'
+                    : '<li><a href="/admin/login.php">Login</a>';
                 ?>
             </ul>
 
