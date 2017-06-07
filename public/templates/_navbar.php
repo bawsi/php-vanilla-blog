@@ -32,9 +32,9 @@ $categories = $article->getCategories();
 				<li><a href="#contact">Contact</a></li>
 
                 <!-- search -->
-                <form class="navbar-form navbar-left search">
+                <form class="navbar-form navbar-left search" action="/search.php" method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Search">
+                        <input type="text" name="s" class="form-control input-sm" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-danger btn-sm">Search</button>
                 </form>
