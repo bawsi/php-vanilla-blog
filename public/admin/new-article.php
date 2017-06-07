@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
 					<?php endforeach; ?>
 				</select>
-				<input type="hidden" name="authorId" value="1">
+				<input type="hidden" name="authorId" value="<?php echo $_SESSION['userId']; ?>">
 				<button type="submit" name="submit" class="btn btn-danger btn-block">Publish article <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			</form>
 		</div>
