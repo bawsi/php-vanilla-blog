@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<div class="col-md-9">
 			<form class="article-form" action="" method="post" enctype="multipart/form-data">
 				<p>Article Title</p>
-				<input type="text" name="title" placeholder="Article title here" class="form-control">
+				<input type="text" name="title" placeholder="Article title here" class="form-control" required="required">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"></textarea>
 				<p>Image (appears on article thumbnail / 400x200)</p>
