@@ -46,7 +46,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
 							<span class="category">
 								<i class="fa fa-folder-open-o"></i>
-                                <a href="/category?c=<?php echo htmlspecialchars($article['category_name']); ?>"><?php echo htmlspecialchars($article['category_name']); ?></a>
+                                <a href="/category.php?c=<?php echo htmlspecialchars($article['category_name']); ?>"><?php echo htmlspecialchars($article['category_name']); ?></a>
 							</span>
 						</p>
 
