@@ -1,3 +1,4 @@
+
 <?php
 $categories = $article->getCategories();
  ?>
@@ -29,6 +30,15 @@ $categories = $article->getCategories();
 				</li>
 
 				<li><a href="#contact">Contact</a></li>
+
+                <!-- search -->
+                <form class="navbar-form navbar-left search">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-sm">Search</button>
+                </form>
+
 			</ul>
 
             <!-- Navbar on right -->
