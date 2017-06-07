@@ -190,4 +190,22 @@ class Article
 
         return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
     }
+
+    public function search($searchTerm)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT articles.id, articles.title, articles.body, articles.created_at,
+                    articles.img_path, users.username AS author, article_categories.category_name
+            FROM articles
+            JOIN users ON articles.author_id = users.id
+            JOIN article_categories ON articles.category_id = article_categories.id
+            WHERE (articles.title LIKE :searchTerm OR articles.body LIKE :searchTerm)"
+        );
+        $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        $stmt->execute();
+
+        die(var_dump($stmt->fetchAll()));
+        return ($stmt) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+    }
+
 }
