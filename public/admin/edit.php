@@ -51,7 +51,7 @@ include(TEMPLATES_PATH . '/_header.php');
 			<form class="article-form" action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="articleId" value="<?php echo $articleId; ?>">
 				<p>Article Title</p>
-				<input type="text" name="title" placeholder="Article title here" class="form-control" value="<?php echo $articleData['title']; ?>">
+				<input type="text" name="title" placeholder="Article title here" required="required" class="form-control" value="<?php echo $articleData['title']; ?>">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"><?php echo $articleData['body']; ?></textarea>
                 <p>Image (appears on article thumbnail / 400x200)</p>
