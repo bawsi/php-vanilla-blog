@@ -183,4 +183,26 @@ class ArticleController
         return $numOfPages;
     }
 
+    public function search()
+    {
+        // If search variable is not set, or empty, redirect to homepage
+        if (!isset($_GET['s']) || empty($_GET['s'])) {
+            header('location: /');
+        }
+
+        // Adding wildcard (%) signs to search term, so I can bind in sql stmt
+        $searchTerm = '%' . $_GET['s'] . '%';
+
+        $articles = $this->articleModel->search($searchTerm);
+
+        // If any articles were found, return them, otherwise, set error msg, and redirect to homepage
+        if ($articles) {
+            return $articles;
+        } else {
+            $_SESSION['error_messages'][] = 'No results were found for that search query.';
+            header('location: /');
+        }
+
+    }
+
 }
