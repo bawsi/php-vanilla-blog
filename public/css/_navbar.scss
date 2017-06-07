@@ -30,5 +30,11 @@ nav.navbar.navbar-main {
             }
         }
 
+        @media(min-width: 999px) and (max-width: 999px) {
+            button.search-btn {
+                position: relative;
+                top: -3px;
+            }
+        }
     }
 }
