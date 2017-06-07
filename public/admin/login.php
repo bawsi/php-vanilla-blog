@@ -31,8 +31,8 @@ include(TEMPLATES_PATH . '/_header.php')
             <hr />
             <form class="login-form" action="" method="post">
                 <!-- <p>Username:</p> -->
-                <input type="text" class="form-control" name="username" placeholder="Username">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
                 <button type="submit" class="btn btn-success btn-block" name="submit">Login</button>
             </form>
 
