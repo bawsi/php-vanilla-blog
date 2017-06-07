@@ -204,7 +204,6 @@ class Article
         $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
         $stmt->execute();
 
-        die(var_dump($stmt->fetchAll()));
         return ($stmt) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
