@@ -23,7 +23,7 @@ include(TEMPLATES_PATH . '/_header.php')
 			<!-- Single article -->
 			<div class="single-article col-md-4 col-sm-6 col-xs-12">
 				<div class="thumbnail">
-					<img src="<?php echo $article['img_path']; ?>" alt="article image thumbnail">
+					<a href="/article.php?id=<?php echo $article['id']; ?>"><img src="<?php echo $article['img_path']; ?>" alt="article image thumbnail"></a>
 					<div class="caption" style="padding-bottom: 0">
 
 						<p class="article-info">
