@@ -9,8 +9,10 @@ div.container-homepage {
 			padding: 0px;
 			overflow: hidden;
 			border-radius: 2px;
-			box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, .1);
-			// border: 1px solid rgba(0, 0, 0, 0.07);
+			border: none;
+			background-color: #fcfcfc;
+			border: 1px solid #e4e7e5;
+			// box-shadow: 2px 2px 2px 1px #868686;
 			position: relative;
 
 			div.caption {
