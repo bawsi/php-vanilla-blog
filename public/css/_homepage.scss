@@ -63,6 +63,7 @@ div.container-homepage {
 		// Author, date and category
 		p.article-info {
 			opacity: 0.5;
+			margin-bottom: 0px;
 
 			// Give margin left to 2nd and 3rd child (author and category)
 			span:nth-child(2), span:nth-child(3) {
