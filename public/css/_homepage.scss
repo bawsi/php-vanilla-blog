@@ -16,7 +16,9 @@ div.container-homepage {
 			// box-shadow: 2px 2px 2px 1px #868686;
 			position: relative;
 
+			// Caption (author, category, date, title)
 			div.caption {
+				padding-bottom: 0px;
 				a.article-title {
 					text-decoration: none;
 					color: #2C3E50;
