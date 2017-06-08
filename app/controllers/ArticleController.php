@@ -166,7 +166,18 @@ class ArticleController
     public function delete($id)
     {
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-        return $this->articleModel->delete($id);
+
+        // Get article info, before deleting it, so I can delete old img
+        $oldImagePath = $this->articleModel->getSingleArticleById($id);
+        $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
+
+        // Delete article
+        $deletedStatus = $this->articleModel->delete($id);
+
+        // If old image is NOT default.png, delete it
+        ($oldImagePath !== false) ? unlink($oldImagePath) : '';
+
+        return $deletedStatus;
     }
 
     public function getArticlesPaginated($page, $perPage, $category = -1)
