@@ -69,25 +69,32 @@ class ArticleController
             if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategoryId, $authorId)))
             {
                 // If image was submitted, get its info, resize it, and store it to /uploads directory
-                if (getimagesize($image['tmp_name'])) {
+                if (getimagesize($image['tmp_name']))
+                {
+                    // Getting basic img info from submitted img
                     $imageName = $image['name'];
                     $imageTmpName = $image['tmp_name'];
                     $imageFileType = $image['type'];
 
+                    // Getting img extension
                     $imageExtension = explode('.', $imageName);
                     $ImageActualExtension = strtolower(end($imageExtension));
 
+                    // Supported img formats
                     $allowed = ['jpg', 'jpeg', 'png'];
 
-                    // If submitted image has extension which is now allowed, redirect back with error
+                    // If submitted image has extension which is not allowed, redirect back with error
                     if(!in_array($ImageActualExtension, $allowed)) {
                         $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
                         header('location: /admin/new-article.php');
+                        die();
                     }
 
                     // Saving the image - cant save above, because I cant get article's ID before article is saved
                     Image::configure(['driver' => 'imagick']);
 
+                    // Setting new image file name and paths.
+                    // One path for storing actual img, and one for linking to img form db
                     $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
                     $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
                     $imgPathForDb = '/uploads/' . $fileName;
