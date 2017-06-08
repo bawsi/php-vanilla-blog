@@ -25,21 +25,9 @@ div.container-homepage {
 						color: #CC6565;
 						transition: color 150ms ease-in-out;
 					}
-				}
 
-				a.read-more-btn {
-					border-radius: 0px;
-					border-bottom-left-radius: 2px;
-					border-bottom-right-radius: 2px;
-					position: absolute;
-					bottom: 0px;
-					left: 0px;
-					transition: background-color 150ms, border-color 150ms;
-
-					&:hover {
-						background-color: #CC6565;
-						border-color: #CC6565;
-						transition: background-color 150ms, border-color 150ms;
+					h3 {
+						margin-top: 10px;
 					}
 				}
 
@@ -49,6 +37,22 @@ div.container-homepage {
 						text-decoration: none;
 						color: #484b4b;
 					}
+				}
+			}
+
+			// Thumbnails read more button
+			a.read-more-btn {
+				margin-top: 15px;
+				width: 100%;
+				border-radius: 0px;
+				border-bottom-left-radius: 2px;
+				border-bottom-right-radius: 2px;
+				transition: background-color 150ms, border-color 150ms;
+
+				&:hover {
+					background-color: #CC6565;
+					border-color: #CC6565;
+					transition: background-color 150ms, border-color 150ms;
 				}
 			}
 		}
