@@ -59,7 +59,7 @@ class ArticleController
         if (!empty($title) && !empty($body) && is_int($authorId))
         {
             // Filtering out any unwanted characters
-            $title = filter_input($title, FILTER_SANITIZE_STRING);
+            $title = filter_var($title, FILTER_SANITIZE_STRING);
             $body = $body;
             $articleCategoryId = filter_var($articleCategoryId, FILTER_SANITIZE_NUMBER_INT);
             $image = $image;
