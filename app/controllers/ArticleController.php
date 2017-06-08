@@ -58,8 +58,15 @@ class ArticleController
         // Basic validation
         if (!empty($title) && !empty($body) && is_int($authorId))
         {
-            // Storing data to db
-            if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategory, $authorId)))
+            // Filtering out any unwanted characters
+            $title = filter_input($title, FILTER_SANITIZE_STRING);
+            $body = $body;
+            $articleCategoryId = filter_var($articleCategoryId, FILTER_SANITIZE_NUMBER_INT);
+            $image = $image;
+            $authorId = filter_var($authorId, FILTER_SANITIZE_NUMBER_INT);
+
+            // Storing data (except img) to db
+            if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategoryId, $authorId)))
             {
                 // If image was submitted, get its info, resize it, and store it to /uploads directory
                 if (getimagesize($image['tmp_name'])) {
