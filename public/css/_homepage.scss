@@ -3,9 +3,10 @@ div.container-homepage {
 		margin-bottom: 20px;
 	}
 	div.single-article {
+		height: 359px;
+		max-width: 400px;
 		div.thumbnail {
 			display: block;
-			height: 359px;
 			padding: 0px;
 			overflow: hidden;
 			border-radius: 2px;
