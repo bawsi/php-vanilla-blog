@@ -120,13 +120,19 @@ class ArticleController
         return $categories;
     }
 
+
     public function edit($articleId, $title, $body, $image, $categoryId)
     {
         // Saving article
         $this->articleModel->edit($articleId, $title, $body, $categoryId);
 
-        // If file was uploaded, get its info, resize it, store it
-        if (file_exists($image[tmp_name])) {
+        // If file was uploaded, remove old file, resize uploaded file, and save it
+        if (file_exists($image['tmp_name']))
+        {
+            // Getting name of old image name, so we can delete it later
+            $oldImagePath = $this->articleModel->getSingleArticleById($articleId);
+            $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
+
             // Getting Image info
             $imageName = $image['name'];
             $imageTmpName = $image['tmp_name'];
@@ -137,21 +143,23 @@ class ArticleController
 
             $allowed = ['jpg', 'jpeg', 'png'];
 
-
-
-            // Saving the image
+            // Configuring Intervention, and setting up new random image name + storage path
             Image::configure(['driver' => 'imagick']);
 
             $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
             $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
             $imgPathForDb = '/uploads/' . $fileName;
 
-            // Save phisical copy of image to public/uploads/
+            // Resizing image to 400x200px, and storing it to /uploads
             Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
 
-            // Save path of image to article db
+            // Saving path of image to articles table
             $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+
+            // If old image is NOT default.png, delete it
+            ($oldImagePath !== false) ? unlink($oldImagePath) : '';
         }
+
         return true;
     }
 
