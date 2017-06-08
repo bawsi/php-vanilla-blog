@@ -72,5 +72,15 @@ div.container-homepage {
 		}
 	}
 
+	@media (max-width:767px) {
+		div.single-article {
+			float: left;
+			clear: both;
+			position: relative;
+			width: 400px;
+			left: 50%;
+			margin-left: -200px;
+		}
+	}
 
 }
