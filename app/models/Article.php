@@ -89,7 +89,7 @@ class Article
         $stmt->bindParam(':authorId', $authorId, PDO::PARAM_INT);
         $currentTime = time();
         $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_STR);
-        $stmt->bindParam(':category_id', $articleCategory);
+        $stmt->bindParam(':category_id', $articleCategory, PDO::PARAM_INT);
         $stmt->execute();
 
         return ($stmt) ? $this->db->lastInsertId() : false;
