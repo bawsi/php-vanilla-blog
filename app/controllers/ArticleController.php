@@ -99,7 +99,7 @@ class ArticleController
                     $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
                     $imgPathForDb = '/uploads/' . $fileName;
 
-                    // Save phisical copy of image to public/uploads/
+                    // Resize and save image to public/uploads/
                     Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
 
                     // Save path of image to article db
