@@ -7,14 +7,8 @@ $currentPage = 'login';
 ($user->isLoggedIn()) ? header('location: /admin') : '';
 
 // If POST request, try to login with submitted data
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty($_POST['password'])) {
-    if ($user->login($_POST['username'], $_POST['password'])) {
-        header('location: /admin');
-    } else {
-        $_SESSION['error_messages'][] = 'Invalid username / password combination.';
-    }
-} else if (isset($_POST['submit'])) {
-    $_SESSION['error_messages'][] = 'Both fields are required!';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user->login();
 }
 
 include(TEMPLATES_PATH . '/_header.php')
