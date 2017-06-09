@@ -28,6 +28,7 @@ class ArticleController
         return $this->articleModel->getArticles($numberOfArticles);
     }
 
+
     /**
      * Grabs article by its ID ($_GET['id']), validates it,
      * and then returns that article
@@ -42,30 +43,25 @@ class ArticleController
         return $this->articleModel->getSingleArticleById($articleId);
     }
 
+
     /**
      * Checks if submitted new article form data is valid.
      * For now, it only checks if everything was filled in
-     *
-     * @param  string $title    Article title
-     * @param  string $body     Article body
-     * @param  int    $authorId ID of author
-     *
-     * @return bool             Return true, if all fields were filled, false otherwise
      */
-    public function validateAndStoreArticle($title, $body, $articleCategoryId, $image, $authorId)
+    public function validateAndStoreArticle()
     {
-        // Basic validation
-        if (!empty($title) && !empty($body) && is_int($authorId))
-        {
-            // Filtering out any unwanted characters
-            $title = filter_var($title, FILTER_SANITIZE_STRING);
-            $body = $body;
-            $articleCategoryId = filter_var($articleCategoryId, FILTER_SANITIZE_NUMBER_INT);
-            $image = $image;
-            $authorId = filter_var($authorId, FILTER_SANITIZE_NUMBER_INT);
+        // Get all the article data and sanitize
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+    	$body = $_POST['body'];
+    	$categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
+    	$image = $_FILES['image'];
+    	$authorId = $_SESSION['userId'];
 
+        // Basic validation
+        if (!empty($title) && !empty($body) && !empty($authorId) && !empty($categoryId))
+        {
             // Storing data (except img) to db
-            if (($articleId = $this->articleModel->saveArticle($title, $body, $articleCategoryId, $authorId)))
+            if (($articleId = $this->articleModel->saveArticle($title, $body, $categoryId, $authorId)))
             {
                 // If image was submitted, get its info, resize it, and store it to /uploads directory
                 if (getimagesize($image['tmp_name']))
@@ -93,7 +89,7 @@ class ArticleController
                     Image::configure(['driver' => 'imagick']);
 
                     // Setting new image file name and paths.
-                    // One path for storing actual img, and one for linking to img form db
+                    // One path for storing actual img, and one for linking to img from db
                     $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
                     $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
                     $imgPathForDb = '/uploads/' . $fileName;
@@ -105,17 +101,22 @@ class ArticleController
                     $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
                 }
 
-                // Set success msg and return article id
+                // Set success msg and redirect to article
                 $_SESSION['success_messages'][] = 'Article added to database!';
-                return $articleId;
+                header('location: /article.php?id=' . $articleId);
+                die();
 
             } else {
+                // Set error message, and redirect back to new article page
                 $_SESSION['error_messages'][] = 'Failed to store article or image to database.. try again!';
-                return false;
+                header('location: /admin/new-article.php');
+                die();
             }
         } else {
+            // Set error message, and redirect back to new article page
             $_SESSION['error_messages'][] = 'All fields are required!';
-            return false;
+            header('location: /admin/new-article.php');
+            die();
         }
     }
 
