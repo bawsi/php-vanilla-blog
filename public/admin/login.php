@@ -1,10 +1,10 @@
 <?php
-// bootstrap and page variables
+// bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'login';
 
-// If not logged in, redirect to login page
-$user->redirectIfLoggedIn();
+// If already logged in, redirect to admin panel
+($user->isLoggedIn()) ? header('location: /admin') : '';
 
 // If POST request, try to login with submitted data
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty($_POST['password'])) {
