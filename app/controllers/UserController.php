@@ -14,21 +14,26 @@ class UserController
         $this->userModel = $userModel;
     }
 
-    public function login($username, $password) {
-        $username = filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS);
-        $userData = $this->userModel->getUserDataFromUsername($username);
+    public function login()
+    {
+        if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password']))
+        {
+            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $password = $_POST['password'];
+            $userData = $this->userModel->getUserDataFromUsername($username);
 
-        // If user was found, check if hashed password matches,
-		// and redirect accordingly
-		if (!empty($userData)) {
-			if (password_verify($password, $userData['password'])) {
+            // If user was found, check if hashed password matches, and redirect accordingly
+    		if (!empty($userData) && password_verify($password, $userData['password'])) {
                 $_SESSION['userId'] = $userData['id'];
-                return true;
-			} else {
-				return false;
-			}
-		}
+                header('location: /admin');
+                die();
 
+			} else {
+				$_SESSION['error_messages'][] = 'Wrong username/password combination';
+			}
+        } else {
+            $_SESSION['error_messages'][] = 'Both fields are required';
+        }
     }
 
     /**
