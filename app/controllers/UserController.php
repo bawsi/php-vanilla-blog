@@ -3,6 +3,7 @@
 class UserController
 {
     private $userModel;
+
     /**
      * Set property $db to argument, which
      * has to be an instance of Db object
@@ -14,6 +15,9 @@ class UserController
         $this->userModel = $userModel;
     }
 
+    /**
+     * Login user
+     */
     public function login()
     {
         if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password']))
