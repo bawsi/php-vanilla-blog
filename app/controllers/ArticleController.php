@@ -187,27 +187,44 @@ class ArticleController
         return $deletedStatus;
     }
 
-    public function getArticlesPaginated($page, $perPage, $category = -1)
+    public function getArticlesPaginated($perPage)
     {
-        if ($category !== -1) {
-            $category = $this->articleModel->getCategoryIdFromName($category);
+        // If category is not set, redirect to homepage
+        if (!isset($_GET['c']) || empty($_GET['c'])) {
+            header('location: /');
+            die();
         }
 
-        $articles = $this->articleModel->paginate($page, $perPage, $category['id']);
-        return $articles;
-    }
+        // pagination and getting articles
+        $page = (isset($_GET['p'])) ? filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT) : 1;
+        $perPage = 9;
+        $categoryName = (isset($_GET['c']) && !empty($_GET['c'])) ? filter_input(INPUT_GET, 'c', FILTER_SANITIZE_STRING) : false;
 
-    public function getTotalNumberOfPages($perPage, $category = -1)
-    {
-        if ($category !== -1) {
-            $category = $this->articleModel->getCategoryIdFromName($category);
+        // If category name is set in GET request, get category id from its name
+        if ($categoryName !== false) {
+            $categoryId = $this->articleModel->getCategoryIdFromName($categoryName);
+        } else {
+            $categoryId = false;
         }
 
-        $numOfArticles = $this->articleModel->getTotalNumberOfArticles($category['id']);
+        // Get total number of pages, from either specifc category, or from all categories
+        $numOfArticles = $this->articleModel->getTotalNumberOfArticles($categoryId);
         $numOfPages = ceil($numOfArticles[0] / $perPage);
 
-        return $numOfPages;
+        // Getting total number of pages. If category is -1, it means it was numberOfArticles selected,
+        // so get total number of ALL pages, otherwise, get total number of pages in specific category
+
+
+
+        $articles = $this->articleModel->paginate($page, $perPage, $categoryId);
+        return [
+            'articles'         => $articles, 
+            'numOfPages'       => $numOfPages,
+            'page'             => $page,
+            'selectedCategory' => $categoryName
+        ];
     }
+
 
     public function search()
     {
