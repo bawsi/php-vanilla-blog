@@ -24,7 +24,9 @@ include(TEMPLATES_PATH . '/_header.php');
 					<span><i class="fa fa-folder-open-o"></i> <?php echo htmlspecialchars($articleData['category_name']); ?></span>
 				</h5>
 				<hr>
-				<p class="article-body"><?php echo $articleData['body']; ?></p>
+				<div class="article-body">
+					<?php echo $articleData['body']; ?>
+				</div>
 			</div>
 		</div>
 
