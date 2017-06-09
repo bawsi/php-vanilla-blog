@@ -2,6 +2,7 @@
 // bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'admin';
+$page = 'admin-article-index';
 
 // If not logged in, redirect to login page
 if (!$user->isLoggedIn()) {
@@ -9,35 +10,17 @@ if (!$user->isLoggedIn()) {
     die();
 }
 
-$page = 'admin-article-index';
-
 // If POST request, update article
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $articleId = $_POST['articleId'];
-    $title = $_POST['title'];
-    $body = $_POST['body'];
-    $image = $_FILES['image'];
-    $categoryId = $_POST['categoryId'];
-
-    if ($article->edit($articleId, $title, $body, $image, $categoryId)) {
-        $_SESSION['success_messages'][] = 'Article successfully updated!';
-        header('location: /article.php?id=' . $articleId);
-    } else {
-        $_SESSION['error_messages'][] = 'Failed to update the article. Try again please!';
-        header('location: /admin/article-index.php');
-    }
-
+    $article->edit();
 } else {
-    // Otherwise, get article by its id, so we can fill the form below with its info
-    $articleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    // Otherwise, get article fro its ID + categories for form
+    $articleData = $article->getArticleById();
     $categories = $article->getCategories();
-    $articleData = $article->getArticleById($articleId);
 }
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
-
-
 
 <!-- Main content -->
 <div class="container container-new-article">
