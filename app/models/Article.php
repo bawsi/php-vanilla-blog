@@ -171,7 +171,7 @@ class Article
 
     public function getTotalNumberOfArticles($category)
     {
-        $categoryQuery = ($category >= 1) ? ' WHERE category_id = :categoryId' : '';
+        $categoryQuery = ($category !== false) ? ' WHERE category_id = :categoryId' : '';
         $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
 
         $stmt = $this->db->prepare($query);
@@ -188,7 +188,9 @@ class Article
         $stmt->bindParam(':category', $category);
         $stmt->execute();
 
-        return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+        $categories = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return ($stmt) ? $categories['id'] : false;
     }
 
     public function search($searchTerm)
