@@ -119,7 +119,10 @@ class ArticleController
         }
     }
 
-    public function edit($articleId, $title, $body, $image, $categoryId)
+    /**
+     * Edits article with updated data
+     */
+    public function edit()
     {
         // Getting POSTED article data
         $articleId = $_POST['articleId'];
