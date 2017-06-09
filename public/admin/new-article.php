@@ -1,7 +1,8 @@
 <?php
-// bootstrap
+// bootstrap and page variables
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'admin';
+$page = 'admin-new-article';
 
 // If not logged in, redirect to login page
 if (!$user->isLoggedIn()) {
@@ -9,31 +10,15 @@ if (!$user->isLoggedIn()) {
     die();
 }
 
-$page = 'admin-new-article';
-
-// Getting list of all categories
-$categories = $article->getCategories();
-
-// header template (included before other code, because otherwise,
-// success_messages session variable gets unset right after it is set
-include(TEMPLATES_PATH . '/_header.php');
-
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$articleTitle = $_POST['title'];
-	$articleBody = $_POST['body'];
-	$articleCategory = $_POST['category'];
-	$image = $_FILES['image'];
-	$articleAuthorId = (int)$_POST['authorId'];
-
-	if ($articleId = $article->validateAndStoreArticle($articleTitle, $articleBody, $articleCategory, $image, $articleAuthorId)) {
-		header('location: /article.php?id=' . $articleId);
-	} else {
-		// Including messages again, since otherwise error message that was set
-		// wont be displayed untill next request
-		include(TEMPLATES_PATH . '/_messages.php');
-	}
+	$article->validateAndStoreArticle();
+} else {
+    // Get list of all categories
+    $categories = $article->getCategories();
 }
+
+include(TEMPLATES_PATH . '/_header.php');
 ?>
 
 
@@ -60,12 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<p>Image (appears on article thumbnail / 400x200)</p>
 				<input type="file" name="image" class="form-control" accept="image/*">
 				<p>Category</p>
-				<select class="category form-control" name="category">
+				<select class="category form-control" name="categoryId">
 					<?php foreach ($categories as $category): ?>
 						<option value='<?php echo $category["id"]; ?>'><?php echo $category['category_name']; ?></option>
 					<?php endforeach; ?>
 				</select>
-				<input type="hidden" name="authorId" value="<?php echo $_SESSION['userId']; ?>">
 				<button type="submit" name="submit" class="btn btn-danger btn-block">Publish article <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			</form>
 		</div>
