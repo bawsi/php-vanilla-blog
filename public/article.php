@@ -21,7 +21,7 @@ include(TEMPLATES_PATH . '/_header.php');
 				<h5 class="article-info">
 					<span><i class="fa fa-calendar"></i> <?php echo htmlspecialchars(date('d.m.Y \a\t H:i', $articleData['created_at'])); ?></span>
 					<span><i class="fa fa-user"></i> <?php echo htmlspecialchars($articleData['author']); ?></span>
-					<span><i class="fa fa-folder-open-o"></i> <?php echo htmlspecialchars($articleData['category_name']); ?></span>
+					<span class="category"><a href="/category.php?c=<?php echo htmlspecialchars($articleData['category_name']); ?>"><i class="fa fa-folder-open-o"></i> <?php echo htmlspecialchars($articleData['category_name']); ?></a></span>
 				</h5>
 				<hr>
 				<div class="article-body">
