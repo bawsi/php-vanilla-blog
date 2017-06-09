@@ -36,10 +36,10 @@ class UserController
      */
     public function redirectIfNotLoggedIn()
     {
-        if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
-            return true;
-        } else {
-            return false;
+        if (!isset($_SESSION['userId']) || empty($_SESSION['userId'])) {
+            $_SESSION['error_messages'][] = 'You must login, before you can access this page!';
+            header('location: /admin/login.php');
+            die();
         }
     }
 
