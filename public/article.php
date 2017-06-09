@@ -3,7 +3,7 @@
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'article';
 
-$articleData = $article->getArticleById($_GET['id']);
+$articleData = $article->getArticleById();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
