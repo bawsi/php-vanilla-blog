@@ -3,18 +3,9 @@
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'category';
 
-// If category is not set, redirect to homepage
-if (!isset($_GET['c']) || empty($_GET['c'])) {
-    header('location: /');
-}
-
-// pagination and getting articles
-$page = (isset($_GET['p'])) ? $_GET['p'] : 1;
+// Getting articles
 $perPage = 9;
-$selectedCategory = $_GET['c'];
-
-$totalPages = $article->getTotalNumberOfPages($perPage, $selectedCategory);
-$articles = $article->getArticlesPaginated($page, $perPage, $selectedCategory);
+$data = $article->getArticlesPaginated($perPage);
 
 include(TEMPLATES_PATH . '/_header.php');
 
@@ -22,11 +13,11 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- Main content -->
 <div class="container container-homepage">
-	<h1 class="title text-center"><?php echo $selectedCategory; ?></h1>
+	<h1 class="title text-center"><?php echo $data['selectedCategory']; ?></h1>
 	<hr width="75%">
 	<!-- Articles row -->
 	<div class="row">
-		<?php foreach ($articles as $article): ?>
+		<?php foreach ($data['articles'] as $article): ?>
 			<!-- Single article -->
 			<div class="single-article col-md-4 col-sm-6 col-xs-12">
 				<div class="thumbnail">
@@ -65,21 +56,21 @@ include(TEMPLATES_PATH . '/_header.php');
 	<nav aria-label="Page navigation" class="text-center">
 		<ul class="pagination">
 
-			<?php if($page > 1): ?>
+			<?php if($data['page'] > 1): ?>
 				<li>
-					<a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $page - 1; ?>" aria-label="Previous">
+					<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $page - 1; ?>" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
 			<?php endif; ?>
 
-			<?php for($pageCount = 1; $pageCount <= $totalPages; $pageCount++):?>
+			<?php for($pageCount = 1; $pageCount <= $data['numOfPages']; $pageCount++):?>
 				<li><a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
 			<?php endfor; ?>
 
-			<?php if($page < $totalPages): ?>
+			<?php if($data['page'] < $data['numOfPages']): ?>
 				<li>
-					<a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $page + 1; ?>" aria-label="Next">
+					<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $page + 1; ?>" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
