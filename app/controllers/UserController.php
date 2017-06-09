@@ -32,6 +32,20 @@ class UserController
     }
 
     /**
+     * Checks if user is logged in
+     * @return boolean True if logged in, false otherwise
+     */
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
      * If user not logged in, redirect to login page, with error message
      */
     public function redirectIfNotLoggedIn()
