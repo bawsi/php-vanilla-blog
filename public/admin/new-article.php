@@ -5,10 +5,7 @@ $currentPage = 'admin';
 $page = 'admin-new-article';
 
 // If not logged in, redirect to login page
-if (!$user->isLoggedIn()) {
-    header('location: /admin/login.php');
-    die();
-}
+$user->redirectIfNotLoggedIn();
 
 // If it is POST request, new article was already submitted. Validate & store it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

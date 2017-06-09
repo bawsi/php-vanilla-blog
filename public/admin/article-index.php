@@ -1,15 +1,12 @@
 <?php
-// bootstrap
+// bootstrap and page variables
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'admin';
+$page = 'admin-article-index';
 
 // If not logged in, redirect to login page
-if (!$user->isLoggedIn()) {
-    header('location: /admin/login.php');
-    die();
-}
+$user->redirectIfNotLoggedIn();
 
-$page = 'admin-article-index';
 
 $articles = $article->getArticles(999);
 

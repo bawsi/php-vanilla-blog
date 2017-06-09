@@ -1,7 +1,10 @@
 <?php
-// bootstrap
+// bootstrap and page variables
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'admin';
+
+// If not logged in, redirect to login page
+$user->redirectIfNotLoggedIn();
 
 // logout
 $user->logout();
