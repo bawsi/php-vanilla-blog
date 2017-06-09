@@ -29,18 +29,17 @@ class ArticleController
     }
 
     /**
-     * Grabs article by its ID, validates it,
+     * Grabs article by its ID ($_GET['id']), validates it,
      * and then returns that article
-     *
-     * @param  int $id ID of article
      *
      * @return array Associative array of articles
      */
-    public function getArticleById($id)
+    public function getArticleById()
     {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        // Sanitizing ID value
+        $articleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-        return $this->articleModel->getSingleArticleById($id);
+        return $this->articleModel->getSingleArticleById($articleId);
     }
 
     /**
@@ -122,6 +121,13 @@ class ArticleController
 
     public function edit($articleId, $title, $body, $image, $categoryId)
     {
+        // Getting POSTED article data
+        $articleId = $_POST['articleId'];
+        $title = $_POST['title'];
+        $body = $_POST['body'];
+        $image = $_FILES['image'];
+        $categoryId = $_POST['categoryId'];
+
         // Basic validation
         if (!empty($title) && !empty($body) && !empty($articleId && !empty($categoryId)))
         {
@@ -180,6 +186,7 @@ class ArticleController
             }
 
         // Redirect to edited article
+        $_SESSION['success_messages'][] = 'Article successfully updated!';
         header('location: /article.php?id=' . $articleId);
         die();
 
