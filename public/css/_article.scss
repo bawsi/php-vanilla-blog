@@ -14,6 +14,14 @@ div.container-article {
 			span:nth-child(2), span:nth-child(3) {
 				margin-left: 10px;;
 			}
+
+			span.category {
+				a {
+					text-decoration: none;
+					color: #484b4b;
+
+				}
+			}
 		}
 
 		div.article-body {
