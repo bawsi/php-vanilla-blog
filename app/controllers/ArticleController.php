@@ -120,6 +120,84 @@ class ArticleController
         }
     }
 
+    public function edit($articleId, $title, $body, $image, $categoryId)
+    {
+        // Basic validation
+        if (!empty($title) && !empty($body) && !empty($articleId && !empty($categoryId)))
+        {
+            // Filtering out any unwanted characters
+            $title = filter_var($title, FILTER_SANITIZE_STRING);
+            $body = $body;
+            $articleCategoryId = filter_var($articleCategoryId, FILTER_SANITIZE_NUMBER_INT);
+            $image = $image;
+            $authorId = filter_var($authorId, FILTER_SANITIZE_NUMBER_INT);
+
+            // Saving article
+            $this->articleModel->edit($articleId, $title, $body, $categoryId);
+
+            // If file was uploaded, remove old file, resize uploaded file, and save it
+            if (file_exists($image['tmp_name']))
+            {
+                // Getting name of old image name, so we can delete it later
+                $oldImagePath = $this->articleModel->getSingleArticleById($articleId);
+                $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
+
+                // Getting Image info
+                $imageName = $image['name'];
+                $imageTmpName = $image['tmp_name'];
+                $imageFileType = $image['type'];
+
+                // Getting original image extension
+                $imageExtension = explode('.', $imageName);
+                $ImageActualExtension = strtolower(end($imageExtension));
+
+                // Allowed image extensions
+                $allowed = ['jpg', 'jpeg', 'png'];
+
+                // If submitted image has extension which is not allowed, redirect back with error
+                if(!in_array($ImageActualExtension, $allowed)) {
+                    $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
+                    header('location: /admin/edit.php?id=' . $articleId);
+                    die();
+                }
+
+                // Configuring Intervention
+                Image::configure(['driver' => 'imagick']);
+
+                // Setting up new random image name + storage path
+                $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+                $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                $imgPathForDb = '/uploads/' . $fileName;
+
+                // Resizing image to 400x200px, and storing it to /uploads
+                Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+
+                // Saving path of image to articles table
+                $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+
+                // If old image is NOT default.png, delete it
+                ($oldImagePath !== false) ? unlink($oldImagePath) : '';
+            }
+
+        // Redirect to edited article
+        header('location: /article.php?id=' . $articleId);
+        die();
+
+    } else {
+        // If any of the fields (title, body, authorId or categoryId) are empty,
+        // set error message, and redirect back to edit page
+        $_SESSION['error_messages'][] = 'All fields except image are required!';
+        header('location: /admin/edit.php?id=' . $articleId);
+        die();
+    }
+}
+
+
+    /**
+     * Get list of all the categories
+     *
+     * @return Array List of all categories
+     */
     public function getCategories()
     {
         $categories = $this->articleModel->getCategories();
@@ -128,48 +206,13 @@ class ArticleController
     }
 
 
-    public function edit($articleId, $title, $body, $image, $categoryId)
-    {
-        // Saving article
-        $this->articleModel->edit($articleId, $title, $body, $categoryId);
-
-        // If file was uploaded, remove old file, resize uploaded file, and save it
-        if (file_exists($image['tmp_name']))
-        {
-            // Getting name of old image name, so we can delete it later
-            $oldImagePath = $this->articleModel->getSingleArticleById($articleId);
-            $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
-
-            // Getting Image info
-            $imageName = $image['name'];
-            $imageTmpName = $image['tmp_name'];
-            $imageFileType = $image['type'];
-
-            $imageExtension = explode('.', $imageName);
-            $ImageActualExtension = strtolower(end($imageExtension));
-
-            $allowed = ['jpg', 'jpeg', 'png'];
-
-            // Configuring Intervention, and setting up new random image name + storage path
-            Image::configure(['driver' => 'imagick']);
-
-            $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-            $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
-            $imgPathForDb = '/uploads/' . $fileName;
-
-            // Resizing image to 400x200px, and storing it to /uploads
-            Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
-
-            // Saving path of image to articles table
-            $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
-
-            // If old image is NOT default.png, delete it
-            ($oldImagePath !== false) ? unlink($oldImagePath) : '';
-        }
-
-        return true;
-    }
-
+    /**
+     * Delete articles from database + image that is
+     * associated with that article, if it was uploaded.
+     * Once deleted, redirec to /admin/article-index.php
+     *
+     * @param  int $id id of article to delete
+     */
     public function delete($id)
     {
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
@@ -184,48 +227,60 @@ class ArticleController
         // If old image is NOT default.png, delete it
         ($oldImagePath !== false) ? unlink($oldImagePath) : '';
 
-        return $deletedStatus;
+        // Redirect to article index, once article is deleted
+        header('location: /admin/article-index.php');
     }
 
+    /**
+     * Return number of articles that $perPage specifies. If $_GET['c']
+     * is set, get articles only from that category, otherwise, from all categories.
+     * If $_GET['p'] is set, get articles with an offset, otherwise, get first page
+     *
+     * @param  int $perPage How many results we want per page
+     *
+     * @return array        Array containing articles, numberOfPages, page and selectedCategory
+     */
     public function getArticlesPaginated($perPage)
     {
-        // If category is not set, redirect to homepage
-        if (!isset($_GET['c']) || empty($_GET['c'])) {
-            header('location: /');
-            die();
-        }
+        // If category is set, get paginated articles from specific category
+        if (isset($_GET['c']) || !empty($_GET['c'])) {
+            // pagination and getting articles
+            $categoryName = filter_input(INPUT_GET, 'c', FILTER_SANITIZE_STRING);
 
-        // pagination and getting articles
-        $page = (isset($_GET['p'])) ? filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT) : 1;
-        $perPage = 9;
-        $categoryName = (isset($_GET['c']) && !empty($_GET['c'])) ? filter_input(INPUT_GET, 'c', FILTER_SANITIZE_STRING) : false;
-
-        // If category name is set in GET request, get category id from its name
-        if ($categoryName !== false) {
+            // Get category's ID from its name
             $categoryId = $this->articleModel->getCategoryIdFromName($categoryName);
+
         } else {
             $categoryId = false;
+            $categoryName = false;
         }
+
+        // if GET 'p' is set, set $page equal to its value, otherwise, set it to 1
+        $page = (isset($_GET['p'])) ? filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT) : 1;
 
         // Get total number of pages, from either specifc category, or from all categories
         $numOfArticles = $this->articleModel->getTotalNumberOfArticles($categoryId);
         $numOfPages = ceil($numOfArticles[0] / $perPage);
 
-        // Getting total number of pages. If category is -1, it means it was numberOfArticles selected,
-        // so get total number of ALL pages, otherwise, get total number of pages in specific category
-
-
-
+        // Getting articles
         $articles = $this->articleModel->paginate($page, $perPage, $categoryId);
+
         return [
-            'articles'         => $articles, 
+            'articles'         => $articles,
             'numOfPages'       => $numOfPages,
             'page'             => $page,
             'selectedCategory' => $categoryName
         ];
+
     }
 
 
+    /**
+     * Search 'articles' table for keyword provided via $_GET['S']
+     * If cant find any results, redirect to homepage
+     *
+     * @return Array       Array of matching articles
+     */
     public function search()
     {
         // If search variable is not set, or empty, redirect to homepage
@@ -236,6 +291,7 @@ class ArticleController
         // Adding wildcard (%) signs to search term, so I can bind in sql stmt
         $searchTerm = '%' . $_GET['s'] . '%';
 
+        // Search db using Article model
         $articles = $this->articleModel->search($searchTerm);
 
         // If any articles were found, return them, otherwise, set error msg, and redirect to homepage
