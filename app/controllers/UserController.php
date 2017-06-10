@@ -3,6 +3,7 @@
 class UserController
 {
     private $userModel;
+    private $msg;
 
     /**
      * Set property $db to argument, which
@@ -10,9 +11,10 @@ class UserController
      *
      * @param Db $db Object Db
      */
-    public function __construct(User $userModel)
+    public function __construct(User $userModel, $msg)
     {
         $this->userModel = $userModel;
+        $this->msg = $msg;
     }
 
     /**
@@ -33,10 +35,12 @@ class UserController
                 die();
 
 			} else {
-				$_SESSION['error_messages'][] = 'Wrong username/password combination';
+                $this->msg->error('Wrong username/password combination.', '/admin/login.php');
+				die();
 			}
         } else {
-            $_SESSION['error_messages'][] = 'Both fields are required';
+            $this->msg->error('Both fields are required.', '/admin/login.php');
+            die();
         }
     }
 
@@ -60,12 +64,14 @@ class UserController
     public function redirectIfNotLoggedIn()
     {
         if (!isset($_SESSION['userId']) || empty($_SESSION['userId'])) {
-            $_SESSION['error_messages'][] = 'You must login, before you can access this page!';
-            header('location: /admin/login.php');
+            $this->msg->error('You must login, before you can access this page!', '/admin/login.php');
             die();
         }
     }
 
+    /**
+     * Logout user by unsetting his session ID
+     */
     public function logout()
     {
         if ($this->isLoggedIn()) {
