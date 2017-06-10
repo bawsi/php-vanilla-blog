@@ -38,11 +38,11 @@ include(TEMPLATES_PATH . '/_header.php')
                 <!-- Articles -->
                 <?php foreach ($articles as $article):?>
                     <tr>
-                        <td><?php echo htmlspecialchars($article['id']); ?></td>
-                        <td><?php echo htmlspecialchars($article['title']); ?></td>
-                        <td><?php echo htmlspecialchars($article['category_name']); ?></td>
-                        <td><?php echo htmlspecialchars($article['author']); ?></td>
-                        <td><?php echo htmlspecialchars(date("d.m.Y", $article['created_at'])); ?></td>
+                        <td><?php echo $article['id']; ?></td>
+                        <td><?php echo $article['title']; ?></td>
+                        <td><?php echo $article['category_name']; ?></td>
+                        <td><?php echo $article['author']; ?></td>
+                        <td><?php echo date("d.m.Y", $article['created_at']); ?></td>
                         <td>
                             <a href="<?php echo '/article.php?id=' . $article['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-link" aria-hidden="true"></i></a>
                             <a href="<?php echo '/admin/edit.php?id=' . $article['id']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
