@@ -1,4 +1,5 @@
 <?php
+use Psr\Http\Message\MessageInterface;
 // Including config
 include 'config.php';
 
@@ -22,4 +23,6 @@ $userModel = new User($dbModel);
 $article = new ArticleController($articleModel);
 $user = new UserController($userModel);
 
+// Messages
+$msg = new \Plasticbrain\FlashMessages\FlashMessages();
 ?>
