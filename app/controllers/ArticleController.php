@@ -119,9 +119,20 @@ class ArticleController
 
     /**
      * Edits article with updated data
+     *
+     * @return Array Returns either array, or just redirects
      */
     public function edit()
     {
+        // If request method is not POST, return single article
+        // data from its id, and list of all categories
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $articleData = $this->getArticleById();
+            $categories = $this->getCategories();
+
+            return [$articleData, $categories];
+        }
+
         // Getting POSTED article data
         $articleId = $_POST['articleId'];
         $title = $_POST['title'];
