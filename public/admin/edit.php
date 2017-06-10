@@ -8,13 +8,7 @@ $page = 'admin-article-index';
 $user->redirectIfNotLoggedIn();
 
 // If POST request, update article
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $article->edit();
-} else {
-    // Otherwise, get article fro its ID + categories for form
-    $articleData = $article->getArticleById();
-    $categories = $article->getCategories();
-}
+$article->edit();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
