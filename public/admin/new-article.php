@@ -7,13 +7,8 @@ $page = 'admin-new-article';
 // If not logged in, redirect to login page
 $user->redirectIfNotLoggedIn();
 
-// If it is POST request, new article was already submitted. Validate & store it
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$article->validateAndStoreArticle();
-} else {
-    // Get list of all categories
-    $categories = $article->getCategories();
-}
+// Validate and store article on POST, or get list of categories on GET
+$categories = $article->validateAndStoreArticle();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
