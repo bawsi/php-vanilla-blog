@@ -15,7 +15,7 @@ include APP_PATH . '/models/User.php';
 include APP_PATH . '/controllers/ArticleController.php';
 include APP_PATH . '/controllers/UserController.php';
 
-// Messages (https://mikeeverhart.net/php-flash-messages/index.php)
+// Flash Messages (https://mikeeverhart.net/php-flash-messages/index.php)
 $msg = new \Plasticbrain\FlashMessages\FlashMessages();
 
 // Instantiating Models
