@@ -15,14 +15,15 @@ include APP_PATH . '/models/User.php';
 include APP_PATH . '/controllers/ArticleController.php';
 include APP_PATH . '/controllers/UserController.php';
 
-// Instantiating Models and Controllers
+// Messages (https://mikeeverhart.net/php-flash-messages/index.php)
+$msg = new \Plasticbrain\FlashMessages\FlashMessages();
+
+// Instantiating Models
 $dbModel = new Db;
 $articleModel = new Article($dbModel);
 $userModel = new User($dbModel);
 
-$article = new ArticleController($articleModel);
-$user = new UserController($userModel);
-
-// Messages (https://mikeeverhart.net/php-flash-messages/index.php)
-$msg = new \Plasticbrain\FlashMessages\FlashMessages();
+// Instantiating Controllers
+$article = new ArticleController($articleModel, $msg);
+$user = new UserController($userModel, $msg);
 ?>
