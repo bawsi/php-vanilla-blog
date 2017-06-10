@@ -5,15 +5,17 @@ use Intervention\Image\ImageManagerStatic as Image;
 class ArticleController
 {
     private $articleModel;
+    private $msg;
     /**
      * Set property $db to argument, which
      * has to be an instance of Db object
      *
      * @param Db $db Object Db
      */
-    public function __construct(Article $articleModel)
+    public function __construct(Article $articleModel, $msg)
     {
         $this->articleModel = $articleModel;
+        $this->msg = $msg;
     }
 
     /**
@@ -39,7 +41,6 @@ class ArticleController
     {
         // Sanitizing ID value
         $articleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
         return $this->articleModel->getSingleArticleById($articleId);
     }
 
@@ -80,8 +81,7 @@ class ArticleController
 
                     // If submitted image has extension which is not allowed, redirect back with error
                     if(!in_array($ImageActualExtension, $allowed)) {
-                        $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
-                        header('location: /admin/new-article.php');
+                        $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/new-article.php');
                         die();
                     }
 
@@ -102,20 +102,17 @@ class ArticleController
                 }
 
                 // Set success msg and redirect to article
-                $_SESSION['success_messages'][] = 'Article added to database!';
-                header('location: /article.php?id=' . $articleId);
+                $this->msg->success('Article added to database!', '/article.php?id=' . $articleId);
                 die();
 
             } else {
                 // Set error message, and redirect back to new article page
-                $_SESSION['error_messages'][] = 'Failed to store article or image to database.. try again!';
-                header('location: /admin/new-article.php');
+                $this->msg->error('Failed to store article or image to database. Try again!', '/admin/new-article.php');
                 die();
             }
         } else {
             // Set error message, and redirect back to new article page
-            $_SESSION['error_messages'][] = 'All fields are required!';
-            header('location: /admin/new-article.php');
+            $this->msg->error('All fields except image are required.', '/admin/new-article.php');
             die();
         }
     }
@@ -166,8 +163,7 @@ class ArticleController
 
                 // If submitted image has extension which is not allowed, redirect back with error
                 if(!in_array($ImageActualExtension, $allowed)) {
-                    $_SESSION['error_messages'][] = 'Only .jpg, .jpeg and .png images allowed';
-                    header('location: /admin/edit.php?id=' . $articleId);
+                    $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/edit.php?id=' . $articleId);
                     die();
                 }
 
@@ -190,15 +186,13 @@ class ArticleController
             }
 
         // Redirect to edited article
-        $_SESSION['success_messages'][] = 'Article successfully updated!';
-        header('location: /article.php?id=' . $articleId);
+        $this->msg->success('Article successfully updated!', '/article.php?id=' . $articleId);
         die();
 
     } else {
         // If any of the fields (title, body, authorId or categoryId) are empty,
         // set error message, and redirect back to edit page
-        $_SESSION['error_messages'][] = 'All fields except image are required!';
-        header('location: /admin/edit.php?id=' . $articleId);
+        $this->msg->error('All fields except image are required!', '/admin/edit.php?id=' . $articleId);
         die();
     }
 }
@@ -239,7 +233,8 @@ class ArticleController
         ($oldImagePath !== false) ? unlink($oldImagePath) : '';
 
         // Redirect to article index, once article is deleted
-        header('location: /admin/article-index.php');
+        $this->msg->info('Article with ID of ' . $id . ' successfully deleted!', '/admin/article-index.php');
+        die();
     }
 
     /**
@@ -262,6 +257,7 @@ class ArticleController
             $categoryId = $this->articleModel->getCategoryIdFromName($categoryName);
 
         } else {
+            // If category is not set, set both categoryId and categoryName to false
             $categoryId = false;
             $categoryName = false;
         }
@@ -296,7 +292,8 @@ class ArticleController
     {
         // If search variable is not set, or empty, redirect to homepage
         if (!isset($_GET['s']) || empty($_GET['s'])) {
-            header('location: /');
+            $this->msg->error('Cannot access this page, without entering a search term.', '/');
+            die();
         }
 
         // Adding wildcard (%) signs to search term, so I can bind in sql stmt
@@ -309,8 +306,8 @@ class ArticleController
         if ($articles) {
             return $articles;
         } else {
-            $_SESSION['error_messages'][] = 'No results were found for that search query.';
-            header('location: /');
+            $this->msg->error('No results were found for that search query.', '/');
+            die();
         }
 
     }
