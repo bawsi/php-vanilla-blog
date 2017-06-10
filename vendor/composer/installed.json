@@ -119,18 +119,62 @@
         ]
     },
     {
-        "name": "intervention/image",
-        "version": "2.3.11",
-        "version_normalized": "2.3.11.0",
+        "name": "plasticbrain/php-flash-messages",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Intervention/image.git",
-            "reference": "e8881fd99b9804b29e02d6d1c2c15ee459335cf1"
+            "url": "https://github.com/plasticbrain/PhpFlashMessages.git",
+            "reference": "b565762619342057ce561de20d0f2f6e14f9aa77"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Intervention/image/zipball/e8881fd99b9804b29e02d6d1c2c15ee459335cf1",
-            "reference": "e8881fd99b9804b29e02d6d1c2c15ee459335cf1",
+            "url": "https://api.github.com/repos/plasticbrain/PhpFlashMessages/zipball/b565762619342057ce561de20d0f2f6e14f9aa77",
+            "reference": "b565762619342057ce561de20d0f2f6e14f9aa77",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2016-04-01T08:39:38+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Plasticbrain\\FlashMessages\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mike Everhart",
+                "email": "mike@plasticbrain.net"
+            }
+        ],
+        "description": "A modern take on PHP session-based flash messages",
+        "keywords": [
+            "bootstrap",
+            "flash",
+            "messages",
+            "session"
+        ]
+    },
+    {
+        "name": "intervention/image",
+        "version": "2.3.13",
+        "version_normalized": "2.3.13.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Intervention/image.git",
+            "reference": "15a517f052ee15d373ffa145c9642d5fec7ddf5c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Intervention/image/zipball/15a517f052ee15d373ffa145c9642d5fec7ddf5c",
+            "reference": "15a517f052ee15d373ffa145c9642d5fec7ddf5c",
             "shasum": ""
         },
         "require": {
@@ -147,7 +191,7 @@
             "ext-imagick": "to use Imagick based image processing.",
             "intervention/imagecache": "Caching extension for the Intervention Image library"
         },
-        "time": "2017-02-04T10:37:19+00:00",
+        "time": "2017-04-23T18:45:36+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
