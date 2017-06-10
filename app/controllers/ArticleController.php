@@ -48,72 +48,79 @@ class ArticleController
     /**
      * Checks if submitted new article form data is valid.
      * For now, it only checks if everything was filled in
+     * @return Array Redirects on POST request, or returns array of categories on GET
      */
     public function validateAndStoreArticle()
     {
-        // Get all the article data and sanitize
-        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    	$body = $_POST['body'];
-    	$categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
-    	$image = $_FILES['image'];
-    	$authorId = $_SESSION['userId'];
+        // If POST request, execute this method
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Get all the article data and sanitize
+            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        	$body = $_POST['body'];
+        	$categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
+        	$image = $_FILES['image'];
+        	$authorId = $_SESSION['userId'];
 
-        // Basic validation
-        if (!empty($title) && !empty($body) && !empty($authorId) && !empty($categoryId))
-        {
-            // Storing data (except img) to db
-            if (($articleId = $this->articleModel->saveArticle($title, $body, $categoryId, $authorId)))
+            // Basic validation
+            if (!empty($title) && !empty($body) && !empty($authorId) && !empty($categoryId))
             {
-                // If image was submitted, get its info, resize it, and store it to /uploads directory
-                if (getimagesize($image['tmp_name']))
+                // Storing data (except img) to db
+                if (($articleId = $this->articleModel->saveArticle($title, $body, $categoryId, $authorId)))
                 {
-                    // Getting basic img info from submitted img
-                    $imageName = $image['name'];
-                    $imageTmpName = $image['tmp_name'];
-                    $imageFileType = $image['type'];
+                    // If image was submitted, get its info, resize it, and store it to /uploads directory
+                    if (getimagesize($image['tmp_name']))
+                    {
+                        // Getting basic img info from submitted img
+                        $imageName = $image['name'];
+                        $imageTmpName = $image['tmp_name'];
+                        $imageFileType = $image['type'];
 
-                    // Getting img extension
-                    $imageExtension = explode('.', $imageName);
-                    $ImageActualExtension = strtolower(end($imageExtension));
+                        // Getting img extension
+                        $imageExtension = explode('.', $imageName);
+                        $ImageActualExtension = strtolower(end($imageExtension));
 
-                    // Supported img formats
-                    $allowed = ['jpg', 'jpeg', 'png'];
+                        // Supported img formats
+                        $allowed = ['jpg', 'jpeg', 'png'];
 
-                    // If submitted image has extension which is not allowed, redirect back with error
-                    if(!in_array($ImageActualExtension, $allowed)) {
-                        $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/new-article.php');
-                        die();
+                        // If submitted image has extension which is not allowed, redirect back with error
+                        if(!in_array($ImageActualExtension, $allowed)) {
+                            $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/new-article.php');
+                            die();
+                        }
+
+                        // Saving the image - cant save above, because I cant get article's ID before article is saved
+                        Image::configure(['driver' => 'imagick']);
+
+                        // Setting new image file name and paths.
+                        // One path for storing actual img, and one for linking to img from db
+                        $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
+                        $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                        $imgPathForDb = '/uploads/' . $fileName;
+
+                        // Resize and save image to public/uploads/
+                        Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
+
+                        // Save path of image to article db
+                        $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
                     }
 
-                    // Saving the image - cant save above, because I cant get article's ID before article is saved
-                    Image::configure(['driver' => 'imagick']);
+                    // Set success msg and redirect to article
+                    $this->msg->success('Article added to database!', '/article.php?id=' . $articleId);
+                    die();
 
-                    // Setting new image file name and paths.
-                    // One path for storing actual img, and one for linking to img from db
-                    $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-                    $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
-                    $imgPathForDb = '/uploads/' . $fileName;
-
-                    // Resize and save image to public/uploads/
-                    Image::make($imageTmpName)->fit(400, 200)->save($imgFullPath);
-
-                    // Save path of image to article db
-                    $this->articleModel->saveArticleImagePath($imgPathForDb, $articleId);
+                } else {
+                    // Set error message, and redirect back to new article page
+                    $this->msg->error('Failed to store article or image to database. Try again!', '/admin/new-article.php');
+                    die();
                 }
-
-                // Set success msg and redirect to article
-                $this->msg->success('Article added to database!', '/article.php?id=' . $articleId);
-                die();
-
             } else {
                 // Set error message, and redirect back to new article page
-                $this->msg->error('Failed to store article or image to database. Try again!', '/admin/new-article.php');
+                $this->msg->error('All fields except image are required.', '/admin/new-article.php');
                 die();
             }
         } else {
-            // Set error message, and redirect back to new article page
-            $this->msg->error('All fields except image are required.', '/admin/new-article.php');
-            die();
+            // Return array of all categories for form
+            return $this->getCategories();
         }
     }
 
