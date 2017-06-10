@@ -6,11 +6,7 @@ $currentPage = 'admin';
 // If not logged in, redirect to login page
 $user->redirectIfNotLoggedIn();
 
-$article = $article->delete($_GET['id']);
-header('location: /admin/article-index.php');
-
-
-
-
+// Delete article
+$article->delete();
 
 ?>
