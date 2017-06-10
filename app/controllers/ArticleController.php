@@ -130,7 +130,7 @@ class ArticleController
             $articleData = $this->getArticleById();
             $categories = $this->getCategories();
 
-            return [$articleData, $categories];
+            return ['articleData' => $articleData, 'categories' => $categories];
         }
 
         // Getting POSTED article data
