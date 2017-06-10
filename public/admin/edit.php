@@ -7,8 +7,9 @@ $page = 'admin-article-index';
 // If not logged in, redirect to login page
 $user->redirectIfNotLoggedIn();
 
-// If POST request, update article
-$article->edit();
+// If POST request, update article and redirect to it,
+// otherwise, it returns array, which contains articleData and categories
+$data = $article->edit();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
