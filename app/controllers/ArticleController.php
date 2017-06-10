@@ -218,9 +218,9 @@ class ArticleController
      *
      * @param  int $id id of article to delete
      */
-    public function delete($id)
+    public function delete()
     {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
         // Get article info, before deleting it, so I can delete old img
         $oldImagePath = $this->articleModel->getSingleArticleById($id);
