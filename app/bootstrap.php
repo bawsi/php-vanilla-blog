@@ -23,6 +23,6 @@ $userModel = new User($dbModel);
 $article = new ArticleController($articleModel);
 $user = new UserController($userModel);
 
-// Messages
+// Messages (https://mikeeverhart.net/php-flash-messages/index.php)
 $msg = new \Plasticbrain\FlashMessages\FlashMessages();
 ?>
