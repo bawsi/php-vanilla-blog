@@ -6,10 +6,8 @@ $currentPage = 'login';
 // If already logged in, redirect to admin panel
 ($user->isLoggedIn()) ? header('location: /admin') : '';
 
-// If POST request, try to login with submitted data
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user->login();
-}
+// Try to login with submitted data
+$user->login();
 
 include(TEMPLATES_PATH . '/_header.php')
 ?>
