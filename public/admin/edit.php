@@ -24,17 +24,17 @@ include(TEMPLATES_PATH . '/_header.php');
 		<!-- edit article form column -->
 		<div class="col-md-9">
 			<form class="article-form" action="" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="articleId" value="<?php echo $articleId; ?>">
+                <input type="hidden" name="articleId" value="<?php echo $data['article']['id']; ?>">
 				<p>Article Title</p>
-				<input type="text" name="title" placeholder="Article title here" required="required" class="form-control" value="<?php echo $data['articleData']['title']; ?>">
+				<input type="text" name="title" placeholder="Article title here" required="required" class="form-control" value="<?php echo $data['article']['title']; ?>">
 				<p>Article Body</p>
-				<textarea name="body" rows="8"><?php echo $data['articleData']['body']; ?></textarea>
+				<textarea name="body" rows="8"><?php echo $data['article']['body']; ?></textarea>
                 <p>Image (appears on article thumbnail / 400x200)</p>
 				<input type="file" name="image" class="form-control" accept="image/*">
 				<p>Category</p>
 				<select class="category form-control" name="categoryId">
 					<?php foreach ($data['categories'] as $category): ?>
-						<option value='<?php echo $category['id']; ?>' <?php echo ($category['category_name'] == $data['articleData']['category_name'] ? 'selected' : ''); ?>><?php echo $category['category_name']; ?></option>
+						<option value='<?php echo $category['id']; ?>' <?php echo ($category['category_name'] == $data['article']['category_name'] ? 'selected' : ''); ?>><?php echo $category['category_name']; ?></option>
 					<?php endforeach; ?>
 				</select>
 				<input type="hidden" name="authorId" value="1">
