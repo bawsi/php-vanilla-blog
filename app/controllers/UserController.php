@@ -99,6 +99,24 @@ class UserController
         }
     }
 
+    public function getUserId()
+    {
+        if (isset($_COOKIE['jwt'])) {
+            $jwt = $_COOKIE['jwt'];
+
+            try {
+                // Decode jwt
+                $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
+                // Return id of logged in user
+                return $decoded->userId;
+
+            } catch (Exception $e) {
+                // Failed decoding jwt, return false
+                return false;
+            }
+        }
+    }
+
     /**
      * Logout user by unsetting his session ID
      */
