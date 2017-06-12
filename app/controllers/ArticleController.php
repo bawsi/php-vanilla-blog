@@ -65,7 +65,7 @@ class ArticleController
         	$authorId = $this->userController->getUserId();
 
             // Basic validation
-            if (!empty($title) && !empty($body) && !empty($authorId) && !empty($categoryId))
+            if (!empty($title) && !empty($body) && $authorId && !empty($categoryId))
             {
                 // Storing data (except img) to db
                 if (($articleId = $this->articleModel->saveArticle($title, $body, $categoryId, $authorId)))
