@@ -34,7 +34,7 @@ class UserController
                     // Username and password entered are correct. Set data for jwt
                     $data = array(
                         "iat"    => time(),
-                        "exp"    => time() + 86400,
+                        "exp"    => time() + 3600,    // expires in 1 hour
                         "userId" => $userData['id']
                     );
 
