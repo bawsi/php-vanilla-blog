@@ -1,6 +1,7 @@
 <?php
 
 use Intervention\Image\ImageManagerStatic as Image;
+use \Firebase\JWT\JWT;
 
 class ArticleController
 {
