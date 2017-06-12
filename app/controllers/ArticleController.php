@@ -62,7 +62,7 @@ class ArticleController
         	$body = $_POST['body'];
         	$categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
         	$image = $_FILES['image'];
-        	$authorId = $_SESSION['userId'];
+        	$authorId = $this->userController->getUserId();
 
             // Basic validation
             if (!empty($title) && !empty($body) && !empty($authorId) && !empty($categoryId))
