@@ -7,6 +7,7 @@ class ArticleController
 {
     private $articleModel;
     private $msg;
+    private $userController;
     /**
      * Set property $db to argument, which
      * has to be an instance of Db object
