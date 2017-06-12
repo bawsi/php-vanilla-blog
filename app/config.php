@@ -12,6 +12,7 @@ define("TEMPLATES_PATH", dirname(__DIR__) . '/public/templates');
 
 // Other
 define('JWT_KEY', 'qwpdjqwd0912uepj12je-912f12fpojqsfl');
+define('SITE_URL', 'site.dev');
 
 // errors
 ini_set('display_errors', 1);
