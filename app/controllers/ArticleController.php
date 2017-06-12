@@ -14,10 +14,11 @@ class ArticleController
      *
      * @param Db $db Object Db
      */
-    public function __construct(Article $articleModel, $msg)
+    public function __construct(Article $articleModel, $msg, $userController)
     {
         $this->articleModel = $articleModel;
         $this->msg = $msg;
+        $this->userController = $userController;
     }
 
     /**
