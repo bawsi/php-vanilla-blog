@@ -140,7 +140,7 @@ class ArticleController
             $articleData = $this->getArticleById();
             $categories = $this->getCategories();
 
-            return ['articleData' => $articleData, 'categories' => $categories];
+            return ['article' => $articleData, 'categories' => $categories];
         }
 
         // Getting POSTED article data
@@ -150,15 +150,17 @@ class ArticleController
         $image = $_FILES['image'];
         $categoryId = $_POST['categoryId'];
 
+
+
         // Basic validation
-        if (!empty($title) && !empty($body) && !empty($articleId && !empty($categoryId)))
+        if (!empty($title) && !empty($body) && !empty($articleId) && !empty($categoryId))
         {
             // Filtering out any unwanted characters
             $title = filter_var($title, FILTER_SANITIZE_STRING);
             $body = $body;
-            $articleCategoryId = filter_var($articleCategoryId, FILTER_SANITIZE_NUMBER_INT);
+            $articleId = filter_var($articleId, FILTER_SANITIZE_NUMBER_INT);
             $image = $image;
-            $authorId = filter_var($authorId, FILTER_SANITIZE_NUMBER_INT);
+            $authorId = $this->userController->getUserId();
 
             // Saving article
             $this->articleModel->edit($articleId, $title, $body, $categoryId);
