@@ -1,6 +1,7 @@
 {
     "require": {
         "intervention/image": "^2.3",
-        "plasticbrain/php-flash-messages": "^1.0"
+        "plasticbrain/php-flash-messages": "^1.0",
+        "firebase/php-jwt": "^4.0"
     }
 }
