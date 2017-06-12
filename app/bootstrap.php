@@ -24,6 +24,7 @@ $articleModel = new Article($dbModel);
 $userModel = new User($dbModel);
 
 // Instantiating Controllers
-$article = new ArticleController($articleModel, $msg);
 $user = new UserController($userModel, $msg);
+$article = new ArticleController($articleModel, $msg, $user);
+
 ?>
