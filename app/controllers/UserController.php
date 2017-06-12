@@ -62,11 +62,21 @@ class UserController
      */
     public function isLoggedIn()
     {
-        if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
-            return true;
+        // Check if jwt cookie is set
+        if (isset($_COOKIE['jwt'])) {
+            $jwt = $_COOKIE['jwt'];
+
+            // Decode the cookie
+            $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
+
+            // Reeturn true if userId is set, and userId is int, and is bigger than 0
+            return (isset($decoded->userId) && is_int($decoded->userId) && $decoded->userId > 0) ? true : false;
+
         } else {
+            // Return false, if jwt cookie is not set
             return false;
         }
+
 
     }
 
