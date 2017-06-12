@@ -42,8 +42,11 @@ class UserController
                     $jwt = JWT::encode($data, JWT_KEY, 'HS512');
 
                     // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
-                    setcookie('jwt', $jwt, time() + 1800, '/', SITE_URL, false, true);
+                    setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
 
+                    // Redirect to admin panel
+                    header('location: /admin');
+                    die();
 
     			} else {
                     $this->msg->error('Wrong username/password combination.', '/admin/login.php');
@@ -66,18 +69,23 @@ class UserController
         if (isset($_COOKIE['jwt'])) {
             $jwt = $_COOKIE['jwt'];
 
-            // Decode the cookie
-            $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
+            // Try to decode the JWT. If is hasnt expired yet, and
+            // userId is set and is > than 0, return true, false otherwise
+            try {
+                $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
+                // Reeturn true if userId is set in jwd, and userId is bigger than 0
+                return (isset($decoded->userId) && $decoded->userId > 0) ? true : false;
 
-            // Reeturn true if userId is set, and userId is int, and is bigger than 0
-            return (isset($decoded->userId) && is_int($decoded->userId) && $decoded->userId > 0) ? true : false;
+            } catch (Firebase\JWT\ExpiredException $e) {
+                // Since JWT expired, unset it, and return false
+                setcookie('jwt', '', 1, '/', SITE_URL, false, true);
+                return false;
+            }
 
         } else {
             // Return false, if jwt cookie is not set
             return false;
         }
-
-
     }
 
     /**
@@ -97,7 +105,7 @@ class UserController
     public function logout()
     {
         if ($this->isLoggedIn()) {
-            unset($_SESSION['userId']);
+            setcookie('jwt', '', 1, '/', SITE_URL, false, true);
         }
     }
 }
