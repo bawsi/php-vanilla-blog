@@ -1,4 +1,5 @@
 <?php
+use \Firebase\JWT\JWT;
 
 class UserController
 {
@@ -28,11 +29,21 @@ class UserController
                 $password = $_POST['password'];
                 $userData = $this->userModel->getUserDataFromUsername($username);
 
-                // If user was found, check if hashed password matches, and redirect accordingly
+                // If user was found, check if hashed password matches
         		if (!empty($userData) && password_verify($password, $userData['password'])) {
-                    $_SESSION['userId'] = $userData['id'];
-                    header('location: /admin');
-                    die();
+                    // Username and password entered are correct. Set data for jwt
+                    $data = array(
+                        "iat"    => time(),
+                        "exp"    => time() + 86400,
+                        "userId" => $userData['id']
+                    );
+
+                    // Encode JWT data from above, key and algorithm together
+                    $jwt = JWT::encode($data, JWT_KEY, 'HS512');
+
+                    // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
+                    setcookie('jwt', $jwt, time() + 1800, '/', SITE_URL, false, true);
+
 
     			} else {
                     $this->msg->error('Wrong username/password combination.', '/admin/login.php');
