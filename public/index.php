@@ -7,7 +7,7 @@ $currentPage = 'index';
 $perPage = 9;
 $data = $article->getArticlesPaginated($perPage);
 
-include(TEMPLATES_PATH . '/_header.php')
+include(TEMPLATES_PATH . '/_header.php');
 ?>
 
 <!-- Main content -->
