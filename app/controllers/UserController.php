@@ -40,7 +40,7 @@ class UserController
 
                     // Encode JWT data from above, key and algorithm together
                     $jwt = JWT::encode($data, JWT_KEY, 'HS512');
-                    die($jwt);
+                    
                     // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
                     setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
 
