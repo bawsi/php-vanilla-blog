@@ -1,0 +1,204 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background: rgba(255, 255, 255, 0.6);
+    /* Margin bottom for footer height - otherwise content gets covered */
+    margin-bottom: 120px;
+}
+
+nav.navbar {
+    margin-bottom: 0px;
+}
+
+div.container-homepage h1.title {
+    margin-bottom: 20px;
+}
+
+div.container-homepage div.single-article {
+    height: 359px;
+    max-width: 400px;
+}
+
+div.container-homepage div.single-article div.thumbnail {
+    display: block;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 2px;
+    border: none;
+    background-color: #fcfcfc;
+    border: 1px solid #e4e7e5;
+    position: relative;
+}
+
+div.container-homepage div.single-article div.thumbnail div.caption {
+    padding-bottom: 0px;
+}
+
+div.container-homepage div.single-article div.thumbnail div.caption a.article-title {
+    text-decoration: none;
+    color: #2C3E50;
+    transition: color 150ms ease-in-out;
+}
+
+div.container-homepage div.single-article div.thumbnail div.caption a.article-title:hover {
+    color: #CC6565;
+    transition: color 150ms ease-in-out;
+}
+
+div.container-homepage div.single-article div.thumbnail div.caption a.article-title h3 {
+    margin-top: 10px;
+}
+
+div.container-homepage div.single-article div.thumbnail div.caption span.category a {
+    text-decoration: none;
+    color: #484b4b;
+}
+
+div.container-homepage div.single-article div.thumbnail a.read-more-btn {
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 0px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: background-color 150ms, border-color 150ms;
+}
+
+div.container-homepage div.single-article div.thumbnail a.read-more-btn:hover {
+    background-color: #CC6565;
+    border-color: #CC6565;
+    transition: background-color 150ms, border-color 150ms;
+}
+
+div.container-homepage div.single-article p.article-info {
+    opacity: 0.5;
+    margin-bottom: 0px;
+}
+
+div.container-homepage div.single-article p.article-info span:nth-child(2), div.container-homepage div.single-article p.article-info span:nth-child(3) {
+    margin-left: 7px;
+}
+
+@media (max-width: 767px) {
+    div.container-homepage div.single-article {
+        float: left;
+        clear: both;
+        position: relative;
+        width: 400px;
+        left: 50%;
+        margin-left: -200px;
+    }
+}
+
+div.container-article div.article-col {
+    border: 1px solid #f2f1f1;
+    background: white;
+    padding: 20px;
+}
+
+div.container-article div.article-col a.btn-primary {
+    margin-right: 5px;
+}
+
+div.container-article div.article-col h5.article-info {
+    opacity: 0.4;
+}
+
+div.container-article div.article-col h5.article-info span:nth-child(2), div.container-article div.article-col h5.article-info span:nth-child(3) {
+    margin-left: 10px;
+}
+
+div.container-article div.article-col h5.article-info span.category a {
+    text-decoration: none;
+    color: #484b4b;
+}
+
+div.container-article div.article-col div.article-body {
+    text-align: justify;
+}
+
+div.container-article div.article-col div.article-body img {
+    max-width: 100%;
+}
+
+div.container-article div.comments {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 900px;
+    max-width: 100%;
+}
+
+div.container-new-article form.article-form {
+    background: white;
+    padding: 10px;
+    box-shadow: 1px 1px 5px 1px #cccbcb;
+}
+
+div.container-new-article form.article-form p:not(:first-child) {
+    margin-top: 15px;
+}
+
+div.container-new-article form.article-form textarea {
+    display: block;
+}
+
+div.container-new-article form.article-form select.category {
+    margin-bottom: 15px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #2C3E50;
+    color: white;
+    padding-top: 20px;
+}
+
+div.container-admin-login form.login-form input {
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #b9b9b9;
+}
+
+nav.navbar.navbar-main {
+    margin-bottom: 20px;
+}
+
+nav.navbar.navbar-main div.navbar-header a.navbar-brand:hover {
+    color: white;
+}
+
+nav.navbar.navbar-main div.navbar-collapse li:not(.category-item) {
+    transition: background-color 100ms;
+}
+
+nav.navbar.navbar-main div.navbar-collapse li:not(.category-item):hover {
+    background-color: #1A242F;
+    transition: background-color 100ms;
+}
+
+nav.navbar.navbar-main div.navbar-collapse li:not(.category-item):hover > a {
+    color: white;
+}
+
+nav.navbar.navbar-main div.navbar-collapse form.search {
+    margin-top: 12px;
+}
+
+@media (max-width: 998px) {
+    nav.navbar.navbar-main div.navbar-collapse button.search-btn {
+        width: 100%;
+    }
+}
+
+@media (min-width: 999px) and (max-width: 999px) {
+    nav.navbar.navbar-main div.navbar-collapse button.search-btn {
+        position: relative;
+        top: -3px;
+    }
+}
