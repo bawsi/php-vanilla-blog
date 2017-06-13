@@ -10,7 +10,6 @@ $currentPage = 'login';
 $user->login();
 
 include(TEMPLATES_PATH . '/_header.php');
-echo $_COOKIE['jwt'];
 ?>
 
 <div class="container container-admin-login">
