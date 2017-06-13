@@ -253,6 +253,7 @@ class ArticleController
         $deletedStatus = $this->articleModel->delete($id);
 
         // If old image is NOT default.png, delete it
+        chmod($oldImagePath, 0777);
         ($oldImagePath !== false) ? unlink($oldImagePath) : '';
 
         // Redirect to article index, once article is deleted
