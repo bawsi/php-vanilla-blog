@@ -2,8 +2,8 @@
 // database info
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'blog');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_USER', 'bawsi');
+define('DB_PASS', 'misko123');
 
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
