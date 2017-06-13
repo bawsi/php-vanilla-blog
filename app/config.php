@@ -1,9 +1,9 @@
 <?php
 // database info
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'localhost');
 define('DB_NAME', 'blog');
-define('DB_USER', 'bawsi');
-define('DB_PASS', 'misko123');
+define('DB_USER', 'root');
+define('DB_PASS', 'root');
 
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
