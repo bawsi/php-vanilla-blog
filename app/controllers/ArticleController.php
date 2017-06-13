@@ -247,7 +247,7 @@ class ArticleController
 
         // Get article info, before deleting it, so I can delete old img
         $oldImagePath = $this->articleModel->getSingleArticleById($id);
-        $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
+        $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
 
         // Delete article
         $deletedStatus = $this->articleModel->delete($id);
