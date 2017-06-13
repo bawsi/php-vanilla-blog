@@ -9,7 +9,7 @@ $currentPage = 'login';
 // Try to login with submitted data
 $user->login();
 
-include(TEMPLATES_PATH . '/_header.php')
+include(TEMPLATES_PATH . '/_header.php');
 echo $_COOKIE['jwt'];
 ?>
 
