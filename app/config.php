@@ -1,9 +1,9 @@
 <?php
 // database info
-define('DB_HOST', 'eu-cdbr-west-01.cleardb.com');
-define('DB_NAME', 'heroku_a99d21812695f83');
-define('DB_USER', 'bebada6f641e25');
-define('DB_PASS', '557242ba');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'blog');
+define('DB_USER', 'root');
+define('DB_PASS', 'root');
 
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
