@@ -214,6 +214,15 @@ class Article
          return $articles;
     }
 
+    /**
+     * Return number of articles in specific category, or total. If category
+     * is not passed in, it counts all articles, otherwise, it counts
+     * articles from specific category
+     *
+     * @param  int/bool   $category   id of category, or false
+     *
+     * @return int                    Number of articles
+     */
     public function getTotalNumberOfArticles($category)
     {
         // If category argument was passed, we extend query, to include that database
