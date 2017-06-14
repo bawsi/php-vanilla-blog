@@ -49,6 +49,7 @@ class UserController
                     die();
 
     			} else {
+                    // If password does not match, redirect to login page, with error msg
                     $this->msg->error('Wrong username/password combination.', '/admin/login.php');
     				die();
     			}
