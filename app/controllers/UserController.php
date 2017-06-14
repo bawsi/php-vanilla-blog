@@ -26,6 +26,7 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Check that both fields are set, and are not empty
             if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+                // Sanitizing all the received data, and getting userdata, based on the username
                 $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
                 $password = $_POST['password'];
                 $userData = $this->userModel->getUserDataFromUsername($username);
