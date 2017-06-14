@@ -238,6 +238,13 @@ class Article
         return $num;
     }
 
+    /**
+     * Get id of category, from its name
+     * 
+     * @param  str $category Category name
+     *
+     * @return int/bool      If category is found, return its id, else return false
+     */
     public function getCategoryIdFromName($category) {
         $stmt = $this->db->prepare('SELECT id FROM article_categories WHERE category_name = :category LIMIT 1');
         $stmt->bindParam(':category', $category);
