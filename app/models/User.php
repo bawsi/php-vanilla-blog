@@ -17,11 +17,11 @@ class User {
 	 *
 	 * @param  string   $username   Username string
 	 * @param  string   $password   Password string
-	 * 
+	 *
 	 * @return bool                 True if logged in, false otherwise
 	 */
-	public function getUserDataFromUsername($username) {
-
+	public function getUserDataFromUsername($username)
+	{
 		$stmt = $this->db->prepare(
 		'SELECT * FROM users
 		 WHERE username = :username
