@@ -96,6 +96,13 @@ class Article
         return ($stmt) ? $this->db->lastInsertId() : false;
     }
 
+    /**
+     * Save article's image path to article table
+     *
+     * @param  str    $imgPath    Path to image (/uploads/imgname.extension)
+     * @param  int    $articleId  Id of article to save $imgPath to
+     * @return bool               True if img path was saved to db, false otherwise
+     */
     public function saveArticleImagePath($imgPath, $articleId) {
         $stmt = $this->db->prepare(
             'UPDATE articles
