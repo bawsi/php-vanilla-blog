@@ -225,11 +225,14 @@ class Article
      */
     public function getTotalNumberOfArticles($categoryId)
     {
-        // If category argument was passed, we extend query, to include that database
+        // If category argument was passed, we extend query, to
+        // only count articles from that category
         $categoryQuery = ($categoryId >= 1) ? ' WHERE category_id = :categoryId' : '';
         $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
 
         $stmt = $this->db->prepare($query);
+        // We check if categoryId is >= to 1, instead of != false, because this way, we
+        // validate that its a valid int + that its not false, in simpler manner
         ($categoryId >= 1) ? $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT) : '';
         $stmt->execute();
 
