@@ -130,6 +130,17 @@ class Article
         return $categories;
     }
 
+    /**
+     * Edit already existing article. Will not update the image here tho.
+     * Only the title, body and category
+     *
+     * @param  int $articleId  Id of article
+     * @param  str $title      Articles title
+     * @param  str $body       Articles body
+     * @param  int $categoryId Id of category
+     * 
+     * @return bool             True if article was updated, false otherwise
+     */
     public function edit($articleId, $title, $body, $categoryId) {
         $stmt = $this->db->prepare(
             'UPDATE articles
