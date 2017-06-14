@@ -4,12 +4,6 @@ session_start();
 class User {
 	private $db;
 
-	/**
-	 * Just set property $db to argument, which
-	 * has to be an instance of Db object
-	 *
-	 * @param Db  $db  Object Db
-	 */
 	public function __construct(Db $db)
 	{
 		$this->db = $db->getConnection();
