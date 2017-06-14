@@ -170,7 +170,7 @@ class ArticleController
             {
                 // Getting name of old image name, so we can delete it later
                 $oldImagePath = $this->articleModel->getSingleArticleById($articleId);
-                $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/code/public' . $oldImagePath['img_path'];
+                $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
 
                 // Getting Image info
                 $imageName = $image['name'];
