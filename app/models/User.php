@@ -17,6 +17,7 @@ class User {
 	 *
 	 * @param  string   $username   Username string
 	 * @param  string   $password   Password string
+	 * 
 	 * @return bool                 True if logged in, false otherwise
 	 */
 	public function getUserDataFromUsername($username) {
