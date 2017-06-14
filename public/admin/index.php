@@ -24,6 +24,11 @@ include(TEMPLATES_PATH . '/_header.php')
     <div class="row">
         <!-- side navigation -->
         <?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
+
+        <!-- main content -->
+        <div class="col-md-9">
+            Stats about authors, categories etc here, once I add user roles
+        </div>
     </div>
 
 
