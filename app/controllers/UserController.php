@@ -54,6 +54,7 @@ class UserController
     				die();
     			}
             } else {
+                // If any of the two fields, or both, are empty, redirect to login page with error msg
                 $this->msg->error('Both fields are required.', '/admin/login.php');
                 die();
             }
