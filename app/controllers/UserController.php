@@ -58,7 +58,8 @@ class UserController
     }
 
     /**
-     * Checks if user is logged in
+     * Checks if user is logged in, and return bool
+     *
      * @return boolean True if logged in, false otherwise
      */
     public function isLoggedIn()
@@ -129,7 +130,7 @@ class UserController
     }
 
     /**
-     * Logout user by unsetting his session ID
+     * Logout user by deleting the jwt cookie
      */
     public function logout()
     {
