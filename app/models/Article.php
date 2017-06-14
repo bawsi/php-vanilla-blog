@@ -223,14 +223,14 @@ class Article
      *
      * @return int                    Number of articles
      */
-    public function getTotalNumberOfArticles($category)
+    public function getTotalNumberOfArticles($categoryId)
     {
         // If category argument was passed, we extend query, to include that database
-        $categoryQuery = ($category !== false) ? ' WHERE category_id = :categoryId' : '';
+        $categoryQuery = ($categoryId !== false) ? ' WHERE category_id = :categoryId' : '';
         $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
 
         $stmt = $this->db->prepare($query);
-        ($category >= 1) ? $stmt->bindParam(':categoryId', $category, PDO::PARAM_INT) : '';
+        ($categoryId >= 1) ? $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT) : '';
         $stmt->execute();
 
         $num = $stmt->fetch();
