@@ -97,8 +97,8 @@ class UserController
      */
     public function redirectIfNotLoggedIn()
     {
+        // Redirect to login page, if isLoggedIn() method returns false
         if (!$this->isLoggedIn()) {
-            // Redirect to login page, if isLoggedIn() method returns false
             $this->msg->error('You must login, before you can access this page!', '/admin/login.php');
             die();
         }
