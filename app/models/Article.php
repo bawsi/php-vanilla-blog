@@ -159,7 +159,7 @@ class Article
 
     /**
      * Deletes article from database
-     * 
+     *
      * @param  int $id Id of article
      *
      * @return bool     True if article was deleted, false otherwise
@@ -175,6 +175,18 @@ class Article
         return ($stmt->rowCount()) ? true : false;
     }
 
+    /**
+     * Will return specified number of articles, with a specific offset,
+     *  depending on $page and $perPage values.
+     *  If category was set, it will limit results to that category,
+     *  otherwise, it will take articles from all categories
+     *
+     * @param  int $page     Which page of articles (this is for offset)
+     * @param  int $perPage  How many articles to take
+     * @param  int $category If is not -1, it means category was set, so get results from that cat
+     *
+     * @return Array         Array of articles for specific page
+     */
     public function paginate($page, $perPage, $category)
     {
         $offsetAmount = ($page - 1) * $perPage;
