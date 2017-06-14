@@ -1,5 +1,9 @@
 <?php
+// Starting session, which is needed for flash messages atm
+session_start();
+
 use Psr\Http\Message\MessageInterface;
+
 // Including config
 include 'config.php';
 
