@@ -38,6 +38,7 @@ class Article
         $stmt->bindParam(':numberOfArticles', $numberOfArticles, PDO::PARAM_INT);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $articles;
     }
 
@@ -166,6 +167,7 @@ class Article
          $stmt->execute();
 
          $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
          return $articles;
     }
 
