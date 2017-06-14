@@ -112,9 +112,12 @@ class UserController
      */
     public function getUserId()
     {
+        // If cookie jwt is set, it means user is logged in
         if (isset($_COOKIE['jwt'])) {
             $jwt = $_COOKIE['jwt'];
 
+            // Try to decode the jwt using the key from config file,
+            // and return users id stored in that jwt
             try {
                 // Decode jwt
                 $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
