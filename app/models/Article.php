@@ -116,6 +116,11 @@ class Article
         return ($stmt->rowCount()) ? true : false;
     }
 
+    /**
+     * Get list of all categories
+     *
+     * @return Array Associative Array of cateories
+     */
     public function getCategories() {
         $stmt = $this->db->query('SELECT * FROM article_categories');
         $stmt->execute();
