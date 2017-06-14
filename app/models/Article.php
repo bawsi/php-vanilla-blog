@@ -187,10 +187,10 @@ class Article
      *
      * @return Array         Array of articles for specific page
      */
-    public function paginate($page, $perPage, $category)
+    public function paginate($page, $perPage, $categoryId)
     {
         $offsetAmount = ($page - 1) * $perPage;
-        $categoryQuery = ($category >= 1) ? ' WHERE articles.category_id = :categoryId' : '';
+        $categoryQuery = ($categoryId >= 1) ? ' WHERE articles.category_id = :categoryId' : '';
 
         $query = 'SELECT articles.id, articles.title, articles.body, articles.created_at,
                 articles.img_path, users.username AS author, article_categories.category_name
@@ -206,7 +206,7 @@ class Article
 
          $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
          $stmt->bindParam(':offset_amount', $offsetAmount, PDO::PARAM_INT);
-         ($category >= 1) ? $stmt->bindParam(':categoryId', $category, PDO::PARAM_INT) : '';
+         ($categoryId >= 1) ? $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT) : '';
          $stmt->execute();
 
          $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
