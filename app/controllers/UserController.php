@@ -6,12 +6,6 @@ class UserController
     private $userModel;
     private $msg;
 
-    /**
-     * Set property $db to argument, which
-     * has to be an instance of Db object
-     *
-     * @param Db $db Object Db
-     */
     public function __construct(User $userModel, $msg)
     {
         $this->userModel = $userModel;
