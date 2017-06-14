@@ -101,7 +101,7 @@ class Article
      *
      * @param  str    $imgPath    Path to image (/uploads/imgname.extension)
      * @param  int    $articleId  Id of article to save $imgPath to
-     * 
+     *
      * @return bool               True if img path was saved to db, false otherwise
      */
     public function saveArticleImagePath($imgPath, $articleId) {
@@ -157,6 +157,13 @@ class Article
         return ($stmt->rowCount()) ? true : false;
     }
 
+    /**
+     * Deletes article from database
+     * 
+     * @param  int $id Id of article
+     *
+     * @return bool     True if article was deleted, false otherwise
+     */
     public function delete($id) {
         $stmt = $this->db->prepare(
             'DELETE FROM articles WHERE id = :id'
