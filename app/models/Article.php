@@ -173,6 +173,7 @@ class Article
 
     public function getTotalNumberOfArticles($category)
     {
+        // If category argument was passed, we extend query, to include that database
         $categoryQuery = ($category !== false) ? ' WHERE category_id = :categoryId' : '';
         $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
 
