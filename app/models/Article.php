@@ -230,7 +230,7 @@ class Article
         $query = 'SELECT COUNT(*) FROM articles' . $categoryQuery;
 
         $stmt = $this->db->prepare($query);
-        ($categoryId >= 1) ? $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT) : '';
+        ($categoryId !== false) ? $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT) : '';
         $stmt->execute();
 
         $num = $stmt->fetch();
