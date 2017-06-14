@@ -128,6 +128,9 @@ class UserController
                 // Failed decoding jwt, return false
                 return false;
             }
+        } else {
+            // Cookie not set, meaning user is not logged in. Return false
+            return false;
         }
     }
 
