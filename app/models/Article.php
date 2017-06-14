@@ -240,7 +240,7 @@ class Article
 
     /**
      * Get id of category, from its name
-     * 
+     *
      * @param  str $category Category name
      *
      * @return int/bool      If category is found, return its id, else return false
