@@ -250,7 +250,6 @@ class ArticleController
         $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
 
         // Delete article
-        chmod($oldImagePath, 0707);
         $deletedStatus = $this->articleModel->delete($id);
 
         // If old image is NOT default.png, delete it
