@@ -104,6 +104,12 @@ class UserController
         }
     }
 
+    /**
+     * Get logged in users ID, from jwt stored in cookie,
+     * or return false if not set, or decoding fails
+     *
+     * @return int/bool  Users ID, or false bool value
+     */
     public function getUserId()
     {
         if (isset($_COOKIE['jwt'])) {
