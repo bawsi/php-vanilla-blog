@@ -263,6 +263,7 @@ class Article
      * and return articles matching that query, or false, if none found
      *
      * @param  str $searchTerm What to search for
+     * 
      * @return Array/bool             Array of found articles, or false
      */
     public function search($searchTerm)
