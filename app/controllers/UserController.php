@@ -40,7 +40,7 @@ class UserController
 
                     // Encode JWT data from above, key and algorithm together
                     $jwt = JWT::encode($data, JWT_KEY, 'HS512');
-                    
+
                     // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
                     setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
 
@@ -123,6 +123,8 @@ class UserController
     public function logout()
     {
         if ($this->isLoggedIn()) {
+            // Setting jwt cookie to 1, which is in the past
+            // (1 is first second of unix timestamp)
             setcookie('jwt', '', 1, '/', SITE_URL, false, true);
         }
     }
