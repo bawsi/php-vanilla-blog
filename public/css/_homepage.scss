@@ -72,6 +72,7 @@ div.container-homepage {
 		}
 	}
 
+	// On smaller screens
 	@media (max-width:767px) {
 		div.single-article {
 			float: left;
@@ -80,6 +81,15 @@ div.container-homepage {
 			width: 400px;
 			left: 50%;
 			margin-left: -200px;
+		}
+	}
+
+	// Pagination
+	ul.pagination {
+		li.active {
+			a {
+				background: #BF3F3F;
+			}
 		}
 	}
 
