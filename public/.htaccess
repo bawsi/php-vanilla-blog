@@ -1,1 +1,1 @@
-ErrorDocument 404 /404-standalone.php
+ErrorDocument 404 /404.php
