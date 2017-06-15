@@ -53,31 +53,34 @@ include(TEMPLATES_PATH . '/_header.php');
 	</div> <!-- End of articles row -->
 
 	<!-- pagination -->
-	<nav aria-label="Page navigation" class="text-center">
-		<ul class="pagination">
+	<?php if ($data['numOfPages'] > 1):?>
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination">
 
-			<?php if($data['page'] > 1): ?>
-				<li>
-					<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $page - 1; ?>" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-			<?php endif; ?>
+				<?php if($data['page'] > 1): ?>
+					<li>
+						<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $data['page'] - 1; ?>" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				<?php endif; ?>
 
-			<?php for($pageCount = 1; $pageCount <= $data['numOfPages']; $pageCount++):?>
-				<li><a href="/category.php?c=<?php echo $selectedCategory;?>&p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
-			<?php endfor; ?>
+				<?php for($pageCount = 1; $pageCount <= $data['numOfPages']; $pageCount++):?>
+					<li class="<?php echo ($pageCount == $data['page']) ? 'active' : ''; ?>"><a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
+				<?php endfor; ?>
 
-			<?php if($data['page'] < $data['numOfPages']): ?>
-				<li>
-					<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $page + 1; ?>" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			<?php endif; ?>
+				<?php if($data['page'] < $data['numOfPages']): ?>
+					<li>
+						<a href="/category.php?c=<?php echo $data['selectedCategory'];?>&p=<?php echo $data['page'] + 1; ?>" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				<?php endif; ?>
 
-		</ul>
-	</nav>
+			</ul>
+		</nav>
+	<?php endif; ?>
+
 </div> <!-- End of main content -->
 
 
