@@ -263,7 +263,7 @@ class Article
      * and return articles matching that query, or false, if none found
      *
      * @param  str $searchTerm What to search for
-     * 
+     *
      * @return Array/bool             Array of found articles, or false
      */
     public function search($searchTerm)
@@ -274,7 +274,8 @@ class Article
             FROM articles
             JOIN users ON articles.author_id = users.id
             JOIN article_categories ON articles.category_id = article_categories.id
-            WHERE (articles.title LIKE :searchTerm OR articles.body LIKE :searchTerm)"
+            WHERE (articles.title LIKE :searchTerm OR articles.body LIKE :searchTerm)
+            LIMIT 50"
         );
         $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
         $stmt->execute();
