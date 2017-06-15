@@ -65,7 +65,7 @@ include(TEMPLATES_PATH . '/_header.php');
 				<?php endif; ?>
 
 				<?php for($pageCount = 1; $pageCount <= $data['numOfPages']; $pageCount++):?>
-					<li><a href="/index.php?p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
+					<li class="<?php echo ($pageCount == $data['page']) ? 'active' : ''; ?>"><a href="/index.php?p=<?php echo $pageCount; ?>"><?php echo $pageCount; ?></a></li>
 				<?php endfor; ?>
 
 				<?php if($data['page'] < $data['numOfPages']): ?>
