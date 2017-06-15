@@ -92,6 +92,10 @@ div.container-homepage div.single-article p.article-info span:nth-child(2), div.
     }
 }
 
+div.container-homepage ul.pagination li.active a {
+    background: #BF3F3F;
+}
+
 div.container-article div.article-col {
     border: 1px solid #f2f1f1;
     background: white;
