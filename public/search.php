@@ -9,7 +9,7 @@ include(TEMPLATES_PATH . '/_header.php')
 ?>
 
 <div class="container container-homepage">
-	<h1 class="title text-center">Search results for '<?php echo $_GET['s']; ?>'</h1>
+	<h1 class="title text-center">Search results for "<?php echo htmlspecialchars($_GET['s']); ?>"</h1>
 	<hr width="75%">
 	<!-- Articles row -->
 	<div class="row">
