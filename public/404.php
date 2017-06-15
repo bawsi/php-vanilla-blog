@@ -1,3 +1,11 @@
+<?php
+//bootstrap
+include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
+$currentPage = '';
+
+include(TEMPLATES_PATH . '/_header.php');
+?>
+
 <!-- Main content  -->
 <div class="container container-404">
     <div class="row">
@@ -18,3 +26,6 @@
         </div>
     </div>
 </div>
+
+<!-- footer -->
+<?php include(TEMPLATES_PATH . '/_footer.php') ?>
