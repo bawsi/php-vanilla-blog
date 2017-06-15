@@ -325,12 +325,11 @@ class ArticleController
         // Search db using Article model
         $articles = $this->articleModel->search($searchTerm);
 
-        // If any articles were found, return them, otherwise, set error msg, and redirect to homepage
+        // If any articles were found, return them, otherwise, return false
         if ($articles) {
             return $articles;
         } else {
-            $this->msg->error('No results were found for that search query.', '/');
-            die();
+            return false;
         }
 
     }
