@@ -29,7 +29,7 @@ $categories = $article->getCategories();
 					</ul>
 				</li>
 
-				<li><a href="#contact">Contact</a></li>
+				<!-- <li><a href="#contact">Contact</a></li> -->
 
                 <!-- search -->
                 <form class="navbar-form navbar-left search" action="/search.php" method="get">
