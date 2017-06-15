@@ -58,7 +58,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
 				<?php if($data['page'] > 1): ?>
 					<li>
-						<a href="/index.php?p=<?php echo $page - 1; ?>" aria-label="Previous">
+						<a href="/index.php?p=<?php echo $data['page'] - 1; ?>" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
@@ -70,7 +70,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
 				<?php if($data['page'] < $data['numOfPages']): ?>
 					<li>
-						<a href="/index.php?p=<?php echo $page + 1; ?>" aria-label="Next">
+						<a href="/index.php?p=<?php echo $data['page'] + 1; ?>" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
