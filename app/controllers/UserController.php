@@ -12,9 +12,6 @@ class UserController
         $this->msg = $msg;
     }
 
-    /**
-     * Login user
-     */
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -25,31 +22,46 @@ class UserController
                 $password = $_POST['password'];
                 $userData = $this->userModel->getUserDataFromUsername($username);
 
-                // If user was found, check if hashed password matches
-                if (!empty($userData) && password_verify($password, $userData['password'])) {
-                    // Username and password entered are correct. Set data for jwt
-                    $data = array(
-                        "iat"    => time(),
-                        "exp"    => time() + 3600,    // expires in 1 hour
-                        "userId" => $userData['id']
-                    );
+                // Settings for login throttling, in case of too many failed login attempts
+                $badLoginLimit = 3;
+                $lockoutTime = 600;
+                $firstFailedLogin = $userData['first_failed_login'];
+                $loginAttempts = (int)$userData['login_attempts'];
+                $userId = $userData['id'];
 
-                    // Encode JWT data from above, key and algorithm together
-                    $jwt = JWT::encode($data, JWT_KEY, 'HS512');
-
-                    // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
-                    setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
-
-                    // Redirect to admin panel
-                    header('location: /admin');
-                    die();
-                } else {
-                    // If password does not match, redirect to login page, with error msg
-                    $this->msg->error('Wrong username/password combination.', '/admin/login.php');
+                // user failed to login for $badLoginLimit times, and is still in lockout
+                if ($loginAttempts >= $badLoginLimit && $firstFailedLogin > time() - $lockoutTime) {
+                    $this->msg->error('Too many failed login attempts.. You are temporarily locked out!', '/admin/login.php');
                     die();
                 }
-            } else {
-                // If any of the two fields, or both, are empty, redirect to login page with error msg
+
+                // Attemp to log user in in, and it fails
+                elseif (!$this->loginAttempt($userData, $password)) {
+                    // Previous lockout time has expired
+                    if ($firstFailedLogin < time() - $lockoutTime) {
+                        // Set first_failed_login to current time, and login_attempts to 1
+                        $this->userModel->updateFirstFailedLoginAndLoginAttempts(time(), 1, $userId);
+
+                        // Redirect to login page, with error message
+                        $this->msg->error('Wrong username / password combination.. Please try again!1', '/admin/login.php');
+                        die();
+
+                    } else { // Lockout time has not yet expired
+                        $this->userModel->updateFirstFailedLoginAndLoginAttempts($firstFailedLogin, ++$loginAttempts, $userId);
+
+                        // Redirect to login page, with error message
+                        $this->msg->error('Wrong username / password combination.. Please try again!', '/admin/login.php');
+                        die();
+                    }
+                } else { // Login attempt is successfull
+                    // Reset both first_failed_login and login_attempts
+                    $this->userModel->updateFirstFailedLoginAndLoginAttempts(1, 0, $userId);
+
+                    // Redirect to admin page
+                    header('location: /admin');
+                    die();
+                }
+            } else { // If either username or password field is empty, redirect to login page with error
                 $this->msg->error('Both fields are required.', '/admin/login.php');
                 die();
             }
