@@ -166,6 +166,29 @@ class UserController
         }
     }
 
+    public function getUserRole()
+    {
+        // If cookie jwt is set, it means user is logged in
+        if (isset($_COOKIE['jwt'])) {
+            $jwt = $_COOKIE['jwt'];
+
+            // Try to decode the jwt using the key from config file,
+            // and return users id stored in that jwt
+            try {
+                // Decode jwt
+                $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
+                // Return id of logged in user
+                return $decoded->userRole;
+            } catch (Exception $e) {
+                // Failed decoding jwt, return false
+                return false;
+            }
+        } else {
+            // Cookie not set, meaning user is not logged in. Return false
+            return false;
+        }
+    }
+
     /**
      * Logout user by deleting the jwt cookie
      */
