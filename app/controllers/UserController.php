@@ -200,4 +200,18 @@ class UserController
             setcookie('jwt', '', 1, '/', SITE_URL, false, true);
         }
     }
+
+    public function allowedToModifyArticle($authorId)
+    {
+            $userRole = $this->getUserRole();
+            $loggedInUserId = $this->getUserId();
+
+            if ($userRole == 'admin' || $userRole == 'mod' || $loggedInUserId == $authorId) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+
+
 }
