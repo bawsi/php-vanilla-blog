@@ -56,6 +56,34 @@ class UserController
         }
     }
 
+
+    /**
+     * Login user
+     */
+    public function loginAttempt($userData, $password)
+    {
+        // If user was found, check if hashed password matches
+            if (!empty($userData) && password_verify($password, $userData['password'])) {
+                // Username and password entered are correct. Set data for jwt
+                $data = array(
+                    "iat"    => time(),
+                    "exp"    => time() + 3600,    // expires in 1 hour
+                    "userId" => $userData['id']
+                );
+
+                // Encode JWT data from above, key and algorithm together
+                $jwt = JWT::encode($data, JWT_KEY, 'HS512');
+
+                // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
+                setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
+
+                return true;
+            } else {
+                // wrong username or password, return false
+                return false;
+            }
+    }
+
     /**
      * Checks if user is logged in, and return bool
      *
