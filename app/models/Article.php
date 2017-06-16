@@ -53,7 +53,7 @@ class Article
     {
         $stmt = $this->db->prepare(
             'SELECT articles.id, articles.title, articles.body, articles.created_at, articles.img_path,
-	                article_categories.category_name, users.username as author
+	                article_categories.category_name, users.username as author, users.id as authorId
 			FROM articles
 			JOIN article_categories ON articles.category_id = article_categories.id
 			JOIN users ON articles.author_id = users.id
