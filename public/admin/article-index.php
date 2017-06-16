@@ -7,7 +7,7 @@ $page = 'admin-article-index';
 // If not logged in, redirect to login page
 $user->redirectIfNotLoggedIn();
 
-$articles = $article->getArticles(999);
+$articles = $article->getArticles();
 
 include(TEMPLATES_PATH . '/_header.php')
 ?>
