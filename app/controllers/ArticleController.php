@@ -150,7 +150,13 @@ class ArticleController
         $image = $_FILES['image'];
         $categoryId = $_POST['categoryId'];
 
+        $authorId = $this->articleModel->getArticleAuthor($articleId);
 
+        // If authenticated user is not an admin, mod or author, redirect to homepage with error
+        if (!$this->userController->allowedToModifyArticle($authorId)) {
+            $this->msg->error('You are not allowed to perform this action.', '/');
+            die();
+        }
 
         // Basic validation
         if (!empty($title) && !empty($body) && !empty($articleId) && !empty($categoryId))
