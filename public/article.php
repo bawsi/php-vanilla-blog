@@ -13,7 +13,7 @@ include(TEMPLATES_PATH . '/_header.php');
 	<div class="container container-article">
 		<div class="row">
 			<div class="article-col col-md-10 col-md-offset-1">
-				<?php if ($user->isLoggedIn()): ?>
+				<?php if ($user->isLoggedIn() && $user->allowedToModifyArticle($articleData['authorId'])): ?>
 					<a href="<?php echo '/admin/delete.php?id=' . $articleData['id']; ?>" class="btn btn-danger btn-xs pull-right">Delete</a>
 					<a href="<?php echo '/admin/edit.php?id=' . $articleData['id']; ?>" class="btn btn-primary btn-xs pull-right">Edit</a>
 				<?php endif; ?>
