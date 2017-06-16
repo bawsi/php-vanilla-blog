@@ -43,7 +43,7 @@ class UserController
                         $this->userModel->updateFirstFailedLoginAndLoginAttempts(time(), 1, $userId);
 
                         // Redirect to login page, with error message
-                        $this->msg->error('Wrong username / password combination.. Please try again!1', '/admin/login.php');
+                        $this->msg->error('Wrong username / password combination.. Please try again!', '/admin/login.php');
                         die();
 
                     } else { // Lockout time has not yet expired
