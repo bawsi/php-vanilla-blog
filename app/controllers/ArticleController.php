@@ -28,7 +28,7 @@ class ArticleController
      *
      * @return array                 Array of all articles
      */
-    public function getArticles($numberOfArticles)
+    public function getArticles($numberOfArticles = 9999)
     {
         return $this->articleModel->getArticles($numberOfArticles);
     }
