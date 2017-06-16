@@ -26,7 +26,7 @@ class UserController
                 $userData = $this->userModel->getUserDataFromUsername($username);
 
                 // If user was found, check if hashed password matches
-        		if (!empty($userData) && password_verify($password, $userData['password'])) {
+                if (!empty($userData) && password_verify($password, $userData['password'])) {
                     // Username and password entered are correct. Set data for jwt
                     $data = array(
                         "iat"    => time(),
@@ -43,12 +43,11 @@ class UserController
                     // Redirect to admin panel
                     header('location: /admin');
                     die();
-
-    			} else {
+                } else {
                     // If password does not match, redirect to login page, with error msg
                     $this->msg->error('Wrong username/password combination.', '/admin/login.php');
-    				die();
-    			}
+                    die();
+                }
             } else {
                 // If any of the two fields, or both, are empty, redirect to login page with error msg
                 $this->msg->error('Both fields are required.', '/admin/login.php');
@@ -74,13 +73,11 @@ class UserController
                 $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
                 // Reeturn true if userId is set in jwd, and userId is bigger than 0
                 return (isset($decoded->userId) && $decoded->userId > 0) ? true : false;
-
             } catch (Firebase\JWT\ExpiredException $e) {
                 // Since JWT expired, unset it, and return false
                 setcookie('jwt', '', 1, '/', SITE_URL, false, true);
                 return false;
             }
-
         } else {
             // Return false, if jwt cookie is not set
             return false;
@@ -118,7 +115,6 @@ class UserController
                 $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
                 // Return id of logged in user
                 return $decoded->userId;
-
             } catch (Exception $e) {
                 // Failed decoding jwt, return false
                 return false;
