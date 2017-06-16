@@ -283,4 +283,19 @@ class Article
         return ($stmt) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
+    public function getArticleAuthor($articleId)
+    {
+        $stmt = $this->db->prepare(
+            'SELECT author_id
+			FROM articles
+			WHERE articles.id = :id
+	    ');
+
+        $stmt->bindParam(':id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+        $data= $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $data['author_id'];
+    }
+
 }
