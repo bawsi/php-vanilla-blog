@@ -78,9 +78,10 @@ class UserController
             if (!empty($userData) && password_verify($password, $userData['password'])) {
                 // Username and password entered are correct. Set data for jwt
                 $data = array(
-                    "iat"    => time(),
-                    "exp"    => time() + 3600,    // expires in 1 hour
-                    "userId" => $userData['id']
+                    "iat"    =>    time(),
+                    "exp"    =>    time() + 3600,    // expires in 1 hour
+                    "userId" =>    $userData['id'],
+                    "userRole" =>  $userData['role']
                 );
 
                 // Encode JWT data from above, key and algorithm together
