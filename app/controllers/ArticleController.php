@@ -240,6 +240,8 @@ class ArticleController
     }
 
 
+
+
     /**
      * Delete articles from database + image that is
      * associated with that article, if it was uploaded.
@@ -249,21 +251,28 @@ class ArticleController
      */
     public function delete()
     {
-        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $articleId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $authorId = $this->articleModel->getArticleAuthor($articleId);
 
-        // Get article info, before deleting it, so I can delete old img
-        $oldImagePath = $this->articleModel->getSingleArticleById($id);
-        $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
+        // Only delete an article, if authenticated user is admin, mod or article author
+        if ($this->userController->allowedToModifyArticle($authorId)) {
+            // Get article info, before deleting it, so I can delete old img
+            $oldImagePath = $this->articleModel->getSingleArticleById($articleId);
+            $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
 
-        // Delete article
-        $deletedStatus = $this->articleModel->delete($id);
+            // Delete article
+            $deletedStatus = $this->articleModel->delete($articleId);
 
-        // If old image is NOT default.png, delete it
-        ($oldImagePath !== false) ? unlink($oldImagePath) : '';
+            // If old image is NOT default.png, delete it
+            ($oldImagePath !== false) ? unlink($oldImagePath) : '';
 
-        // Redirect to article index, once article is deleted
-        $this->msg->info('Article with ID of ' . $id . ' successfully deleted!', '/admin/article-index.php');
-        die();
+            // Redirect to article index, once article is deleted
+            $this->msg->info('Article with ID of ' . $articleId . ' successfully deleted!', '/admin/article-index.php');
+            die();
+        } else { // User is not allowed to delete this article, so redirect to homepage with error msg
+            $this->msg->error('You are not allowed to perform this action.', '/');
+            die();
+        }
     }
 
     /**
