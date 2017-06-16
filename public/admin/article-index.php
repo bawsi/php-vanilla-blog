@@ -45,8 +45,12 @@ include(TEMPLATES_PATH . '/_header.php')
                         <td><?php echo date("d.m.Y", $article['created_at']); ?></td>
                         <td>
                             <a href="<?php echo '/article.php?id=' . $article['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-link" aria-hidden="true"></i></a>
-                            <a href="<?php echo '/admin/edit.php?id=' . $article['id']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a href="<?php echo '/admin/delete.php?id=' . $article['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
+
+                            <?php if ($user->allowedToModifyArticle($article['authorId'])): ?>
+                                <a href="<?php echo '/admin/edit.php?id=' . $article['id']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="<?php echo '/admin/delete.php?id=' . $article['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <?php endif; ?>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
