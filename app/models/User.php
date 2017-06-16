@@ -31,6 +31,24 @@ class User {
 
 		return $user;
 	}
+
+	public function updateFirstFailedLoginAndLoginAttempts($firstFailedLogin, $loginAttempts, $userId) {
+		$stmt = $this->db->prepare(
+			'UPDATE users
+			SET first_failed_login = :firstFailedLogin, login_attempts = :loginAttempts
+			WHERE id = :userId'
+		);
+		$stmt->bindParam(':firstFailedLogin', $firstFailedLogin, PDO::PARAM_INT);
+		$stmt->bindParam(':loginAttempts', $loginAttempts, PDO::PARAM_INT);
+		$stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return ($stmt) ? true : false;
+	}
+
+
+
 }
 
 
