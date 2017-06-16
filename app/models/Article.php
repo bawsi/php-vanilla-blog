@@ -27,7 +27,7 @@ class Article
     {
         $stmt = $this->db->prepare(
             'SELECT articles.id, articles.title, articles.body, articles.created_at,
-				    articles.img_path, users.username AS author, article_categories.category_name
+				    articles.img_path, users.id AS authorId, users.username AS author, users.role as authorRole, article_categories.category_name
 			 FROM articles
 			 JOIN users ON articles.author_id = users.id
 			 JOIN article_categories ON articles.category_id = article_categories.id
