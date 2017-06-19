@@ -58,6 +58,20 @@ class User {
 		return $users;
 	}
 
+	public function registerNewUser($username, $password, $role)
+	{
+		$stmt = $this->db->prepare(
+			'INSERT INTO users
+			(username, password, role) VALUES(:username, :password, :role)'
+		);
+		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+		$stmt->bindParam(':password', $password, PDO::PARAM_STR);
+		$stmt->bindParam(':role', $role, PDO::PARAM_STR);
+		$stmt->execute();
+
+		return ($stmt) ? true : false;
+	}
+
 
 }
 
