@@ -32,6 +32,14 @@ class User {
 		return ($user) ? $user : false;
 	}
 
+	/**
+	 * Update first_failed_login and login_attempts, with new values
+	 *
+	 * @param  int $firstFailedLogin Unix timestamp of first failed login attempt
+	 * @param  int $loginAttempts    Number of failed login attempts
+	 * @param  int $userId           Id of user
+	 * @return bool                   True if success, false otherwise
+	 */
 	public function updateFirstFailedLoginAndLoginAttempts($firstFailedLogin, $loginAttempts, $userId) {
 		$stmt = $this->db->prepare(
 			'UPDATE users
