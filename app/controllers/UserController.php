@@ -189,6 +189,15 @@ class UserController
         }
     }
 
+
+    public function getAllUsers()
+    {
+        $users = $this->userModel->getAllUsers();
+
+        return $users;
+    }
+
+
     /**
      * Logout user by deleting the jwt cookie
      */
