@@ -93,11 +93,28 @@ class User {
 		return ($stmt) ? true : false;
 	}
 
+	public function editUser($userId, $username, $password, $userRole)
+	{
+		$passwordQuery = ($password !== false) ? 'password = :password, ' : '';
+		$stmt = $this->db->prepare(
+			"UPDATE users
+			SET username = :username, $passwordQuery role = :userRole
+			WHERE id = :userId"
+		);
+		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+		($password !== false) ? $stmt->bindParam(':password', $password, PDO::PARAM_STR) : '';
+		$stmt->bindParam(':userRole', $userRole, PDO::PARAM_STR);
+		$stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return ($stmt->rowCount()) ? true : false;
+	}
+
 	/**
 	 * Delete user from users table
 	 *
 	 * @param  int $userId Id of user to delete
-	 * @return bool         
+	 * @return bool
 	 */
 	public function deleteUser($userId)
 	{
