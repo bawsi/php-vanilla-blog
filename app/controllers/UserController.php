@@ -254,6 +254,9 @@ class UserController
                 if ($isRegistered) {
                     $this->msg->success("New user '$username' successfully registered.", '/admin/users.php');
                     die();
+                } else { // If registration failed, set errors and redirect back
+                    $this->msg->error("Registration of user '$username' failed..", '/admin/users.php');
+                    die();
                 }
             } else { // Otherwise, redirect back, with error message
                 $this->msg->error('All fields are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
