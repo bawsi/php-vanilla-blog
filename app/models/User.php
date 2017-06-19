@@ -29,7 +29,7 @@ class User {
 		$stmt->execute();
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		return $user;
+		return ($user) ? $user : false;
 	}
 
 	public function updateFirstFailedLoginAndLoginAttempts($firstFailedLogin, $loginAttempts, $userId) {
