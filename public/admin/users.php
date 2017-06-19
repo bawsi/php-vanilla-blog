@@ -61,7 +61,6 @@ include(TEMPLATES_PATH . '/_header.php');
                  Add user
             </button>
 
-
             <!-- Modal  -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -96,9 +95,6 @@ include(TEMPLATES_PATH . '/_header.php');
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-
-
-
 
         </div>
     </div>
