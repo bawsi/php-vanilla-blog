@@ -220,15 +220,17 @@ class UserController
      * @return bool           True if allowed to modify it, false otherwise
      */
     public function allowedToModifyArticle($authorId)
-    {
-            $userRole = $this->getUserRole();
-            $loggedInUserId = $this->getUserId();
+    {   
+        // Get role and ID of logged in user
+        $userRole = $this->getUserRole();
+        $loggedInUserId = $this->getUserId();
 
-            if ($userRole == 'admin' || $userRole == 'mod' || $loggedInUserId == $authorId) {
-                return true;
-            } else {
-                return false;
-            }
+        // If logged in user is admin, mod or author, return true, false otherwise
+        if ($userRole == 'admin' || $userRole == 'mod' || $loggedInUserId == $authorId) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function newUser()
