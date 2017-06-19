@@ -100,6 +100,45 @@ include(TEMPLATES_PATH . '/_header.php');
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
+            <!-- Edit user modal  -->
+            <?php foreach ($users as $user): ?>
+                    <div class="modal fade" id="editUser<?php echo $user['id']; ?>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Edit user</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- edit user form -->
+                                    <form action="/admin/edit-user.php" method="post">
+                                        <div class="form-group">
+                                            <input type="hidden" name="userId" value="<?php echo $user['id']; ?>">
+                                            <label for="username">Username</label>
+                                            <input required class="form-control" type="text" name="username" placeholder="Username" value="<?php echo $user['username']; ?>" style="margin-bottom:10px;">
+                                            <label for="password">New password</label>
+                                            <input class="form-control" type="password" name="password" placeholder="New password" style="margin-bottom:10px;">
+                                            <label for="role">User role</label>
+                                            <select required class="form-control" name="role">
+                                                <option <?php echo ($user['role'] == 'admin') ? 'selected' : ''; ?> value="admin">Admin</option>
+                                                <option <?php echo ($user['role'] == 'writer') ? 'selected' : ''; ?> value="writer">Writer</option>
+                                                <option <?php echo ($user['role'] == 'mod') ? 'selected' : ''; ?> value="mod">Moderator</option>
+                                            </select>
+                                        </div>
+                                        <hr>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-danger text-right" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-success text-right">Update User</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+            <?php endforeach; ?>
+
         </div>
     </div>
 </div>
