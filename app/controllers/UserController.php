@@ -225,7 +225,7 @@ class UserController
     public function newUser()
     {
         // If user came to this page via POST request
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->isAdmin()) {
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
@@ -245,7 +245,7 @@ class UserController
 
 
         } else { // User came to this page directly. Redirect him to homepage
-            $this->msg->error('You cannot access this page directly!', '/');
+            $this->msg->error('You cannot do this...!', '/');
             die();
         }
     }
