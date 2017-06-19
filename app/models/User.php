@@ -55,6 +55,11 @@ class User {
 		return ($stmt) ? true : false;
 	}
 
+	/**
+	 * Get a list of all users and their data and return it
+	 *
+	 * @return array Array of all users and their data
+	 */
 	public function getAllUsers()
 	{
 		$stmt = $this->db->prepare(
