@@ -225,7 +225,7 @@ class UserController
     public function newUser()
     {
         // If user came to this page via POST request
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->isAdmin()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
@@ -248,14 +248,6 @@ class UserController
             $this->msg->error('You cannot do this...!', '/');
             die();
         }
-    }
-
-    public function isAdmin()
-    {
-            $jwt = $_COOKIE['jwt'];
-            $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
-
-            return ($decoded->userRole == 'admin') ? true : false;
     }
 
     public function deleteUser()
