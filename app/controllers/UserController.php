@@ -270,6 +270,38 @@ class UserController
         }
     }
 
+    public function editUserAsAdmin()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
+            $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
+            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $password = $_POST['password'];
+            $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+
+            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $userRole !== 'admin' && $userId != 1 && !$this->userModel->getUserDataFromUsername($username)) {
+                if (!empty($pasword)) {
+                    if (strlen($password) > 4) {
+                        $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
+                        $this->userModel->editUser($userId, $username, $password, $userRole);
+                        $this->msg->success('User successfully updated.', '/admin/users.php');
+                        die();
+                    } else {
+                        $this->msg->error('Password is too short!', '/admin/users.php');
+                        die();
+                    }
+                } else {
+                    $password = false;
+                    $this->userModel->editUser($userId, $username, $password, $userRole);
+                    $this->msg->success('User successfully updated.', '/admin/users.php');
+                    die();
+                }
+            } else {
+                $this->msg->error('All fields except password, are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
+                die();
+            }
+        }
+    }
+
     /**
      * Make sure logged in user is allowed to delete articles, validate
      * userId passed through GET request, and then delete user
