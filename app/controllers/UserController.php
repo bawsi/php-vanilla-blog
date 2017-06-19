@@ -276,10 +276,12 @@ class UserController
      */
     public function deleteUser()
     {
+        // If GET variable 'id' is set, and logged in user is admin, proceed with user deletion
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
             $userId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
             $wasDeleted = $this->userModel->deleteUser($userId);
 
+            // Set message based on result of user deletion, and redirect
             if ($wasDeleted) {
                 $this->msg->success('User successfully deleted.', '/admin/users.php');
                 die();
@@ -288,7 +290,7 @@ class UserController
                 die();
             }
 
-        } else {
+        } else { // If 'id' was not set, or user is not admin, set error and redirect
             $this->msg->error('You cannot do this...', '/admin');
             die();
         }
