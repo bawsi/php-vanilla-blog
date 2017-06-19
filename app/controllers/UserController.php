@@ -252,7 +252,22 @@ class UserController
 
     public function deleteUser()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
+            $userId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $wasDeleted = $this->userModel->deleteUser($userId);
 
+            if ($wasDeleted) {
+                $this->msg->success('User successfully deleted.', '/admin/users.php');
+                die();
+            } else {
+                $this->msg->error('Failed to delete user.', '/admin/users.php');
+                die();
+            }
+
+        } else {
+            $this->msg->error('You cannot do this...', '/admin');
+            die();
+        }
     }
 
 
