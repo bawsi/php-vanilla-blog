@@ -220,7 +220,7 @@ class UserController
      * @return bool           True if allowed to modify it, false otherwise
      */
     public function allowedToModifyArticle($authorId)
-    {   
+    {
         // Get role and ID of logged in user
         $userRole = $this->getUserRole();
         $loggedInUserId = $this->getUserId();
@@ -233,6 +233,10 @@ class UserController
         }
     }
 
+    /**
+     * Validate new user data, make sure all is valid, and then
+     * register new user, and set appropriate messages
+     */
     public function newUser()
     {
         // If user came to this page via POST request
@@ -245,11 +249,13 @@ class UserController
             // username doesnt exist yet, register user
             if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4 && !empty($userRole) && !$this->userModel->getUserDataFromUsername($username) && $userRole !== 'admin') {
                 $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
+
+                // If registration was successfull, redirect back with success msg
                 if ($isRegistered) {
                     $this->msg->success("New user '$username' successfully registered.", '/admin/users.php');
                     die();
                 }
-            } else {
+            } else { // Otherwise, redirect back, with error message
                 $this->msg->error('All fields are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
                 die();
             }
