@@ -55,7 +55,50 @@ include(TEMPLATES_PATH . '/_header.php');
 
             </table>
 
-            <a class="btn btn-success" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add user</a>
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                 Add user
+            </button>
+
+
+            <!-- Modal  -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Add new user</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!-- new user form -->
+                            <form action="/admin/new-user.php" method="post">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input required class="form-control" type="text" name="username" placeholder="Username" style="margin-bottom:10px;">
+                                    <label for="password">Password</label>
+                                    <input required class="form-control" type="password" name="password" placeholder="password" style="margin-bottom:10px;">
+                                    <label for="role">User role</label>
+                                    <select required class="form-control" name="role">
+                                        <option value="writer">Writer</option>
+                                        <option value="mod">Moderator</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-danger text-right" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success text-right">Add User</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
+
 
         </div>
     </div>
