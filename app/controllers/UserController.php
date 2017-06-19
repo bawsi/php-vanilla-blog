@@ -270,6 +270,10 @@ class UserController
         }
     }
 
+    /**
+     * Make sure logged in user is allowed to delete articles, validate
+     * userId passed through GET request, and then delete user
+     */
     public function deleteUser()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
