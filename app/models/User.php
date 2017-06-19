@@ -71,6 +71,14 @@ class User {
 		return $users;
 	}
 
+	/**
+	 * Add new user to database
+	 *
+	 * @param  str $username Unique username
+	 * @param  str $password Bcrypt hashed password
+	 * @param  str $role     User role (admin, mod, writer)
+	 * @return bool          
+	 */
 	public function registerNewUser($username, $password, $role)
 	{
 		$stmt = $this->db->prepare(
