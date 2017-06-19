@@ -35,6 +35,7 @@ include(TEMPLATES_PATH . '/_header.php');
                     <th>Username</th>
                     <th>Role</th>
                     <th>Total articles</th>
+                    <th>Latest article</th>
                     <th>Options</th>
                 </tr>
 
@@ -43,6 +44,7 @@ include(TEMPLATES_PATH . '/_header.php');
                         <td><?php echo $user['id']; ?></td>
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['role']; ?></td>
+                        <td><?php echo 'TODO'; ?></td>
                         <td><?php echo 'TODO'; ?></td>
                         <td>
                             <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -54,7 +56,7 @@ include(TEMPLATES_PATH . '/_header.php');
             </table>
 
             <a class="btn btn-success" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add user</a>
-            
+
         </div>
     </div>
 </div>
