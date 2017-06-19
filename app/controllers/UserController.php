@@ -210,6 +210,15 @@ class UserController
         }
     }
 
+    /**
+     * Check if logged in user is allowed to modify the article.
+     * User is allowed to modify article if hes the author, admin or mod
+     * Method takes argument aurhorId, instead of articleId, since that
+     * is all we need here to check if user is allowed to modify article.
+     *
+     * @param  int $authorId Id of articles author
+     * @return bool           True if allowed to modify it, false otherwise
+     */
     public function allowedToModifyArticle($authorId)
     {
             $userRole = $this->getUserRole();
