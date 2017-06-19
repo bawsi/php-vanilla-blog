@@ -222,5 +222,37 @@ class UserController
             }
     }
 
+    public function newUser()
+    {
+        // If user came to this page via POST request
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
+            $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+
+            // If username, password and role are all set, not empty, and
+            // username doesnt exist yet, register user
+            if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4 && !empty($userRole) && !$this->userModel->getUserDataFromUsername($username)) {
+                $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
+                if ($isRegistered) {
+                    $this->msg->success("New user '$username' successfully registered.", '/admin/users.php');
+                    die();
+                }
+            } else {
+                $this->msg->error('All fields are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
+                die();
+            }
+
+
+        } else { // User came to this page directly. Redirect him to homepage
+            $this->msg->error('You cannot access this page directly!', '/');
+            die();
+        }
+
+
+
+
+    }
+
 
 }
