@@ -49,7 +49,7 @@ include(TEMPLATES_PATH . '/_header.php');
                         <td><?php echo 'TODO'; ?></td>
                         <td>
                             <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <a href="<?php echo '/admin/delete-user.php?id=' . $user['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
