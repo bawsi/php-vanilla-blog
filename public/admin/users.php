@@ -83,7 +83,6 @@ include(TEMPLATES_PATH . '/_header.php');
                                     <select required class="form-control" name="role">
                                         <option value="writer">Writer</option>
                                         <option value="mod">Moderator</option>
-                                        <option value="admin">Admin</option>
                                     </select>
                                 </div>
                                 <hr>
