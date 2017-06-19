@@ -248,9 +248,18 @@ class UserController
             $this->msg->error('You cannot access this page directly!', '/');
             die();
         }
+    }
 
+    public function isAdmin()
+    {
+            $jwt = $_COOKIE['jwt'];
+            $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
 
+            return ($decoded->userRole == 'admin') ? true : false;
+    }
 
+    public function deleteUser()
+    {
 
     }
 
