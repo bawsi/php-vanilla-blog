@@ -40,18 +40,22 @@ include(TEMPLATES_PATH . '/_header.php');
                 </tr>
 
                 <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?php echo $user['id']; ?></td>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['role']; ?></td>
-                        <!-- TODO: Get total articles of user, and latest article date, and fill it in -->
-                        <td><?php echo 'TODO'; ?></td>
-                        <td><?php echo 'TODO'; ?></td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a href="<?php echo '/admin/delete-user.php?id=' . $user['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
+                    <?php if ($user['role'] !== 'admin'): ?>
+                        <tr>
+                            <td><?php echo $user['id']; ?></td>
+                            <td><?php echo $user['username']; ?></td>
+                            <td><?php echo $user['role']; ?></td>
+                            <!-- TODO: Get total articles of user, and latest article date, and fill it in -->
+                            <td><?php echo 'TODO'; ?></td>
+                            <td><?php echo 'TODO'; ?></td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>">
+                                     Edit
+                                </button>
+                                <a href="<?php echo '/admin/delete-user.php?id=' . $user['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach; ?>
 
             </table>
@@ -61,7 +65,7 @@ include(TEMPLATES_PATH . '/_header.php');
                  Add user
             </button>
 
-            <!-- Modal  -->
+            <!-- New user modal  -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
