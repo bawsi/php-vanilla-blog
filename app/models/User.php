@@ -72,6 +72,17 @@ class User {
 		return ($stmt) ? true : false;
 	}
 
+	public function deleteUser($userId)
+	{
+		$stmt = $this->db->prepare(
+			'DELETE FROM users WHERE id = :id'
+		);
+		$stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return ($stmt->rowCount() > 0) ? true : false;
+	}
+
 
 }
 
