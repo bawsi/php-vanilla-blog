@@ -232,7 +232,7 @@ class UserController
 
             // If username, password and role are all set, not empty, and
             // username doesnt exist yet, register user
-            if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4 && !empty($userRole) && !$this->userModel->getUserDataFromUsername($username)) {
+            if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4 && !empty($userRole) && !$this->userModel->getUserDataFromUsername($username) && $userRole !== 'admin') {
                 $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
                 if ($isRegistered) {
                     $this->msg->success("New user '$username' successfully registered.", '/admin/users.php');
