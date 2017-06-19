@@ -77,7 +77,7 @@ class User {
 	 * @param  str $username Unique username
 	 * @param  str $password Bcrypt hashed password
 	 * @param  str $role     User role (admin, mod, writer)
-	 * @return bool          
+	 * @return bool
 	 */
 	public function registerNewUser($username, $password, $role)
 	{
@@ -93,6 +93,12 @@ class User {
 		return ($stmt) ? true : false;
 	}
 
+	/**
+	 * Delete user from users table
+	 *
+	 * @param  int $userId Id of user to delete
+	 * @return bool         
+	 */
 	public function deleteUser($userId)
 	{
 		$stmt = $this->db->prepare(
