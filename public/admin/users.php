@@ -44,6 +44,7 @@ include(TEMPLATES_PATH . '/_header.php');
                         <td><?php echo $user['id']; ?></td>
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['role']; ?></td>
+                        <!-- TODO: Get total articles of user, and latest article date, and fill it in -->
                         <td><?php echo 'TODO'; ?></td>
                         <td><?php echo 'TODO'; ?></td>
                         <td>
