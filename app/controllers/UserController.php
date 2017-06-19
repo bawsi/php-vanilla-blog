@@ -245,7 +245,7 @@ class UserController
 
 
         } else { // User came to this page directly. Redirect him to homepage
-            $this->msg->error('You cannot do this...', '/admin/users.php');
+            $this->msg->error('You cannot do this...', '/admin');
             die();
         }
     }
