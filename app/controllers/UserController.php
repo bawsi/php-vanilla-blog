@@ -287,6 +287,7 @@ class UserController
             $oldUserData = $this->getUserById($userId);
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $oldUsername = $oldUserData['username'];
+            $usernameIsValid = (!$this->checkUsernameExistsExceptOneUserId($username, $userId)) ? true : false;
             $password = $_POST['password'];
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
             $oldUserRole = $oldUserData['role'];
