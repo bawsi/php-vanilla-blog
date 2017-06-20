@@ -43,6 +43,15 @@ class User {
 		return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
 	}
 
+	/**
+	 * Check if username already exists in database, and
+	 * ignore one user in that query, by its ID
+	 *
+	 * @param  str    $username Username to search for
+	 * @param  int    $id       User to ignore in that search
+	 * 
+	 * @return bool          	True if user was found, false otherwise
+	 */
 	public function checkUsernameExistsExceptOneUserId($username, $id)
 	{
 		$stmt = $this->db->prepare(
