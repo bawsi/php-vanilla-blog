@@ -32,6 +32,13 @@ class User {
 		return ($user) ? $user : false;
 	}
 
+	/**
+	 * Get user and its data by his ID
+	 *
+	 * @param  int $id Id of user
+	 * 
+	 * @return array/bool     Array of user data, or false
+	 */
 	public function getUserById($id)
 	{
 		$stmt = $this->db->prepare(
@@ -49,7 +56,7 @@ class User {
 	 *
 	 * @param  str    $username Username to search for
 	 * @param  int    $id       User to ignore in that search
-	 * 
+	 *
 	 * @return bool          	True if user was found, false otherwise
 	 */
 	public function checkUsernameExistsExceptOneUserId($username, $id)
