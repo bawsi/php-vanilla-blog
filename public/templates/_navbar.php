@@ -53,7 +53,7 @@ $categories = $article->getCategories();
                             <li><a href="/admin/settings.php">Account Settings</a></li>
                             <li><a href="/admin/logout.php">Logout</a></li>
                         <?php else: // Not logged, show login btn ?>
-                            <li><a href="/admin/login.php">Login</a>'
+                            <li><a href="/admin/login.php">Login</a></li>
                         <?php endif; ?>
 
 					</ul>
