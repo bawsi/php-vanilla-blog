@@ -32,6 +32,29 @@ class User {
 		return ($user) ? $user : false;
 	}
 
+	public function getUserById($id)
+	{
+		$stmt = $this->db->prepare(
+			'SELECT * FROM users WHERE id = :id LIMIT 1'
+		);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+	}
+
+	public function checkUsernameExistsExceptOneUserId($username, $id)
+	{
+		$stmt = $this->db->prepare(
+			'SELECT * FROM users WHERE username = :username AND id != :id LIMIT 1'
+		);
+		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return ($stmt->fetch()) ? true : false;
+	}
+
 	/**
 	 * Update first_failed_login and login_attempts, with new values
 	 *
