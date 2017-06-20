@@ -121,7 +121,6 @@ include(TEMPLATES_PATH . '/_header.php');
                                             <input class="form-control" type="password" name="password" placeholder="New password" style="margin-bottom:10px;">
                                             <label for="role">User role</label>
                                             <select required class="form-control" name="role">
-                                                <option <?php echo ($user['role'] == 'admin') ? 'selected' : ''; ?> value="admin">Admin</option>
                                                 <option <?php echo ($user['role'] == 'writer') ? 'selected' : ''; ?> value="writer">Writer</option>
                                                 <option <?php echo ($user['role'] == 'mod') ? 'selected' : ''; ?> value="mod">Moderator</option>
                                             </select>
