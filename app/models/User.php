@@ -116,6 +116,15 @@ class User {
 		return ($stmt) ? true : false;
 	}
 
+	/**
+	 * Update existing user data
+	 *
+	 * @param  int $userId   Id of user to update
+	 * @param  str $username New username
+	 * @param  str $password New password
+	 * @param  str $userRole New user role
+	 * @return bool          True if success, false otherwise
+	 */
 	public function editUser($userId, $username, $password, $userRole)
 	{
 		$passwordQuery = ($password !== false) ? 'password = :password, ' : '';
