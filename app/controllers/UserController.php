@@ -145,6 +145,19 @@ class UserController
 
 
     /**
+    * If user not an admin, redirect to panel homepage, with error message
+     */
+    public function redirectIfNotAdmin()
+    {
+        // Redirect to login page, if isLoggedIn() method returns false
+        if (!$this->isLoggedIn() || $this->getUserRole() !== 'admin') {
+            $this->msg->error('You are now allowed to access this page.', '/admin');
+            die();
+        }
+    }
+
+
+    /**
      * Get logged in users ID, from jwt stored in cookie,
      * or return false if not set, or decoding fails
      *
