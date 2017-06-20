@@ -43,14 +43,22 @@ $categories = $article->getCategories();
 
             <!-- Navbar on right -->
             <ul class="nav navbar-nav navbar-right">
-                <?php
-                // If logged in, show admin panel and logout buttons, otherwise, show login button
-                echo ($user->isLoggedIn())
-                    ? '<li class="' . (($currentPage == 'admin') ? 'active' : '') . '"><a href="/admin">Admin panel</a> <li><a href="/admin/logout.php">Logout</a></li>'
-                    : '<li><a href="/admin/login.php">Login</a>';
-                ?>
-            </ul>
+                <!-- Account dropdown menu -->
+                <li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Account <span class="caret"></span></a>
+					<ul class="dropdown-menu">
 
+                        <?php if ($user->isLoggedIn()): // If logged in, show admin panel, settings and logout buttons, otherwise, show login button ?>
+                            <li><a href="/admin">Admin panel</a></li>
+                            <li><a href="/admin/settings.php">Account Settings</a></li>
+                            <li><a href="/admin/logout.php">Logout</a></li>
+                        <?php else: // Not logged, show login btn ?>
+                            <li><a href="/admin/login.php">Login</a>'
+                        <?php endif; ?>
+
+					</ul>
+				</li>
+            </ul>
 
 		</div><!--/.nav-collapse -->
 	</div>
