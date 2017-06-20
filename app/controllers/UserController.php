@@ -284,6 +284,7 @@ class UserController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
             $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
+            $oldUserData = $this->getUserById($userId);
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password = $_POST['password'];
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
