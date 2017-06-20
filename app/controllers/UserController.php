@@ -293,7 +293,7 @@ class UserController
             $oldUserRole = $oldUserData['role'];
 
             if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && $usernameIsValid) {
-                if (!empty($pasword)) {
+                if (!empty($password)) {
                     if (strlen($password) > 4) {
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
                         $this->userModel->editUser($userId, $username, $password, $userRole);
