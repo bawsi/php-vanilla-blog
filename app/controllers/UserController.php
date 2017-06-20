@@ -292,7 +292,7 @@ class UserController
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
             $oldUserRole = $oldUserData['role'];
 
-            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $userRole !== 'admin' && $userId != 1 && !$this->userModel->getUserDataFromUsername($username)) {
+            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && $usernameIsValid) {
                 if (!empty($pasword)) {
                     if (strlen($password) > 4) {
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
