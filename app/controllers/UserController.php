@@ -202,6 +202,10 @@ class UserController
         return $this->userModel->getUserById($id);
     }
 
+    public function checkUsernameExistsExceptOneUserId($username, $id)
+    {
+        return $this->userModel->checkUsernameExistsExceptOneUserId($username, $id);
+    }
 
 
     /**
