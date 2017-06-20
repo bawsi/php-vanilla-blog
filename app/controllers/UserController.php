@@ -265,6 +265,14 @@ class UserController
         return $this->userModel->getUserById($id);
     }
 
+    public function getLoggedInUserData()
+    {
+        $userId = $this->getUserId();
+        $userData = $this->userModel->getUserById($userId);
+
+        return $userData;
+    }
+
     /**
      * Check if username already exists in database,
      * except, ignore one user by its ID in that check
