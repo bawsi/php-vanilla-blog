@@ -315,21 +315,20 @@ class UserController
     public function editUserAsAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
-            // Setting all the variables, that will be needed for validation and updating of user
+            // Setting all the variables for validation and user updating
             $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
-            // Old user data from db - before any edits take place
             $oldUserData = $this->getUserById($userId);
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $oldUsername = $oldUserData['username'];
-            // True if no one has this username yet, other than the current user (if were not changing the username)
             $usernameIsValid = (!$this->checkUsernameExistsExceptOneUserId($username, $userId)) ? true : false;
             $password = $_POST['password'];
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
             $oldUserRole = $oldUserData['role'];
+            $allowedUserRoles = ['mod', 'writer'];
 
             // Make sure username is not empty, longer than 3 chars, role of user were editing
             // not empty, and not admin, and that username is valid (from above)
-            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && $usernameIsValid) {
+            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && in_array($userRole, $allowedUserRoles) && $usernameIsValid) {
                 // New password was set
                 if (!empty($password)) {
                     // Validate that password is longer than 4 characters, hash it, store new data and redirect
