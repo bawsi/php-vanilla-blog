@@ -50,6 +50,8 @@ $userData = $user->getLoggedInUserData();
 					<ul class="dropdown-menu">
 
                         <?php if ($user->isLoggedIn()): // If logged in, show admin panel, settings and logout buttons, otherwise, show login button ?>
+                            <li class="dropdown-header"><?php echo 'Logged in as: ' . $userData['username'] . ' (' . $userData['role'] . ')'; ?></li></li>
+                            <li style="margin-top:4px;" role="separator" class="divider"></li>
                             <li><a href="/admin">Admin panel</a></li>
                             <li><a href="/admin/settings.php">Account Settings</a></li>
                             <li><a href="/admin/logout.php">Logout</a></li>
