@@ -17,7 +17,7 @@ include(TEMPLATES_PATH . '/_header.php');
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1 class="text-center">Login to admin area</h1>
-            <p class="text-center"><strong>Username:</strong> admin - <strong>Password:</strong> 123</p>
+            <p class="text-center"><strong>Username:</strong> admin - <strong>Password:</strong> 12345</p>
             <hr />
             <form class="login-form" action="" method="post">
                 <input type="text" class="form-control" name="username" placeholder="Username" required="required">
