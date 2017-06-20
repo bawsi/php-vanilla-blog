@@ -313,6 +313,9 @@ class UserController
                 $this->msg->error('All fields except password, are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
                 die();
             }
+        } else {
+            $this->msg('You cannot do that...', '/');
+            die();
         }
     }
 
