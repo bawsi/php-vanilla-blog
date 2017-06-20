@@ -61,7 +61,7 @@ class User {
 	 * @param  int $firstFailedLogin Unix timestamp of first failed login attempt
 	 * @param  int $loginAttempts    Number of failed login attempts
 	 * @param  int $userId           Id of user
-	 * @return bool                   True if success, false otherwise
+	 * @return bool                  True if success, false otherwise
 	 */
 	public function updateFirstFailedLoginAndLoginAttempts($firstFailedLogin, $loginAttempts, $userId) {
 		$stmt = $this->db->prepare(
