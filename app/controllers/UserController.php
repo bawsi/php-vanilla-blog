@@ -12,6 +12,10 @@ class UserController
         $this->msg = $msg;
     }
 
+    /**
+     * Get all data for login, validate it, make sure user is not
+     * locked out, and then call the loginAttempt method
+     */
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -71,6 +75,8 @@ class UserController
 
     /**
      * Login user
+     *
+     * @return bool True if logged successfull, false otherwise
      */
     public function loginAttempt($userData, $password)
     {
@@ -100,7 +106,7 @@ class UserController
     /**
      * Checks if user is logged in, and return bool
      *
-     * @return boolean True if logged in, false otherwise
+     * @return bool True if logged in, false otherwise
      */
     public function isLoggedIn()
     {
@@ -137,6 +143,7 @@ class UserController
         }
     }
 
+
     /**
      * Get logged in users ID, from jwt stored in cookie,
      * or return false if not set, or decoding fails
@@ -152,9 +159,8 @@ class UserController
             // Try to decode the jwt using the key from config file,
             // and return users id stored in that jwt
             try {
-                // Decode jwt
+                // Decode jwt cookie
                 $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
-                // Return id of logged in user
                 return $decoded->userId;
             } catch (Exception $e) {
                 // Failed decoding jwt, return false
@@ -166,6 +172,11 @@ class UserController
         }
     }
 
+    /**
+     * Get role of currently logged in user from jwt cookie
+     *
+     * @return str/bool if cookie is set, return role, false if error
+     */
     public function getUserRole()
     {
         // If cookie jwt is set, it means user is logged in
@@ -177,7 +188,6 @@ class UserController
             try {
                 // Decode jwt
                 $decoded = JWT::decode($jwt, JWT_KEY, ['HS512']);
-                // Return id of logged in user
                 return $decoded->userRole;
             } catch (Exception $e) {
                 // Failed decoding jwt, return false
@@ -189,7 +199,11 @@ class UserController
         }
     }
 
-
+    /**
+     * Grab all users and their data, and return them
+     *
+     * @return Array Associative array of users
+     */
     public function getAllUsers()
     {
         $users = $this->userModel->getAllUsers();
@@ -197,11 +211,27 @@ class UserController
         return $users;
     }
 
+    /**
+     * Get single user by its ID, and return it
+     *
+     * @param  int $id ID of user
+     *
+     * @return array     Array of users data
+     */
     public function getUserById($id)
     {
         return $this->userModel->getUserById($id);
     }
 
+    /**
+     * Check if username already exists in database,
+     * except, ignore one user by its ID in that check
+     *
+     * @param  str $username Username to check for
+     * @param  int $id       Id of user to ignore
+     *
+     * @return bool           True if user exists, false otherwise
+     */
     public function checkUsernameExistsExceptOneUserId($username, $id)
     {
         return $this->userModel->checkUsernameExistsExceptOneUserId($username, $id);
@@ -214,8 +244,7 @@ class UserController
     public function logout()
     {
         if ($this->isLoggedIn()) {
-            // Setting jwt cookie to 1, which is in the past
-            // (1 is first second of unix timestamp)
+            // Setting jwt cookie to past time (it expires)
             setcookie('jwt', '', 1, '/', SITE_URL, false, true);
         }
     }
@@ -280,40 +309,51 @@ class UserController
         }
     }
 
+    /**
+     * Edit existing user. Only admins can use this method.
+     */
     public function editUserAsAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
+            // Setting all the variables, that will be needed for validation and updating of user
             $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
+            // Old user data from db - before any edits take place
             $oldUserData = $this->getUserById($userId);
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $oldUsername = $oldUserData['username'];
+            // True if no one has this username yet, other than the current user (if were not changing the username)
             $usernameIsValid = (!$this->checkUsernameExistsExceptOneUserId($username, $userId)) ? true : false;
             $password = $_POST['password'];
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
             $oldUserRole = $oldUserData['role'];
 
+            // Make sure username is not empty, longer than 3 chars, role of user were editing
+            // not empty, and not admin, and that username is valid (from above)
             if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && $usernameIsValid) {
+                // New password was set
                 if (!empty($password)) {
+                    // Validate that password is longer than 4 characters, hash it, store new data and redirect
                     if (strlen($password) > 4) {
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
                         $this->userModel->editUser($userId, $username, $password, $userRole);
                         $this->msg->success('User successfully updated.', '/admin/users.php');
                         die();
-                    } else {
+                    } else { // Password too short - redirect with msg
                         $this->msg->error('Password is too short!', '/admin/users.php');
                         die();
                     }
-                } else {
+                } else { // New password was not set. Update user
+                    // Set $password to false, so we dont update it in the model
                     $password = false;
                     $this->userModel->editUser($userId, $username, $password, $userRole);
                     $this->msg->success('User successfully updated.', '/admin/users.php');
                     die();
                 }
-            } else {
+            } else { // Any of the validation methods failed
                 $this->msg->error('All fields except password, are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
                 die();
             }
-        } else {
+        } else { // User that is editing a user is not admin, or did not come here via POST request
             $this->msg->error('You cannot do that...', '/');
             die();
         }
