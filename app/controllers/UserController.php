@@ -286,8 +286,10 @@ class UserController
             $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
             $oldUserData = $this->getUserById($userId);
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $oldUsername = $oldUserData['username'];
             $password = $_POST['password'];
             $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+            $oldUserRole = $oldUserData['role'];
 
             if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $userRole !== 'admin' && $userId != 1 && !$this->userModel->getUserDataFromUsername($username)) {
                 if (!empty($pasword)) {
