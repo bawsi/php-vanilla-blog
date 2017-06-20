@@ -158,6 +158,35 @@ class UserController
 
 
     /**
+     * Update users password
+     */
+    public function updatePassword()
+    {
+        // Only allow post requests to access this method
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userId = $this->getUserId();
+            $userData = $this->getUserById($userId);
+
+            $oldPassCorrect = password_verify($_POST['old-password'], $userData['password']);
+            $newPasswordsMatch = ($_POST['new-password'] === $_POST['new-password-verify']) ? true : false;
+
+            // Making sure that old password entered matches currently active password,
+            // and that new password and password verification match, and then updating the pass
+            if ($oldPassCorrect && $newPasswordsMatch && strlen($_POST['new-password']) > 4 && $userData['username'] !== 'admin') {
+                $newPass = password_hash($_POST['new-password'], PASSWORD_DEFAULT, ['cost' => '12']);
+                $this->userModel->updatePassword($userId, $newPass);
+                $this->msg->success('Password updated successfully!', '/admin');
+                die();
+            } else { // Verification failed, so redirect with error msg
+                $this->msg->error('Old password is incorrect, passwords do not match, password too short, or you tried changing
+                                  password of user with name "admin", which is disabled on this demo site!', '/admin/settings.php');
+                die();
+            }
+        }
+    }
+
+
+    /**
      * Get logged in users ID, from jwt stored in cookie,
      * or return false if not set, or decoding fails
      *
