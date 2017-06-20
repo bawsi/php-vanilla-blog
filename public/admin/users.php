@@ -7,6 +7,9 @@ $page = 'admin-users';
 // If not logged in, redirect to login page
 $user->redirectIfNotLoggedIn();
 
+// If not admin, redirect back to panel
+$user->redirectIfNotAdmin();
+
 // Grabbing list of all users
 $users = $user->getAllUsers();
 
