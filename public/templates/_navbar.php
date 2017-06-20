@@ -1,7 +1,8 @@
 
 <?php
 $categories = $article->getCategories();
- ?>
+$userData = $user->getLoggedInUserData();
+?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top navbar-main">
