@@ -46,7 +46,7 @@ $userData = $user->getLoggedInUserData();
             <ul class="nav navbar-nav navbar-right">
                 <!-- Account dropdown menu -->
                 <li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Account <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Account<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 
                         <?php if ($user->isLoggedIn()): // If logged in, show admin panel, settings and logout buttons, otherwise, show login button ?>
