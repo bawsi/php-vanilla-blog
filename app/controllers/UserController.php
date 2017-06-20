@@ -197,6 +197,12 @@ class UserController
         return $users;
     }
 
+    public function getUserById($id)
+    {
+        return $this->userModel->getUserById($id);
+    }
+
+
 
     /**
      * Logout user by deleting the jwt cookie
