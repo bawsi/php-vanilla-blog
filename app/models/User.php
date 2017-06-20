@@ -163,6 +163,20 @@ class User
         return ($stmt->rowCount()) ? true : false;
     }
 
+
+    public function updatePassword($userId, $password)
+    {
+        $stmt = $this->db->prepare(
+            'UPDATE users SET password = :password WHERE id = :userId'
+        );
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt->rowCount()) ? true : false;
+    }
+
+
     /**
      * Delete user from users table
      *
