@@ -314,7 +314,7 @@ class UserController
                 die();
             }
         } else {
-            $this->msg('You cannot do that...', '/');
+            $this->msg->error('You cannot do that...', '/');
             die();
         }
     }
