@@ -23,12 +23,12 @@ include APP_PATH . '/controllers/UserController.php';
 $msg = new \Plasticbrain\FlashMessages\FlashMessages();
 
 // Instantiating Models
-$dbModel = new Db;
+$dbModel      = new Db;
 $articleModel = new Article($dbModel);
-$userModel = new User($dbModel);
+$userModel    = new User($dbModel);
 
 // Instantiating Controllers
-$user = new UserController($userModel, $msg, $articleModel);
+$user    = new UserController($userModel, $msg, $articleModel);
 $article = new ArticleController($articleModel, $msg, $user);
 
 ?>
