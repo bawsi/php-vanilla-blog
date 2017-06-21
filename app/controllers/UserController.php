@@ -387,7 +387,9 @@ class UserController
 
             // Make sure username is not empty, longer than 3 chars, role of user were editing
             // not empty, and not admin, and that username is valid (from above)
-            if (!empty($username) && strlen($username) > 3 && !empty($userRole) && $oldUserRole !== 'admin' && in_array($userRole, $allowedUserRoles) && $usernameIsValid) {
+            if (!empty($username) && strlen($username) > 3 && !empty($userRole) &&
+                $oldUserRole !== 'admin' && in_array($userRole, $allowedUserRoles) && $usernameIsValid)
+            {
                 // New password was set
                 if (!empty($password)) {
                     // Validate that password is longer than 4 characters, hash it, store new data and redirect
@@ -408,7 +410,8 @@ class UserController
                     die();
                 }
             } else { // Any of the validation methods failed
-                $this->msg->error('All fields except password, are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
+                $this->msg->error('All fields except password, are required. Make sure username is unique, and longer than 3 characters,
+                                   and that password is longer than 4 characters. User updating for admins was also disabled, for demo site!', '/admin/users.php');
                 die();
             }
         } else { // User that is editing a user is not admin, or did not come here via POST request
@@ -421,23 +424,31 @@ class UserController
      * Make sure logged in user is allowed to delete articles, validate
      * userId passed through GET request, and then delete user
      */
+    // TODO: Move articles of user we delete to another user
     public function deleteUser()
     {
         // If GET variable 'id' is set, and logged in user is admin, proceed with user deletion
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
             $userId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-            $wasDeleted = $this->userModel->deleteUser($userId);
+            $oldUserData = $this->userModel->getUserById($userId);
 
-            // Set message based on result of user deletion, and redirect
-            if ($wasDeleted) {
-                $this->msg->success('User successfully deleted.', '/admin/users.php');
-                die();
-            } else {
-                $this->msg->error('Failed to delete user.', '/admin/users.php');
+            // Disable ability to delete admin accounts for demo site TODO: Remove this for live
+            if ($oldUserData['role'] !== 'admin') {
+                $wasDeleted = $this->userModel->deleteUser($userId);
+
+                // Set message based on result of user deletion, and redirect
+                if ($wasDeleted) {
+                    $this->msg->success('User successfully deleted.', '/admin/users.php');
+                    die();
+                } else {
+                    $this->msg->error('Failed to delete user.', '/admin/users.php');
+                    die();
+                }
+            } else { // Trying to delete admin account (which is disable for this demo)
+                $this->msg->error('You cannot delete an admin account in this demo...', '/admin/users.php');
                 die();
             }
-
-        } else { // If 'id' was not set, or user is not admin, set error and redirect
+        } else { // If 'id' was not set, or logged in user is not an admin, set error and redirect
             $this->msg->error('You cannot do this...', '/admin');
             die();
         }
