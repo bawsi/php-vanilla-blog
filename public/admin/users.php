@@ -11,7 +11,7 @@ $user->redirectIfNotLoggedIn();
 $user->redirectIfNotAdmin();
 
 // Grabbing list of all users
-$users = $user->getAllUsers();
+$users = $user->getUsersWithTotalAndLatestArticle();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
@@ -48,9 +48,8 @@ include(TEMPLATES_PATH . '/_header.php');
                             <td><?php echo $user['id']; ?></td>
                             <td><?php echo $user['username']; ?></td>
                             <td><?php echo $user['role']; ?></td>
-                            <!-- TODO: Get total articles of user, and latest article date, and fill it in -->
-                            <td><?php echo 'TODO'; ?></td>
-                            <td><?php echo 'TODO'; ?></td>
+                            <td><?php echo $user['total_articles']; ?></td>
+                            <td><?php echo ($user['latest_article_time']) ? date('d.m.Y', $user['latest_article_time']) : 'User has not published any articles yet.'; ?></td>
                             <td>
                                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>">
                                      Edit
