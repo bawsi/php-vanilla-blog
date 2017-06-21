@@ -43,21 +43,21 @@ include(TEMPLATES_PATH . '/_header.php');
                 </tr>
 
                 <?php foreach ($users as $user): ?>
-                    <?php if ($user['role'] !== 'admin'): ?>
-                        <tr>
-                            <td><?php echo $user['id']; ?></td>
-                            <td><?php echo $user['username']; ?></td>
-                            <td><?php echo $user['role']; ?></td>
-                            <td><?php echo $user['total_articles']; ?></td>
-                            <td><?php echo ($user['latest_article_time']) ? date('d.m.Y', $user['latest_article_time']) : 'User has not published any articles yet.'; ?></td>
-                            <td>
-                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>">
-                                     Edit
-                                </button>
-                                <a href="<?php echo '/admin/delete-user.php?id=' . $user['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
+
+                    <tr>
+                        <td><?php echo $user['id']; ?></td>
+                        <td><?php echo $user['username']; ?></td>
+                        <td><?php echo $user['role']; ?></td>
+                        <td><?php echo $user['total_articles']; ?></td>
+                        <td><?php echo ($user['latest_article_time']) ? date('d.m.Y', $user['latest_article_time']) : 'User has not published any articles yet.'; ?></td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>">
+                                 Edit
+                            </button>
+                            <a href="<?php echo '/admin/delete-user.php?id=' . $user['id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+
                 <?php endforeach; ?>
 
             </table>
