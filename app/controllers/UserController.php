@@ -273,6 +273,11 @@ class UserController
         return $userData;
     }
 
+    public function getUsersWithTotalAndLatestArticleTime()
+    {
+        return $this->userModel->getUsersWithTotalAndLatestArticleTime();
+    }
+
     /**
      * Check if username already exists in database,
      * except, ignore one user by its ID in that check
