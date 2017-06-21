@@ -5,11 +5,13 @@ class UserController
 {
     private $userModel;
     private $msg;
+    private $articleModel;
 
-    public function __construct(User $userModel, $msg)
+    public function __construct(User $userModel, $msg, $articleModel)
     {
-        $this->userModel = $userModel;
-        $this->msg       = $msg;
+        $this->userModel    = $userModel;
+        $this->msg          = $msg;
+        $this->articleModel = $articleModel;
     }
 
     /**
