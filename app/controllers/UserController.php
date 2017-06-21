@@ -434,19 +434,21 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
             $userId         = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
             $oldUserData    = $this->userModel->getUserById($userId);
-            $userArticleIds = $this->userModel->getArticlesIdsOfUserById($userId);
+            $userArticleIds = $this->articleModel->getUserArticleIds($userId); // id's of users articles, so we can later give them new author
+            $loggedInUser   = $this->getLoggedInUserData();
 
             // Disable ability to delete admin accounts for demo site TODO: Remove this for live
             if ($oldUserData['role'] !== 'admin') {
                 $wasDeleted = $this->userModel->deleteUser($userId);
 
-
-
-
-
-                // Set message based on result of user deletion, and redirect
+                // Assingn new author to articles of deleted user, set msg and redirect
                 if ($wasDeleted) {
-                    $this->msg->success('User successfully deleted.', '/admin/users.php');
+                    // Assign new author to articles TODO: Improve method of assigning new author to articles
+                    foreach($userArticleIds as $articleId) {
+                        $this->articleModel->assignNewAuthorToArticle($articleId[0], $loggedInUser['id']);
+                    }
+
+                    $this->msg->success('User successfully deleted, and his articles moved to user ' . $loggedInUser['username'], '/admin/users.php');
                     die();
                 } else {
                     $this->msg->error('Failed to delete user.', '/admin/users.php');
