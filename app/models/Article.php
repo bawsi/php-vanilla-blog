@@ -68,6 +68,29 @@ class Article
         return $article;
     }
 
+    public function getUserArticleIds($userId)
+    {
+        $stmt = $this->db->prepare(
+            'SELECT articles.id FROM articles WHERE articles.author_id = :userId'
+        );
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $articleIds = $stmt->fetchAll(PDO::FETCH_NUM);
+
+        return ($articleIds) ? $articleIds : false;
+    }
+
+    public function assignNewAuthorToArticle($articleId, $authorId)
+    {
+        $stmt = $this->db->prepare('UPDATE articles SET author_id = :authorId WHERE id = :articleId');
+        $stmt->bindParam(':authorId', $authorId, PDO::PARAM_INT);
+        $stmt->bindparam(':articleId', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt->rowCount()) ? true : false;
+    }
+
     /**
      * Save article to database
      *
