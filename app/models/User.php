@@ -53,12 +53,8 @@ class User
 
     public function getUsersWithTotalAndLatestArticleTime()
     {
-        // TODO: Improve this sql syntax, since apparently its
-        // not good to have SELECT inside SELECT
         $stmt = $this->db->prepare(
-            'SELECT users.username, users.role, users.id, COUNT(articles.id) AS total_articles,
-                (SELECT articles.created_at FROM articles WHERE articles.author_id = users.id
-                    ORDER BY articles.created_at DESC LIMIT 1) as latest_article_time
+            'SELECT users.username, users.role, users.id, COUNT(articles.id) AS total_articles, MAX(articles.created_at) AS latest_article_time
             FROM users
             LEFT JOIN articles ON users.id = articles.author_id
             GROUP BY articles.author_id
