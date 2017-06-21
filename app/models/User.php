@@ -208,6 +208,6 @@ class User
         $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
         $stmt->execute();
 
-        return ($stmt->rowCount() > 0) ? true : false;
+        return ($stmt->rowCount()) ? true : false;
     }
 }
