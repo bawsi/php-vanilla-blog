@@ -342,7 +342,10 @@ class UserController
 
             // If username, password and role are all set, not empty, username doesnt exist yet,
             // and user role is in allowed array fomr above, register user
-            if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4 && !empty($userRole) && in_array($userRole, $allowedUserRoles) && !$this->userModel->getUserDataFromUsername($username) && $userRole !== 'admin') {
+            if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4
+                && !empty($userRole) && in_array($userRole, $allowedUserRoles) && !$this->userModel->getUserDataFromUsername($username)
+                && $userRole !== 'admin')
+            {
                 $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
 
                 // If registration was successfull, redirect back with success msg
