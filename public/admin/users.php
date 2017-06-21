@@ -11,7 +11,7 @@ $user->redirectIfNotLoggedIn();
 $user->redirectIfNotAdmin();
 
 // Grabbing list of all users
-$users = $user->getUsersWithTotalAndLatestArticle();
+$users = $user->getUsersWithTotalAndLatestArticleTime();
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>
