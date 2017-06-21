@@ -61,9 +61,6 @@ class User
             ORDER BY users.id ASC'
         );
 
-
-
-
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
