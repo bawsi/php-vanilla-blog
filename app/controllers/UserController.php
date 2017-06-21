@@ -9,7 +9,7 @@ class UserController
     public function __construct(User $userModel, $msg)
     {
         $this->userModel = $userModel;
-        $this->msg = $msg;
+        $this->msg       = $msg;
     }
 
     /**
@@ -27,11 +27,11 @@ class UserController
                 $userData = $this->userModel->getUserDataFromUsername($username);
 
                 // Settings for login throttling, in case of too many failed login attempts
-                $badLoginLimit = 3;
-                $lockoutTime = 600;
+                $badLoginLimit    = 3;
+                $lockoutTime      = 600;
                 $firstFailedLogin = $userData['first_failed_login'];
-                $loginAttempts = (int)$userData['login_attempts'];
-                $userId = $userData['id'];
+                $loginAttempts    = (int)$userData['login_attempts'];
+                $userId           = $userData['id'];
 
                 // user failed to login for $badLoginLimit times, and is still in lockout
                 if ($loginAttempts >= $badLoginLimit && $firstFailedLogin > time() - $lockoutTime) {
@@ -84,10 +84,10 @@ class UserController
             if (!empty($userData) && password_verify($password, $userData['password'])) {
                 // Username and password entered are correct. Set data for jwt
                 $data = array(
-                    "iat"    =>    time(),
-                    "exp"    =>    time() + 3600,    // expires in 1 hour
-                    "userId" =>    $userData['id'],
-                    "userRole" =>  $userData['role']
+                    "iat"      => time(),
+                    "exp"      => time() + 3600, // expires in 1 hour
+                    "userId"   => $userData['id'],
+                    "userRole" => $userData['role']
                 );
 
                 // Encode JWT data from above, key and algorithm together
@@ -164,16 +164,17 @@ class UserController
     {
         // Only allow post requests to access this method
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $userId = $this->getUserId();
+            $userId   = $this->getUserId();
             $userData = $this->getUserById($userId);
 
-            $oldPassCorrect = password_verify($_POST['old-password'], $userData['password']);
+            $oldPassCorrect    = password_verify($_POST['old-password'], $userData['password']);
             $newPasswordsMatch = ($_POST['new-password'] === $_POST['new-password-verify']) ? true : false;
 
             // Making sure that old password entered matches currently active password,
             // and that new password and password verification match, and then updating the pass
             if ($oldPassCorrect && $newPasswordsMatch && strlen($_POST['new-password']) > 4 && $userData['username'] !== 'admin') {
                 $newPass = password_hash($_POST['new-password'], PASSWORD_DEFAULT, ['cost' => '12']);
+
                 $this->userModel->updatePassword($userId, $newPass);
                 $this->msg->success('Password updated successfully!', '/admin');
                 die();
@@ -267,7 +268,7 @@ class UserController
 
     public function getLoggedInUserData()
     {
-        $userId = $this->getUserId();
+        $userId   = $this->getUserId();
         $userData = $this->userModel->getUserById($userId);
 
         return $userData;
@@ -316,7 +317,7 @@ class UserController
     public function allowedToModifyArticle($authorId)
     {
         // Get role and ID of logged in user
-        $userRole = $this->getUserRole();
+        $userRole       = $this->getUserRole();
         $loggedInUserId = $this->getUserId();
 
         // If logged in user is admin, mod or author, return true, false otherwise
@@ -335,15 +336,15 @@ class UserController
     {
         // If user came to this page via POST request
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
-            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
-            $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
-            $allowedUserRoles = ['mod', 'writer'];
+            $username     = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $password     = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
+            $userRole     = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+            $allowedRoles = ['mod', 'writer'];
 
             // If username, password and role are all set, not empty, username doesnt exist yet,
             // and user role is in allowed array fomr above, register user
             if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4
-                && !empty($userRole) && in_array($userRole, $allowedUserRoles) && !$this->userModel->getUserDataFromUsername($username)
+                && !empty($userRole) && in_array($userRole, $allowedRoles) && !$this->userModel->getUserDataFromUsername($username)
                 && $userRole !== 'admin')
             {
                 $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
@@ -375,14 +376,14 @@ class UserController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $this->getUserRole() == 'admin') {
             // Setting all the variables for validation and user updating
-            $userId = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
-            $oldUserData = $this->getUserById($userId);
-            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-            $oldUsername = $oldUserData['username'];
-            $usernameIsValid = (!$this->checkUsernameExistsExceptOneUserId($username, $userId)) ? true : false;
-            $password = $_POST['password'];
-            $userRole = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
-            $oldUserRole = $oldUserData['role'];
+            $userId           = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
+            $oldUserData      = $this->getUserById($userId);
+            $username         = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $oldUsername      = $oldUserData['username'];
+            $usernameIsValid  = (!$this->checkUsernameExistsExceptOneUserId($username, $userId)) ? true : false;
+            $password         = $_POST['password'];
+            $userRole         = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+            $oldUserRole      = $oldUserData['role'];
             $allowedUserRoles = ['mod', 'writer'];
 
             // Make sure username is not empty, longer than 3 chars, role of user were editing
@@ -429,12 +430,17 @@ class UserController
     {
         // If GET variable 'id' is set, and logged in user is admin, proceed with user deletion
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']) && $this->getUserRole() == 'admin') {
-            $userId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-            $oldUserData = $this->userModel->getUserById($userId);
+            $userId         = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $oldUserData    = $this->userModel->getUserById($userId);
+            $userArticleIds = $this->userModel->getArticlesIdsOfUserById($userId);
 
             // Disable ability to delete admin accounts for demo site TODO: Remove this for live
             if ($oldUserData['role'] !== 'admin') {
                 $wasDeleted = $this->userModel->deleteUser($userId);
+
+
+
+
 
                 // Set message based on result of user deletion, and redirect
                 if ($wasDeleted) {
