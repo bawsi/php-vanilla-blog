@@ -29,8 +29,9 @@ $userData = $user->getLoggedInUserData();
 						<?php endforeach; ?>
 					</ul>
 				</li>
+				<!-- End of categories -->
 
-				<!-- <li><a href="#contact">Contact</a></li> -->
+				<li <?php echo ($currentPage == 'contact') ? 'class="active"' : ''; ?>><a href="/contact.php">Contact me</a></li>
 
                 <!-- search -->
                 <form class="navbar-form navbar-left search" action="/search.php" method="get">
