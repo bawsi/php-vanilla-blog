@@ -338,9 +338,9 @@ class Article
 
         $stmt->bindParam(':id', $articleId, PDO::PARAM_INT);
         $stmt->execute();
-        $data= $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $data['author_id'];
+        return ($data) ? $data['author_id'] : false;
     }
 
 }
