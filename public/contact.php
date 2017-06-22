@@ -26,6 +26,7 @@ include(TEMPLATES_PATH . '/_header.php');
                 <input required class="form-control" type="text" name="subject" placeholder="Message subject">
                 <label for="body">Message</label>
                 <textarea required class="form-control" name="body" rows="8" cols="80"></textarea>
+                <div class="g-recaptcha" data-sitekey="6LcugCYUAAAAAHgv0uxMTivL9kTM7PmBqz8reHkx"></div>
                 <button class="btn btn-danger btn-block" type="submit" name="submit">Send</button>
             </form>
 
