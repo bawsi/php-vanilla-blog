@@ -18,9 +18,13 @@ include APP_PATH . '/models/User.php';
 // Including Controllers
 include APP_PATH . '/controllers/ArticleController.php';
 include APP_PATH . '/controllers/UserController.php';
+include APP_PATH . '/controllers/ContactController.php';
 
 // Flash Messages (https://mikeeverhart.net/php-flash-messages/index.php)
 $msg = new \Plasticbrain\FlashMessages\FlashMessages();
+
+// PHPMailer
+$mail = new PHPMailer;
 
 // Instantiating Models
 $dbModel      = new Db;
@@ -30,5 +34,6 @@ $userModel    = new User($dbModel);
 // Instantiating Controllers
 $user    = new UserController($userModel, $msg, $articleModel);
 $article = new ArticleController($articleModel, $msg, $user);
+$contact = new ContactController($mail, $msg);
 
 ?>
