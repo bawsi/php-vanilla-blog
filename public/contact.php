@@ -3,8 +3,10 @@
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
 $currentPage = 'contact';
 
-include(TEMPLATES_PATH . '/_header.php');
+// If POST request, send email
+$contact->sendContactMail();
 
+include(TEMPLATES_PATH . '/_header.php');
 ?>
 
 <!-- Main content -->
