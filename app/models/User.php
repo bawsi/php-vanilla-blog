@@ -51,6 +51,12 @@ class User
         return ($stmt) ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
     }
 
+    /**
+     * Return a list of all users, with number of their total articles, and
+     * timestamp of their latest article created_at
+     *
+     * @return array/bool Array of users, or false
+     */
     public function getUsersWithTotalAndLatestArticleTime()
     {
         $stmt = $this->db->prepare(
