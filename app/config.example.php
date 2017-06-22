@@ -10,6 +10,8 @@ define('SMTP_HOST', 'smtp.sendgrid.net');
 define('SMTP_PORT', 587);
 define('SMTP_USERNAME', 'username');
 define('SMTP_PASSWORD', 'password');
+define('SMTP_CONTACT_TO', 'youremail@gmail.com'); // Email, to which all contact me emails will go
+define('SMTP_CONTACT_TO_NAME', 'John Doe');      // Name, that will appear next to your email
 
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
