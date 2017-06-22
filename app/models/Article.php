@@ -87,6 +87,13 @@ class Article
         return ($articleIds) ? $articleIds : false;
     }
 
+    /**
+     * Update articles author_id
+     *
+     * @param  int $articleId ID of article to update
+     * @param  int $authorId  ID of new author for article
+     * @return bool           
+     */
     public function assignNewAuthorToArticle($articleId, $authorId)
     {
         $stmt = $this->db->prepare('UPDATE articles SET author_id = :authorId WHERE id = :articleId');
