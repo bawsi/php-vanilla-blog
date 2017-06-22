@@ -52,12 +52,12 @@ class User
     }
 
     public function getUsersWithTotalAndLatestArticleTime()
-    { // TODO: Figure out why this query returns 2 results only, even when there are more accounts
+    {
         $stmt = $this->db->prepare(
-            'SELECT users.username, users.role, users.id, COUNT(articles.id) AS total_articles, MAX(articles.created_at) AS latest_article_time
+            'SELECT users.id, users.username, users.role, COUNT(articles.id) AS total_articles, MAX(articles.created_at) AS latest_article_time
             FROM users
             LEFT JOIN articles ON users.id = articles.author_id
-            GROUP BY articles.author_id
+            GROUP BY users.id
             ORDER BY users.id ASC'
         );
 
