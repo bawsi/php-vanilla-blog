@@ -341,13 +341,12 @@ class UserController
             $username     = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password     = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
             $userRole     = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
-            $allowedRoles = ['mod', 'writer'];
+            $allowedRoles = ['writer', 'mod'];
 
             // If username, password and role are all set, not empty, username doesnt exist yet,
             // and user role is in allowed array fomr above, register user
             if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4
-                && !empty($userRole) && in_array($userRole, $allowedRoles) && !$this->userModel->getUserDataFromUsername($username)
-                && $userRole !== 'admin')
+                && !empty($userRole) && in_array($userRole, $allowedRoles) && !$this->userModel->getUserDataFromUsername($username))
             {
                 $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
 
@@ -360,7 +359,8 @@ class UserController
                     die();
                 }
             } else { // Otherwise, redirect back, with error message
-                $this->msg->error('All fields are required. Make sure username is unique, and longer than 3 characters, and that password is longer than 4 characters.', '/admin/users.php');
+                $this->msg->error('All fields are required. Make sure username is unique, and longer than 3 characters, and that
+                                  password is longer than 4 characters. Adding new admin accounts is also disabled for this demo.', '/admin/users.php');
                 die();
             }
 
