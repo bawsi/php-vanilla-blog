@@ -310,6 +310,7 @@ class ArticleController
         // Getting articles
         $articles = $this->articleModel->paginate($page, $perPage, $categoryId);
 
+        // Return array of data
         return [
             'articles'         => $articles,
             'numOfPages'       => $numOfPages,
