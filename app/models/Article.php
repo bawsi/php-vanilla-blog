@@ -68,6 +68,12 @@ class Article
         return $article;
     }
 
+    /**
+     * Get IDs of all users articles
+     *
+     * @param  int $userId ID of user, which we get the article IDs from
+     * @return array/bool         Array of article IDs, or false
+     */
     public function getUserArticleIds($userId)
     {
         $stmt = $this->db->prepare(
