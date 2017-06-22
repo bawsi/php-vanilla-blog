@@ -13,6 +13,9 @@ define('SMTP_PASSWORD', 'password');
 define('SMTP_CONTACT_TO', 'youremail@gmail.com'); // Email, to which all contact me emails will go
 define('SMTP_CONTACT_TO_NAME', 'John Doe');      // Name, that will appear next to your email
 
+// Recaptcha secret key
+define('SECRET_RECAPTCHA_KEY', 'Your_recaptcha_secret_key_here');
+
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
 define("APP_PATH", dirname(__DIR__) . '/app');
