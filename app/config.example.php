@@ -5,13 +5,19 @@ define('DB_NAME', 'database_name');
 define('DB_USER', 'database_username');
 define('DB_PASS', 'database_password');
 
+// SMTP info
+define('SMTP_HOST', 'smtp.sendgrid.net');
+define('SMTP_PORT', 587);
+define('SMTP_USERNAME', 'username');
+define('SMTP_PASSWORD', 'password');
+
 // paths
 define("PUBLIC_PATH", dirname(__DIR__) . '/public');
 define("APP_PATH", dirname(__DIR__) . '/app');
 define("TEMPLATES_PATH", dirname(__DIR__) . '/public/templates');
 
 // Other (Change JWT_KEY value)
-define('JWT_KEY', 'qwpdjqwd0912uepj12je-912f12fpojqsfl');
+define('JWT_KEY', 'set_custom_jwt_key_here');
 define('SITE_URL', '');
 
 // errors
