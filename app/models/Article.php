@@ -72,6 +72,7 @@ class Article
      * Get IDs of all users articles
      *
      * @param  int $userId ID of user, which we get the article IDs from
+     *
      * @return array/bool         Array of article IDs, or false
      */
     public function getUserArticleIds($userId)
@@ -92,7 +93,8 @@ class Article
      *
      * @param  int $articleId ID of article to update
      * @param  int $authorId  ID of new author for article
-     * @return bool           
+     *
+     * @return bool
      */
     public function assignNewAuthorToArticle($articleId, $authorId)
     {
@@ -319,6 +321,13 @@ class Article
         return ($stmt) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
+    /**
+     * Get articles author_id, from its ID
+     *
+     * @param  in $articleId ID of article
+     *
+     * @return str/bool           Authors ID string, or false
+     */
     public function getArticleAuthor($articleId)
     {
         $stmt = $this->db->prepare(
