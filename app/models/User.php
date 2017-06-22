@@ -185,7 +185,13 @@ class User
         return ($stmt->rowCount()) ? true : false;
     }
 
-
+    /**
+     * Update users password
+     *
+     * @param  int $userId   Users ID
+     * @param  str $password New password for user
+     * @return bool           True if password changed, false otherwise
+     */
     public function updatePassword($userId, $password)
     {
         $stmt = $this->db->prepare(
