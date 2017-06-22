@@ -16,9 +16,9 @@ class ContactController
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['subject']) && !empty($_POST['body'] && !empty($_POST['g-recaptcha-response']))) {
-                $captcha  = $_POST['g-recaptcha-response'];
+                $captcha            = $_POST['g-recaptcha-response'];
                 $secretRecaptchaKey = SECRET_RECAPTCHA_KEY;
-                $userIp = $_SERVER['REMOTE_ADDR'];
+                $userIp             = $_SERVER['REMOTE_ADDR'];
 
                 $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret="
                             . $secretRecaptchaKey . "&response=" . $captcha . "&remoteip=" . $userIp), true); // True means we get back array from json_decode, instead of object (false is default)
