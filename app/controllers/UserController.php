@@ -341,6 +341,7 @@ class UserController
             $username     = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password     = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' => '12']);
             $userRole     = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+            $createdAt    = time();
             $allowedRoles = ['writer', 'mod'];
 
             // If username, password and role are all set, not empty, username doesnt exist yet,
@@ -348,7 +349,7 @@ class UserController
             if (!empty($username) && strlen($username) > 3 && !empty($password) && strlen($password) > 4
                 && !empty($userRole) && in_array($userRole, $allowedRoles) && !$this->userModel->getUserDataFromUsername($username))
             {
-                $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole);
+                $isRegistered = $this->userModel->registerNewUser($username, $password, $userRole, $createdAt);
 
                 // If registration was successfull, redirect back with success msg
                 if ($isRegistered) {
