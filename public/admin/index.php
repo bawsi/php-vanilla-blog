@@ -9,6 +9,9 @@ $user->redirectIfNotLoggedIn();
 
 $articles = $article->getArticles(999);
 
+// Getting stats for panels
+$stats = $article->getUserStats();
+
 include(TEMPLATES_PATH . '/_header.php')
 ?>
 
