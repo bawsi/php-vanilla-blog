@@ -33,7 +33,7 @@ $userModel    = new User($dbModel);
 
 // Instantiating Controllers
 $user    = new UserController($userModel, $msg, $articleModel);
-$article = new ArticleController($articleModel, $msg, $user);
+$article = new ArticleController($articleModel, $msg, $user, $userModel);
 $contact = new ContactController($mail, $msg);
 
 ?>
