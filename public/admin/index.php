@@ -38,7 +38,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Your username</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>Admin</h3>
+                            <h3><?php echo $stats['username']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Your role</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>Admin</h3>
+                            <h3><?php echo $stats['role']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Account registered on</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>31.12.2016</h3>
+                            <h3><?php echo date('d.m.Y', $stats['createdAt']); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Total articles by you</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>27</h3>
+                            <h3><?php echo $stats['totalArticles']; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Your latest article published on</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>14.5.2017</h3>
+                            <h3><?php echo date('d.m.Y', $stats['latestArticleTime']); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ include(TEMPLATES_PATH . '/_header.php')
                             <div class="panel-title">Your most active category</div>
                         </div>
                         <div class="panel-body text-center">
-                            <h3>Programming</h3>
+                            <h3><?php echo $stats['mostActiveCategory']['category_name']; ?></h3>
                         </div>
                     </div>
                 </div>
