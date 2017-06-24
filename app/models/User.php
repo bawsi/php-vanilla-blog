@@ -144,15 +144,16 @@ class User
      *
      * @return bool
      */
-    public function registerNewUser($username, $password, $role)
+    public function registerNewUser($username, $password, $role, $createdAt)
     {
         $stmt = $this->db->prepare(
             'INSERT INTO users
-			(username, password, role) VALUES(:username, :password, :role)'
+			(username, password, role, created_at) VALUES(:username, :password, :role, :createdAt)'
         );
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->bindParam(':password', $password, PDO::PARAM_STR);
         $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        $stmt->bindParam(':createdAt', $createdAt, PDO::PARAM_INT);
         $stmt->execute();
 
         return ($stmt) ? true : false;
