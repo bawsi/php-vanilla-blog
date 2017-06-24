@@ -343,4 +343,18 @@ class Article
         return ($data) ? $data['author_id'] : false;
     }
 
+    public function getTotalNumOfArticlesByUser($id)
+    {
+        $stmt = $this->db->prepare(
+            'SELECT COUNT(id)
+            FROM articles
+            WHERE author_id = :authorId'
+        );
+        $stmt->bindParam(':authorId', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt) ? $stmt->fetchAll()[0][0] : false;
+    }
+
+
 }
