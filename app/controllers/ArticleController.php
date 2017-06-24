@@ -225,9 +225,8 @@ class ArticleController
         // set error message, and redirect back to edit page
         $this->msg->error('All fields except image are required!', '/admin/edit.php?id=' . $articleId);
         die();
+        }
     }
-}
-
 
     /**
      * Get list of all the categories
