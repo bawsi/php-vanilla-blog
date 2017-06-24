@@ -6,6 +6,7 @@ use \Firebase\JWT\JWT;
 class ArticleController
 {
     private $articleModel;
+    private $userModel;
     private $msg;
     private $userController;
     /**
@@ -14,11 +15,12 @@ class ArticleController
      *
      * @param Db $db Object Db
      */
-    public function __construct(Article $articleModel, $msg, $userController)
+    public function __construct(Article $articleModel, $msg, $userController, $userModel)
     {
-        $this->articleModel = $articleModel;
-        $this->msg = $msg;
+        $this->articleModel   = $articleModel;
+        $this->msg            = $msg;
         $this->userController = $userController;
+        $this->userModel      = $userModel;
     }
 
     /**
