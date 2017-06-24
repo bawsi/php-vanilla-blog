@@ -43,7 +43,7 @@ class User
     public function getUserById($id)
     {
         $stmt = $this->db->prepare(
-            'SELECT id, username, role, first_failed_login, login_attempts FROM users WHERE id = :id LIMIT 1'
+            'SELECT id, username, role, created_at, first_failed_login, login_attempts FROM users WHERE id = :id LIMIT 1'
         );
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
