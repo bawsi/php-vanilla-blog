@@ -206,3 +206,11 @@ nav.navbar.navbar-main div.navbar-collapse form.search {
         top: -3px;
     }
 }
+
+div.container-contact form.contact-form input {
+    margin-bottom: 15px;
+}
+
+div.container-contact form.contact-form div.g-recaptcha {
+    margin: 15px auto;
+}
