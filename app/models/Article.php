@@ -127,7 +127,7 @@ class Article
         $stmt->bindParam(':body', $body, PDO::PARAM_STR);
         $stmt->bindParam(':authorId', $authorId, PDO::PARAM_INT);
         $currentTime = time();
-        $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_STR);
+        $stmt->bindParam(':createdAt', $currentTime, PDO::PARAM_INT);
         $stmt->bindParam(':category_id', $articleCategory, PDO::PARAM_INT);
         $stmt->execute();
 
