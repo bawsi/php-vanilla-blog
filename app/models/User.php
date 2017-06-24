@@ -223,4 +223,37 @@ class User
 
         return ($stmt->rowCount()) ? true : false;
     }
+
+    public function getUsersMostActiveCategory($id)
+    {
+        $stmt = $this->db->prepare(
+            'SELECT articles.category_id, article_categories.category_name, COUNT(articles.category_id) AS total_articles
+            FROM articles
+            INNER JOIN article_categories
+            	ON articles.category_id = article_categories.id
+            WHERE author_id = :authorId
+            GROUP BY category_id
+            ORDER BY total_articles DESC
+            LIMIT 1'
+        );
+        $stmt->bindParam(':authorId', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt) ? $stmt->fetchAll(PDO::FETCH_ASSOC)[0] : false;
+    }
+
+    public function getUsersLatestArticleTime($id)
+    {
+        $stmt = $this->db->prepare(
+            'SELECT created_at
+            FROM articles
+            WHERE author_id = :authorId
+            ORDER BY id DESC
+            LIMIT 1'
+        );
+        $stmt->bindParam(':authorId', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return ($stmt) ? $stmt->fetchAll()[0][0] : false;
+    }
 }
