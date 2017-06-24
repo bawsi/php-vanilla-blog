@@ -27,7 +27,76 @@ include(TEMPLATES_PATH . '/_header.php')
 
         <!-- main content -->
         <div class="col-md-9">
-            Stats about authors, categories etc here, once I add user roles
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <div class="panel-title">Your username</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>Admin</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">Your role</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>Admin</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <div class="panel-title">Account registered on</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>31.12.2016</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">Total articles by you</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>27</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <div class="panel-title">Your latest article published on</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>14.5.2017</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <div class="panel-title">Your most active category</div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h3>Programming</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </div>
 
