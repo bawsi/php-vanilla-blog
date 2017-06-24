@@ -240,8 +240,22 @@ class ArticleController
         return $categories;
     }
 
+    public function getUserStats()
+    {
+        $userData           = $this->userController->getLoggedInUserData();
+        $totalArticles      = $this->articleModel->getTotalNumOfArticlesByUser($userData['id']);
+        $latestArticleTime  = $this->userModel->getUsersLatestArticleTime($userData['id']);
+        $mostActiveCategory = $this->userModel->getUsersMostActiveCategory($userData['id']);
 
-
+        return [
+            'username' => $userData['username'],
+            'role'     => $userData['role'],
+            'createdAt' => $userData['created_at'],
+            'totalArticles' => $totalArticles,
+            'latestArticleTime' => $latestArticleTime,
+            'mostActiveCategory' => $mostActiveCategory
+        ];
+    }
 
     /**
      * Delete articles from database + image that is
