@@ -60,11 +60,11 @@ class ArticleController
         // If POST request, execute this method
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Get all the article data and sanitize
-            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-        	$body = $_POST['body'];
+            $title      = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        	$body       = $_POST['body'];
         	$categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
-        	$image = $_FILES['image'];
-        	$authorId = $this->userController->getUserId();
+        	$image      = $_FILES['image'];
+        	$authorId   = $this->userController->getUserId();
 
             // Basic validation
             if (!empty($title) && !empty($body) && $authorId && !empty($categoryId))
@@ -76,8 +76,8 @@ class ArticleController
                     if (getimagesize($image['tmp_name']))
                     {
                         // Getting basic img info from submitted img
-                        $imageName = $image['name'];
-                        $imageTmpName = $image['tmp_name'];
+                        $imageName     = $image['name'];
+                        $imageTmpName  = $image['tmp_name'];
                         $imageFileType = $image['type'];
 
                         // Getting img extension
@@ -88,7 +88,7 @@ class ArticleController
                         $allowed = ['jpg', 'jpeg', 'png'];
 
                         // If submitted image has extension which is not allowed, redirect back with error
-                        if(!in_array($ImageActualExtension, $allowed)) {
+                        if(!in_array($imageExtension, $allowed)) {
                             $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/new-article.php');
                             die();
                         }
@@ -98,8 +98,8 @@ class ArticleController
 
                         // Setting new image file name and paths.
                         // One path for storing actual img, and one for linking to img from db
-                        $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-                        $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                        $fileName     = $articleId . '_400x200_' . uniqid('', true) . '.' . $imageExtension;
+                        $imgFullPath  = PUBLIC_PATH . '/uploads' . '/' . $fileName;
                         $imgPathForDb = '/uploads/' . $fileName;
 
                         // Resize and save image to public/uploads/
@@ -140,16 +140,16 @@ class ArticleController
         // data from its id, and list of all categories
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $articleData = $this->getArticleById();
-            $categories = $this->getCategories();
+            $categories  = $this->getCategories();
 
             return ['article' => $articleData, 'categories' => $categories];
         }
 
         // Getting POSTED article data
-        $articleId = $_POST['articleId'];
-        $title = $_POST['title'];
-        $body = $_POST['body'];
-        $image = $_FILES['image'];
+        $articleId  = $_POST['articleId'];
+        $title      = $_POST['title'];
+        $body       = $_POST['body'];
+        $image      = $_FILES['image'];
         $categoryId = $_POST['categoryId'];
 
         $authorId = $this->articleModel->getArticleAuthor($articleId);
@@ -164,11 +164,11 @@ class ArticleController
         if (!empty($title) && !empty($body) && !empty($articleId) && !empty($categoryId))
         {
             // Filtering out any unwanted characters
-            $title = filter_var($title, FILTER_SANITIZE_STRING);
-            $body = $body;
+            $title     = filter_var($title, FILTER_SANITIZE_STRING);
+            $body      = $body;
             $articleId = filter_var($articleId, FILTER_SANITIZE_NUMBER_INT);
-            $image = $image;
-            $authorId = $this->userController->getUserId();
+            $image     = $image;
+            $authorId  = $this->userController->getUserId();
 
             // Saving article
             $this->articleModel->edit($articleId, $title, $body, $categoryId);
@@ -181,8 +181,8 @@ class ArticleController
                 $oldImagePath = ($oldImagePath['img_path'] == '/uploads/default.png') ? false : '/var/www/php-blog/public' . $oldImagePath['img_path'];
 
                 // Getting Image info
-                $imageName = $image['name'];
-                $imageTmpName = $image['tmp_name'];
+                $imageName     = $image['name'];
+                $imageTmpName  = $image['tmp_name'];
                 $imageFileType = $image['type'];
 
                 // Getting original image extension
@@ -193,7 +193,7 @@ class ArticleController
                 $allowed = ['jpg', 'jpeg', 'png'];
 
                 // If submitted image has extension which is not allowed, redirect back with error
-                if(!in_array($ImageActualExtension, $allowed)) {
+                if(!in_array($imageExtension, $allowed)) {
                     $this->msg->error('Only .jpg, .jpeg and .png images allowed', '/admin/edit.php?id=' . $articleId);
                     die();
                 }
@@ -202,8 +202,8 @@ class ArticleController
                 Image::configure(['driver' => 'imagick']);
 
                 // Setting up new random image name + storage path
-                $fileName = $articleId . '_400x200_' . uniqid('', true) . '.' . $ImageActualExtension;
-                $imgFullPath = PUBLIC_PATH . '/uploads' . '/' . $fileName;
+                $fileName     = $articleId . '_400x200_' . uniqid('', true) . '.' . $imageExtension;
+                $imgFullPath  = PUBLIC_PATH . '/uploads' . '/' . $fileName;
                 $imgPathForDb = '/uploads/' . $fileName;
 
                 // Resizing image to 400x200px, and storing it to /uploads
@@ -240,6 +240,11 @@ class ArticleController
         return $categories;
     }
 
+    /**
+     * Get logged in users statistics, for admin index page
+     *
+     * @return array Array containing all the users stats
+     */
     public function getUserStats()
     {
         $userData           = $this->userController->getLoggedInUserData();
@@ -248,11 +253,11 @@ class ArticleController
         $mostActiveCategory = $this->userModel->getUsersMostActiveCategory($userData['id']);
 
         return [
-            'username' => $userData['username'],
-            'role'     => $userData['role'],
-            'createdAt' => $userData['created_at'],
-            'totalArticles' => $totalArticles,
-            'latestArticleTime' => $latestArticleTime,
+            'username'           => $userData['username'],
+            'role'               => $userData['role'],
+            'createdAt'          => $userData['created_at'],
+            'totalArticles'      => $totalArticles,
+            'latestArticleTime'  => $latestArticleTime,
             'mostActiveCategory' => $mostActiveCategory
         ];
     }
@@ -311,7 +316,7 @@ class ArticleController
 
         } else {
             // If category is not set, set both categoryId and categoryName to false
-            $categoryId = false;
+            $categoryId   = false;
             $categoryName = false;
         }
 
