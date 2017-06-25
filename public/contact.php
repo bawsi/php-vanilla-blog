@@ -14,7 +14,7 @@ include(TEMPLATES_PATH . '/_header.php');
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h1 class="text-center">Get in touch with me</h1>
-            <p class="text-center">I will respond within 24 hours (Normally, within few hours)</p>
+            <p class="text-center">I do my best to respond within 24 hours</p>
             <hr>
 
             <form class="contact-form" action="" method="post">
