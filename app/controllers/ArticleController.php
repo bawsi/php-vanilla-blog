@@ -81,8 +81,7 @@ class ArticleController
                         $imageFileType = $image['type'];
 
                         // Getting img extension
-                        $imageExtension = explode('.', $imageName);
-                        $ImageActualExtension = strtolower(end($imageExtension));
+                        $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
 
                         // Supported img formats
                         $allowed = ['jpg', 'jpeg', 'png'];
@@ -186,8 +185,7 @@ class ArticleController
                 $imageFileType = $image['type'];
 
                 // Getting original image extension
-                $imageExtension = explode('.', $imageName);
-                $ImageActualExtension = strtolower(end($imageExtension));
+                $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
 
                 // Allowed image extensions
                 $allowed = ['jpg', 'jpeg', 'png'];
