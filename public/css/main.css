@@ -214,3 +214,7 @@ div.container-contact form.contact-form input {
 div.container-contact form.contact-form div.g-recaptcha {
     margin: 15px auto;
 }
+
+div.container-admin-index div.panel div.panel-body h3 {
+    margin: 10px 0px;
+}
