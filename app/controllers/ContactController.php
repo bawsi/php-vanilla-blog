@@ -32,6 +32,7 @@ class ContactController
 
                 // If recaptchas validation failed, set error, and return
                 if (!$response['success']) {
+                    die(var_dump($response));
                     $this->msg->error('You failed the captcha.. Please, do not try to spam!', '/contact.php');
                     die();
                 }
