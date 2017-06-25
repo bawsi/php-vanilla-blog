@@ -1,7 +1,7 @@
 <?php
 //bootstrap
 include(realpath($_SERVER['DOCUMENT_ROOT'] . '/../app/bootstrap.php'));
-$currentPage = '';
+$currentPage = '404';
 
 include(TEMPLATES_PATH . '/_header.php');
 ?>

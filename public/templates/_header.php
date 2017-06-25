@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Homepage</title>
+	<title>Practice Blog <?php echo (!empty($currentPage)) ? ' | ' . $currentPage : ''; ?></title>
 	<!-- Bootstrap core CSS -->
 	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
 	<link rel="stylesheet" href="/css/bootstrap.css">
