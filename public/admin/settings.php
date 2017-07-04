@@ -32,3 +32,5 @@ include(TEMPLATES_PATH . '/_header.php');
 <!-- End of main content -->
 
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+</body>
+</html>

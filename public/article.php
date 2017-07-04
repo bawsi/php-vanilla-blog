@@ -61,3 +61,5 @@ include(TEMPLATES_PATH . '/_header.php');
 <?php endif; ?>
 
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+</body>
+</html>

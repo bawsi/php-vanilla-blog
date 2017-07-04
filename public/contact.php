@@ -35,3 +35,5 @@ include(TEMPLATES_PATH . '/_header.php');
 </div>
 
 <?php include(TEMPLATES_PATH . '/_footer.php') ?>
+</body>
+</html>

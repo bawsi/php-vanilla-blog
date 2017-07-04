@@ -53,8 +53,5 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- footer -->
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
-
-
-
-
-?>
+</body>
+</html>

@@ -83,3 +83,5 @@ include(TEMPLATES_PATH . '/_header.php');
 
 
 <?php include(TEMPLATES_PATH . '/_footer.php') ?>
+</body>
+</html>
