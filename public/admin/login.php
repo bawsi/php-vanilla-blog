@@ -33,3 +33,8 @@ include(TEMPLATES_PATH . '/_header.php');
 
 
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+<!--Login validation-->
+<script src="../js/validate-login.js"></script>
+
+</body>
+</html>
