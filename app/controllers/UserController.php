@@ -428,7 +428,6 @@ class UserController
      * Make sure logged in user is allowed to delete articles, validate
      * userId passed through GET request, and then delete user
      */
-    // TODO: Move articles of user we delete to another user
     public function deleteUser()
     {
         // If GET variable 'id' is set, and logged in user is admin, proceed with user deletion
