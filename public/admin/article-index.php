@@ -16,6 +16,7 @@ include(TEMPLATES_PATH . '/_header.php')
     <div class="row">
         <div class="col-md-9 col-md-offset-3">
             <h1>Article index</h1>
+            <span style="float:right; padding-bottom:5px;"><input id="myArticlesToggle" type="checkbox" style="margin-right:5px;"> Show only my articles</span>
             <br>
         </div>
     </div>
@@ -41,7 +42,7 @@ include(TEMPLATES_PATH . '/_header.php')
                         <td><?php echo $article['id']; ?></td>
                         <td><?php echo $article['title']; ?></td>
                         <td><?php echo $article['category_name']; ?></td>
-                        <td><?php echo $article['author']; ?></td>
+                        <td class="author"><?php echo $article['author']; ?></td>
                         <td><?php echo date("d.m.Y", $article['created_at']); ?></td>
                         <td>
                             <a href="<?php echo '/article.php?id=' . $article['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-link" aria-hidden="true"></i></a>
