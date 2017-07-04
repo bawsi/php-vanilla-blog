@@ -443,7 +443,7 @@ class UserController
 
                 // Assingn new author to articles of deleted user, set msg and redirect
                 if ($wasDeleted) {
-                    // Assign new author to articles TODO: Improve method of assigning new author to articles
+                    // Assign new author to articles
                     foreach($userArticleIds as $articleId) {
                         $this->articleModel->assignNewAuthorToArticle($articleId[0], $loggedInUser['id']);
                     }
