@@ -62,3 +62,7 @@ include(TEMPLATES_PATH . '/_header.php')
 
 
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+<!--Admin article index page-->
+<script src="../js/admin-article-index.js"></script>
+</body>
+</html>
