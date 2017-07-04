@@ -19,9 +19,10 @@ include(TEMPLATES_PATH . '/_header.php');
             <h1 class="text-center">Login to admin area</h1>
             <p class="text-center"><strong>Username:</strong> admin - <strong>Password:</strong> 12345</p>
             <hr />
+            <div id="errors"></div>
             <form class="login-form" action="" method="post">
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
-                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="password" class="form-control" name="password" placeholder="Password">
                 <button type="submit" class="btn btn-danger btn-block" name="submit">Login</button>
             </form>
 
