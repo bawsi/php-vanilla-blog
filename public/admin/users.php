@@ -148,5 +148,8 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- footer -->
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+<!--Login validation-->
+<script src="../js/validate-new-user.js"></script>
+
 </body>
 </html>
