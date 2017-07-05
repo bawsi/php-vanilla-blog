@@ -87,7 +87,7 @@ class UserController
                 // Username and password entered are correct. Set data for jwt
                 $data = array(
                     "iat"      => time(),
-                    "exp"      => time() + 3600, // expires in 1 hour
+                    "exp"      => time() + 36000, // expires in 10 hour - or cookie below expires on session end
                     "userId"   => $userData['id'],
                     "userRole" => $userData['role']
                 );
@@ -95,7 +95,7 @@ class UserController
                 // Encode JWT data from above, key and algorithm together
                 $jwt = JWT::encode($data, JWT_KEY, 'HS512');
 
-                // Set cookie, which expires in 30min, with http only enabled, so javascript cant access it
+                // Set cookie, which expires on session end, with http only enabled, so javascript cant access it
                 setcookie('jwt', $jwt, 0, '/', SITE_URL, false, true);
 
                 return true;
