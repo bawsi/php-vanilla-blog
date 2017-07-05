@@ -16,17 +16,25 @@ include(TEMPLATES_PATH . '/_header.php');
 
 <!-- Main content -->
 <div class="container container-new-article">
-	<div class="row">
+    <!-- title -->
+    <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+            <h1>Edit article</h1>
+            <br>
+        </div>
+    </div>
 
+	<div class="row">
 		<!-- Sidebar column-->
 		<?php include(TEMPLATES_PATH . '/admin/_side-nav.php'); ?>
 
 		<!-- edit article form column -->
 		<div class="col-md-9">
+            <div id="article-errors"></div>br
 			<form class="article-form" action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="articleId" value="<?php echo $data['article']['id']; ?>">
 				<p>Article Title</p>
-				<input type="text" name="title" placeholder="Article title here" required="required" class="form-control" value="<?php echo $data['article']['title']; ?>">
+				<input type="text" name="title" placeholder="Article title here" class="form-control" value="<?php echo $data['article']['title']; ?>">
 				<p>Article Body</p>
 				<textarea name="body" rows="8"><?php echo $data['article']['body']; ?></textarea>
                 <p>Image (appears on article thumbnail / 400x200)</p>
@@ -46,12 +54,12 @@ include(TEMPLATES_PATH . '/_header.php');
 </div>
 <!-- End of main content -->
 
-<!-- CKEditor script that replaced textarea with ckeditor -->
-<script>
-    CKEDITOR.replace('body');
-</script>
-
 <!-- footer -->
 <?php include(TEMPLATES_PATH . '/_footer.php'); ?>
+<!-- CKEditor script that replaced textarea with ckeditor -->
+<script>CKEDITOR.replace('body');</script>
+<!--validate article-->
+<script src="../js/validate-new-article.js"></script>
+
 </body>
 </html>
