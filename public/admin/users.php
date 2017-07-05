@@ -105,7 +105,7 @@ include(TEMPLATES_PATH . '/_header.php');
 
             <!-- Edit user modal  -->
             <?php foreach ($users as $user): ?>
-                    <div class="modal fade" id="editUser<?php echo $user['id']; ?>" tabindex="-1" role="dialog">
+                    <div class="modal fade user-form" id="editUser<?php echo $user['id']; ?>" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -115,15 +115,16 @@ include(TEMPLATES_PATH . '/_header.php');
                                 <div class="modal-body">
 
                                     <!-- edit user form -->
-                                    <form action="/admin/edit-user.php" method="post">
+                                    <div class="user-errors"></div>
+                                    <form class="user-form" action="/admin/edit-user.php" method="post">
                                         <div class="form-group">
                                             <input type="hidden" name="userId" value="<?php echo $user['id']; ?>">
                                             <label for="username">Username</label>
-                                            <input required class="form-control" type="text" name="username" placeholder="Username" value="<?php echo $user['username']; ?>" style="margin-bottom:10px;">
+                                            <input class="form-control" type="text" name="username" placeholder="Username" value="<?php echo $user['username']; ?>" style="margin-bottom:10px;">
                                             <label for="password">New password</label>
                                             <input class="form-control" type="password" name="password" placeholder="New password" style="margin-bottom:10px;">
                                             <label for="role">User role</label>
-                                            <select required class="form-control" name="role">
+                                            <select class="form-control" name="role">
                                                 <option <?php echo ($user['role'] == 'writer') ? 'selected' : ''; ?> value="writer">Writer</option>
                                                 <option <?php echo ($user['role'] == 'mod') ? 'selected' : ''; ?> value="mod">Moderator</option>
                                             </select>
