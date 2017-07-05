@@ -78,14 +78,15 @@ include(TEMPLATES_PATH . '/_header.php');
                         <div class="modal-body">
 
                             <!-- new user form -->
-                            <form action="/admin/new-user.php" method="post">
+                            <div class="user-errors"></div>
+                            <form class="user-form" id="new-user-form" action="/admin/new-user.php" method="post">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input required class="form-control" type="text" name="username" placeholder="Username" style="margin-bottom:10px;">
+                                    <input class="form-control" type="text" name="username" placeholder="Username" style="margin-bottom:10px;">
                                     <label for="password">Password</label>
-                                    <input required class="form-control" type="password" name="password" placeholder="password" style="margin-bottom:10px;">
+                                    <input class="form-control" type="password" name="password" placeholder="password" style="margin-bottom:10px;">
                                     <label for="role">User role</label>
-                                    <select required class="form-control" name="role">
+                                    <select class="form-control" name="role">
                                         <option value="writer">Writer</option>
                                         <option value="mod">Moderator</option>
                                     </select>
