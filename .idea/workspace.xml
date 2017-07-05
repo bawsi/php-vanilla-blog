@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edd1e11-ef42-4d33-8b38-f8e4ef3ad550" name="Default" comment="practicing Intervention Image">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/validate-new-article.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/validate-login.js" afterPath="$PROJECT_DIR$/public/js/validate-new-user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/login.php" afterPath="$PROJECT_DIR$/public/admin/login.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/validate-login.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin/users.php" afterPath="$PROJECT_DIR$/public/admin/users.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,8 +83,8 @@
         <option value="$PROJECT_DIR$/public/js/admin-article-index.js" />
         <option value="$PROJECT_DIR$/public/js/validate-login.js" />
         <option value="$PROJECT_DIR$/public/admin/login.php" />
-        <option value="$PROJECT_DIR$/public/admin/users.php" />
         <option value="$PROJECT_DIR$/public/js/validate-new-user.js" />
+        <option value="$PROJECT_DIR$/public/admin/users.php" />
       </list>
     </option>
   </component>
@@ -172,56 +169,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="php-blog">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="public">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="php-blog">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="public">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="js">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="php-blog">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="public">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="admin">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -233,7 +180,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/js/validate-new-user.js&#10;val&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/js/validate-new-user.js&#10;users&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/users.php&#10;login&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/login.php&#10;foote&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;header&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_header.php&#10;login.&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/login.php&#10;foot&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;new&#9;ACTION&#9;NewGroup&#10;getarti&#9;null&#9;null&#10;navb&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_navbar.php&#10;nav&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_navbar.php&#10;article-inde&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/article-index.php&#10;_footer&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;_header&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_header.php&#10;index.php&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/index.php&#10;models/us&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/app/models/User.php&#10;models/&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/app/models&#10;TEST&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/public/test.php&#10;block&#9;null&#9;null&#10;test&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/public/test.php&#10;validateu&#9;null&#9;null&#10;User&#9;null&#9;null&#10;user&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="users&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/users.php&#10;val&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/js/validate-new-user.js&#10;login&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/login.php&#10;foote&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;header&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_header.php&#10;login.&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/login.php&#10;foot&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;new&#9;ACTION&#9;NewGroup&#10;getarti&#9;null&#9;null&#10;navb&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_navbar.php&#10;nav&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_navbar.php&#10;article-inde&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/article-index.php&#10;_footer&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_footer.php&#10;_header&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/templates/_header.php&#10;index.php&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-blog/php-blog/public/admin/index.php&#10;models/us&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/app/models/User.php&#10;models/&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/app/models&#10;TEST&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/public/test.php&#10;block&#9;null&#9;null&#10;test&#9;FILE&#9;file:///Users/blazpetek/Documents/Code/php-apps/php_blog/php-blog/public/test.php&#10;validateu&#9;null&#9;null&#10;User&#9;null&#9;null&#10;user&#9;null&#9;null" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -357,12 +304,12 @@
       <workItem from="1498830088283" duration="53000" />
       <workItem from="1499159324485" duration="5284000" />
       <workItem from="1499179928146" duration="8027000" />
-      <workItem from="1499235981820" duration="2299000" />
+      <workItem from="1499235981820" duration="2426000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33484000" />
+    <option name="totallyTimeSpent" value="33611000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -375,9 +322,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-581" y="-1130" width="2048" height="1130" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10119641" sideWeight="0.4733242" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10119641" sideWeight="0.4733242" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31797236" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842687" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -557,6 +503,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -728,9 +675,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/admin/users.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="122" column="68" lean-forward="false" selection-start-line="122" selection-start-column="68" selection-end-line="122" selection-end-column="68" />
-          <folding />
+        <state relative-caret-position="516">
+          <caret line="120" column="51" lean-forward="false" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
+          <folding>
+            <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
