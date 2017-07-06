@@ -38,7 +38,8 @@ form.addEventListener('submit', (e) => {
 		errorsDiv.innerHTML = '<strong>Oops!</strong>';
 		errorsDiv.append(ul);
 
-		window.scrollTo(0, 0); // scroll to top
+		// scroll to top
+		window.scrollTo(0, 0);
 
 
 	}
