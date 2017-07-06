@@ -64,7 +64,7 @@ function validateContact(name, mail, subject, msg) {
 		errors.push('Message needs to be at least 10 characters long')
 	}
 
-	return (errors.length) ? errors : false;
+	return errors;
 
 
 }

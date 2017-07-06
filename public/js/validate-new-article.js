@@ -61,6 +61,6 @@ function validateArticle(title, body) {
 		console.log(body);
 	}
 
-	return (errors.length) ? errors : false;
+	return errors;
 
 }

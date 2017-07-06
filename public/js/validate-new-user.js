@@ -75,7 +75,7 @@ for (let i = 0; i < userForms.length; i++) {
 			errors.push('Password is too short. Min ' + passwordMinLength + ' characters required');
 		}
 
-		return (errors.length) ? errors : false;
+		return errors;
 
 	}
 }
