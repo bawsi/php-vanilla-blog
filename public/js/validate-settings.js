@@ -50,9 +50,8 @@ function validatePasswords(oldPw, newPw, newPwVerify) {
 
 	if (newPw.length > passMaxLen) {
 		errors.push('New password is too long. Max ' + passMaxLen + ' characters allowed')
-	}
 
-	if (newPw < passMinLen) {
+	} else if (newPw < passMinLen) {
 		errors.push('New password is too short. Min ' + passMinLen + ' characters required')
 	}
 

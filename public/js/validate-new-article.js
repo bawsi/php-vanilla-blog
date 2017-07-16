@@ -50,9 +50,8 @@ function validateArticle(title, body) {
 	const errors = [];
 	if (title.length > titleMaxLength) {
 		errors.push('Title is too long. Max ' + titleMaxLength + ' characters required.');
-	}
 
-	if (title.length < titleMinLength) {
+	} else if (title.length < titleMinLength) {
 		errors.push('Title is too short. Min ' + titleMinLength + ' characters required.');
 		console.log(title);
 	}

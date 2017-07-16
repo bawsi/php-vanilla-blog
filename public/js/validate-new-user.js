@@ -61,17 +61,15 @@ for (let i = 0; i < userForms.length; i++) {
 
 		if (username.length > usernameMaxLength) {
 			errors.push('Username is too long. Max ' + usernameMaxLength + ' characters required.');
-		}
 
-		if (username.length < usernameMinLength) {
+		} else if (username.length < usernameMinLength) {
 			errors.push('Username is too short. Min ' + usernameMinLength + ' characters required.');
 		}
 
 		if (password.length > passwordMaxLength) {
 			errors.push('Password is too long. Max ' + passwordMaxLength + ' characters required');
-		}
 
-		if (password.length < passwordMinLength) {
+		} else if (password.length < passwordMinLength) {
 			errors.push('Password is too short. Min ' + passwordMinLength + ' characters required');
 		}
 

@@ -13,7 +13,7 @@ include(TEMPLATES_PATH . '/_header.php');
 ?>
 
 <!-- Main content -->
-<div class="container container-settings">va
+<div class="container container-settings">
 	<div class="row">
 		<!-- Settings form -->
 		<div class="col-md-4 col-md-offset-4">

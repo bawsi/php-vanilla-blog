@@ -42,9 +42,8 @@ function validateContact(name, mail, subject, msg) {
 
 	if (name.length < 2) {
 		errors.push('Name is too short.');
-	}
 
-	if (name.length > 30) {
+	} else if (name.length > 30) {
 		errors.push('name is too long.');
 	}
 
