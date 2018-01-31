@@ -1,1 +1,1 @@
-**This is a simple blog, made purely in PHP. It is my first solo project. Will be improving it in the future. **
+**This is a simple blog with basic CMS, made purely in PHP.**
